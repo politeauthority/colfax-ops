@@ -10,6 +10,9 @@ Eventually another worker node will be added through Vagrant and managed through
 ### Cluster Build Steps
 Much of the initial cluster setup has been modified from this repo, but updated for more modern
 versions of Kubernetes and modified Ansible playbooks.
+
+Configuration
+
  - Run `virtual-k8s/promox-k8s/proxmox/terraform` against Promox server, setting up 1 
    control-plane and 2 worker nodes. The apply takes about 4.5 minutes.
 

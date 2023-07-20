@@ -1,0 +1,23 @@
+# NFS Client
+# NOT IN USE
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfsclient
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
+    path: cluster/bedrock/storage/nfs-client
+    targetRevision: bootstrap
+    helm:
+      valueFiles:
+        - values-colfax.yaml
+  sources: []
+  destination:
+    namespace: nfs-client
+    name: in-cluster
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true

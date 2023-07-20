@@ -1,0 +1,12 @@
+# NFS-Client Colfax Values
+nfs-subdir-external-provisioner:
+  nfs:
+    server: 192.168.50.6
+    path: /srv/k8s-data
+    mountOptions:
+    volumeName: nfs-subdir-external-provisioner-root
+    # Reclaim policy for the main nfs volume
+    reclaimPolicy: Retain
+
+  storageClass:
+    defaultClass: true

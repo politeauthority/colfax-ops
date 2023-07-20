@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: githubrunners
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/clusters.git'
+    path: colfax/sandbox/github-runners
+    targetRevision: main
+  destination:
+    namespace: actions-runner-system
+    name: in-cluster
+  syncPolicy:
+    # automated:
+    #   prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

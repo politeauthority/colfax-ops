@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingresspublic
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
+    path: cluster/bedrock/ingress/ingress-public
+    targetRevision: bootstrap
+    helm:
+      valueFiles:
+        - values-colfax.yaml
+  destination:
+    namespace: ingress-public
+    name: in-cluster
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true

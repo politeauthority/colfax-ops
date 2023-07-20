@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: certmanager
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
+    path: cluster/bedrock/cert-manager
+    targetRevision: bootstrap
+  destination:
+    namespace: cert-manager
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

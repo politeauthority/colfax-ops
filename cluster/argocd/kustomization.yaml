@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: argocd
+resources:
+- base/
+- apps/
+- overlays/ingress.yaml
+# - base/repository.yaml
+# - base/ingress.yaml
+# - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.6
+
+# patchesStrategicMerge:
+# - |-
+#   apiVersion: apps/v1
+#   kind: Deployment
+#   metadata:
+#     name: argocd-server
+#     namespace: argocd
+#   spec:
+#     template:
+#       spec:
+#         - args:
+#           - /usr/local/bin/argocd-server
+#           - --insecure
+
+# - |-
+#   apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: argocd-cmd-params-cm
+#   data:
+#     server.log.level: "warn"
