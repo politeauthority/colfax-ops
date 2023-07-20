@@ -5,18 +5,18 @@ kube-prometheus-stack:
       templates:
       - '/etc/alertmanager/config/*.tmpl'
       - '/colfax'
-    alertmanagerSpec:
-      volumeMounts:
-      - mountPath: /colfax/
-        name: colfax-config-volume
-        subPath: config.tmpl
-      volumes:
-      - name: colfax-config-volume
-        configMap:
-          name: colfax-alertmanager
-          items:
-          - key: config.yaml
-            path: config.tmpl
+    # alertmanagerSpec:
+    #   volumeMounts:
+    #   - mountPath: /colfax/
+    #     name: colfax-config-volume
+    #     subPath: config.tmpl
+    #   volumes:
+    #   - name: colfax-config-volume
+    #     configMap:
+    #       name: colfax-alertmanager
+    #       items:
+    #       - key: config.yaml
+    #         path: config.tmpl
 
     ingress:
       enabled: true
