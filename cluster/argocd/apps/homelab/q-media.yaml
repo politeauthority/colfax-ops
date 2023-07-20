@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: qmedia
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/clusters.git'
+    path: colfax/homelab/q-media
+    targetRevision: main
+  destination:
+    namespace: q-media
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

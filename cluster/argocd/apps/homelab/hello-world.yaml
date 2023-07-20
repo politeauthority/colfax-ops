@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helloworld
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/clusters.git'
+    path: colfax/homelab/hello-world
+    targetRevision: main
+  destination:
+    namespace: hello-world
+    name: in-cluster
+  syncPolicy:
+    # automated:
+    #   prune: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: qredis
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/clusters.git'
+    path: colfax/homelab/q-redis
+    targetRevision: redis
+  destination:
+    namespace: q-redis
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
