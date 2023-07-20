@@ -5,9 +5,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:politeauthority/clusters.git'
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
     path: q-redis
-    targetRevision: redis
+    targetRevision: main
   destination:
     namespace: q-redis
     name: in-cluster
