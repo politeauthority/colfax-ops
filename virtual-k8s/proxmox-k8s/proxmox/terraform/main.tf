@@ -39,10 +39,10 @@ resource "proxmox_vm_qemu" "worker_nodes" {
   clone             = "ubuntu-2004-cloudinit-template"
 
   os_type           = "cloud-init"
-  cores             = 4
+  cores             = 5
   sockets           = "1"
   cpu               = "host"
-  memory            = 8000
+  memory            = 18000
   scsihw            = "virtio-scsi-pci"
   bootdisk          = "scsi0"
 
