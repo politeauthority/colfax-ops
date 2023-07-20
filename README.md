@@ -14,14 +14,32 @@ versions of Kubernetes and modified Ansible playbooks.
    control-plane and 2 worker nodes. The apply takes about 4.5 minutes.
 
    ℹ️ **Note**
-   - In the Terraform [variables](virtual-k8s/proxmox-k8s/proxmox/terraform/variables.tf) file, you'll want to update the the variables here with connection info to your Proxmox api.
+   - In the Terraform [variables](virtual-k8s/proxmox-k8s/proxmox/terraform/variables.tf) file, 
+    you'll want to update the the variables here with connection info to your Proxmox api.
 
-    - You also may want to change IP address and the virtual machine specs in the [main.tf](virtual-k8s/proxmox-k8s/proxmox/terraform/main.tf) file to suit your needs.
+   - You also may want to change IP address and the virtual machine specs in the 
+    [main.tf](virtual-k8s/proxmox-k8s/proxmox/terraform/main.tf) file to suit your needs.
 
-   In the [virtual-k8s/proxmox-k8s/proxmox/terraform/](virtual-k8s/proxmox-k8s/proxmox/terraform/) directory, run the following.
+   In the [virtual-k8s/proxmox-k8s/proxmox/terraform/](virtual-k8s/proxmox-k8s/proxmox/terraform/) 
+   directory, run the following.
    ```bash
    terraform init
    terraform plan
    terraform apply
    ```
- - terraform apply -var="variable_name=value"
+ - Once the Terraform apply completes we'll need to setup the Ansible inventory with the nodes we
+   created via Terraform. [virtual-k8s/proxmox-k8s/](virtual-k8s/proxmox-k8s/ansible/inventory.yaml)
+ - This will install kubeadm and other utilities necisarry for standing up the cluster. From the
+   [virtual-k8s/proxmox-k8s/proxmox/](virtual-k8s/proxmox-k8s/proxmox/) directory run the following.
+   ```bash
+   ansible-playbook -i ansible/inventory.yaml ansible/bootstrap.yaml -K
+   ```
+   ℹ️ *Note:* Pull the generated kubeconfig stored as `admin.conf`
+   
+- Install MetalLB through ansible, for whatever reason this works better than anything else. MetalLB
+  allows us to establish an IP range we can later use as `LoadBalancer`` IP addresses.
+  ```bash
+  ansible-playbook -i ansible/inventory.yaml ansible/metallb.yaml -K
+  ```
+- Install Kube Seal, follow the [README.me](cluster/bedrock/kube-seal/README.md)
+- Installed ArgoCD, follow the [README.me](cluster/argocd/README.md).
