@@ -5,7 +5,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:politeauthority/clusters.git'
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
     path: q-media
     targetRevision: main
   destination:
