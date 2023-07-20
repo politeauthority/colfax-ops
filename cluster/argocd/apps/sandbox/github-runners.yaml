@@ -6,8 +6,8 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
-    path: colfax/sandbox/github-runners
-    targetRevision: main
+    path: cluster/sandbox/github-runners
+    targetRevision: bootstrap
   destination:
     namespace: actions-runner-system
     name: in-cluster

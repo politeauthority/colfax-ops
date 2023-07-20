@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
-    path: colfax/sandbox/harbor
+    path: sandbox/harbor
     targetRevision: harbor
     helm:
       valueFiles:
