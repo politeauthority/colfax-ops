@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/clusters.git'
-    path: colfax/homelab/q-media
+    path: q-media
     targetRevision: main
   destination:
     namespace: q-media

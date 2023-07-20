@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/clusters.git'
-    path: colfax/homelab/organizr
+    path: organizr
     targetRevision: main
   destination:
     namespace: organizr

@@ -5,8 +5,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:politeauthority/clusters.git'
-    path: colfax/homelab/hello-world
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: hello-world
     targetRevision: main
   destination:
     namespace: hello-world

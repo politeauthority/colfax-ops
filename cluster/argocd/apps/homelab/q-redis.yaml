@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/clusters.git'
-    path: colfax/homelab/q-redis
+    path: q-redis
     targetRevision: redis
   destination:
     namespace: q-redis

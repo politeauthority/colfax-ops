@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/clusters.git'
-    path: colfax/homelab/q-postgres
+    path: q-postgres
     targetRevision: main
     helm:
       valueFiles:
