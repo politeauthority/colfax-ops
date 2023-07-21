@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/wazuh/wazuh-kubernetes.git'
-    path: wazuh-kubernetes/envs/local-env
+    path: envs/local-env
     targetRevision: stable
   destination:
     namespace: wazuh
