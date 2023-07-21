@@ -5,3 +5,4 @@ resources:
 - dyndns.yaml
 - github-runners.yaml
 - harbor.yaml
+- wazuh.yaml
