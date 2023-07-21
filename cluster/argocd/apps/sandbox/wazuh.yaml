@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'https://github.com/wazuh/wazuh-kubernetes.git'
     path: wazuh-kubernetes/envs/local-env
-    targetRevision: bootstrap
+    targetRevision: stable
   destination:
     namespace: wazuh
     name: in-cluster
