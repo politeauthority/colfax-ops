@@ -5,7 +5,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
+    repoURL: 'https://github.com/wazuh/wazuh-kubernetes.git'
     path: wazuh-kubernetes/envs/local-env
     targetRevision: bootstrap
   destination:
