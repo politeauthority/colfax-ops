@@ -37,13 +37,13 @@ kube-prometheus-stack:
       path: /
     # persistence:
     #   enabled: true
-    additionalDataSources:
-    - name: loki
-      editable: false
-      orgId: 1
-      type: loki
-      url: http://loki.loki.svc.cluster.local:3100
-      version: 1
+    # additionalDataSources:
+    # - name: loki
+    #   editable: false
+    #   orgId: 1
+    #   type: loki
+    #   url: http://loki.loki.svc.cluster.local:3100
+    #   version: 1
     serviceMonitor:
       additionalLabels:
         prometheus: prometheus
