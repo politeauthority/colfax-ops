@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: qpostgres
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: q-postgres
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values-colfax.yaml
+  sources: []
+  destination:
+    namespace: q-postgres
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

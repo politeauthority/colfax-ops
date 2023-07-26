@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-node-exporter-full
+data:
+  grafana-colfax-overview.json: |-
+{{ .Files.Get "dashboards/node-exporter-fulljson" | indent 4}}

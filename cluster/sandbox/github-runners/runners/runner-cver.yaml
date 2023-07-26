@@ -1,0 +1,9 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: runner-cver
+spec:
+  replicas: 6
+  template:
+    spec:
+      repository: politeauthority/cver

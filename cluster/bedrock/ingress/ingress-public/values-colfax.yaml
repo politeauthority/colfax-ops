@@ -1,0 +1,14 @@
+ingress-nginx:
+  controller:
+    ingressClass: nginx-public
+    ingressClassResource:
+      name: nginx-public
+    service:
+      loadBalancerIP: "192.168.50.80"
+      externalIPs: ["192.168.50.80"]
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        additionalLabels:
+          prometheus: prometheus

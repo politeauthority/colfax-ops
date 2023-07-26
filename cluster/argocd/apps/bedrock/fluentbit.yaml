@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluentbit
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
+    path: cluster/bedrock/logging/fluentbit
+    targetRevision: loki
+    helm:
+      valueFiles:
+        - values-colfax.yaml
+  sources: []
+  destination:
+    namespace: fluentbit
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

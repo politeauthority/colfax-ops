@@ -1,0 +1,148 @@
+kube-prometheus-stack:
+
+  alertmanager:
+    config:
+      templates:
+      - '/etc/alertmanager/config/*.tmpl'
+      - '/colfax'
+    # alertmanagerSpec:
+    #   volumeMounts:
+    #   - mountPath: /colfax/
+    #     name: colfax-config-volume
+    #     subPath: config.tmpl
+    #   volumes:
+    #   - name: colfax-config-volume
+    #     configMap:
+    #       name: colfax-alertmanager
+    #       items:
+    #       - key: config.yaml
+    #         path: config.tmpl
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx-private
+      hosts:
+        - alertmanager.colfax.int
+      path: /
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  grafana:
+    ingress:
+      enabled: true
+      ingressClassName: nginx-private
+      hosts:
+        - grafana.colfax.int
+      path: /
+    # persistence:
+    #   enabled: true
+    # additionalDataSources:
+    # - name: loki
+    #   editable: false
+    #   orgId: 1
+    #   type: loki
+    #   url: http://loki.loki.svc.cluster.local:3100
+    #   version: 1
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  prometheus:
+    ingress:
+      enabled: true
+      ingressClassName: nginx-private
+      hosts:
+        - prometheus.colfax.int
+      path: /
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+    prometheusSpec:
+      retention: 30d
+      storageSpec: 
+        volumeClaimTemplate:
+          spec:
+            storageClassName: nfs-client
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
+      serviceMonitorSelector:
+        matchLabels:
+          prometheus: prometheus
+      additionalScrapeConfigs:
+      - job_name: "green-machine"
+        static_configs:
+          - targets: [192.168.50.6:9100]
+      - job_name: colfax
+        static_configs:
+          - targets: [192.168.50.50:9100]
+      - job_name: emby
+        static_configs:
+          - targets: [192.168.50.6:9210]
+
+  prometheus-node-exporter:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kube-state-metrics:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubeScheduler:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubernetesServiceMonitors:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubeControllerManager:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubeApiServer:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubelet:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  coreDns:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubeDns:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubeEtcd:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubeScheduler:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubeProxy:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus
+
+  kubeletService:
+    serviceMonitor:
+      additionalLabels:
+        prometheus: prometheus

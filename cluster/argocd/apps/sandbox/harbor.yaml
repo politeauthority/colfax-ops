@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
+    path: cluster/sandbox/harbor
+    targetRevision: bootstrap
+    helm:
+      valueFiles:
+        - values-colfax.yaml
+  destination:
+    namespace: harbor
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

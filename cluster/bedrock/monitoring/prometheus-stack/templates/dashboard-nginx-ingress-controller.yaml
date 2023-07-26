@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-nginx-ingress-controller
+data:
+  nginx-ingress-controller.json: |-
+{{ .Files.Get "dashboards/nginx-ingress-controller.json" | indent 4}}

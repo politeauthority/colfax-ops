@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
+    path: cluster/bedrock/loki
+    targetRevision: bootstrap
+    helm:
+      # skipCrds: true
+      valueFiles:
+        - values-colfax.yaml
+  sources: []
+  destination:
+    namespace: loki
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

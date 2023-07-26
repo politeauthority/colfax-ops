@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wazuh
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/wazuh/wazuh-kubernetes.git'
+    path: envs/local-env
+    targetRevision: stable
+  destination:
+    namespace: wazuh
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

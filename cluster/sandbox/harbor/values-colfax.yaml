@@ -1,0 +1,21 @@
+harbor:
+  expose:
+    tls:
+      enabled: true
+      secret:
+        secretName: "harbor-squid-ink-us-tls"
+        notarySecretName: "notary-squid-ink-us-tls"
+    ingress:
+      hosts:
+        core: harbor.squid-ink.us
+        notary: notary.squid-ink.us
+      className: nginx-public
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+  externalURL: https://harbor.squid-ink.us
+  # database:
+  #   type: external
+  #   external:
+  #     host: qpostgres-postgresql.q-postgres.svc.cluster.local
+  #     username: postgres
+  #     existingSecret: qpostgres

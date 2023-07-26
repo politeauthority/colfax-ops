@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: synapse
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: synapse
+    targetRevision: synapse
+    helm:
+      valueFiles:
+        - values-colfax.yaml
+  sources: []
+  destination:
+    namespace: synapse
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
