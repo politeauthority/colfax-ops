@@ -19,8 +19,8 @@ jobs:
       - name: Validate Kustomize - Argo
         run: |
           kustomize build cluster/argocd -o argo.yaml
-          kustomize build bedrock/cert-manager -o cert-manager.yaml
-          kustomize build sandbox/github-runners
+          kustomize build cluster/bedrock/cert-manager -o cert-manager.yaml
+          kustomize build cluster/sandbox/github-runners -o github-runners.yaml
       - name: Validate Kustomize - Bedrock
         run: |
             kustomize build bedrock/cert-manager
