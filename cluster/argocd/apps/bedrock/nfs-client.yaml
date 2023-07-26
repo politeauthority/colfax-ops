@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
     path: cluster/bedrock/storage/nfs-client
-    targetRevision: bootstrap
+    targetRevision: main
     helm:
       valueFiles:
         - values-colfax.yaml

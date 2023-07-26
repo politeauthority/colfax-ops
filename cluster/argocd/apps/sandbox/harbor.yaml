@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
     path: cluster/sandbox/harbor
-    targetRevision: bootstrap
+    targetRevision: main
     helm:
       valueFiles:
         - values-colfax.yaml

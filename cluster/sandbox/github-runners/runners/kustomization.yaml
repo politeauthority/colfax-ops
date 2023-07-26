@@ -5,3 +5,4 @@ resources:
 - runner-cver.yaml
 - runner-polite-cicd.yaml
 - runner-dyndns.yaml
+- runner-colfax-ops.yaml

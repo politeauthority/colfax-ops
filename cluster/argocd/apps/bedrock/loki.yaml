@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
     path: cluster/bedrock/loki
-    targetRevision: bootstrap
+    targetRevision: main
     helm:
       # skipCrds: true
       valueFiles:
