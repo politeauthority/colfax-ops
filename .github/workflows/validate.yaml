@@ -1,0 +1,46 @@
+name: Build and Test
+
+on:
+  push:
+    branches: ["main", "cicd"]
+
+jobs:
+  validate-kustomize:
+    runs-on: self-hosted
+    container:
+      image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
+      credentials:
+        username: politeauthority
+        password: ${{ secrets.HARBOR_PASSWORD }}
+    strategy:
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate Kustomize - Argo
+        run: |
+          kustomize build cluster/argocd
+          kustomize build bedrock/cert-manager
+          kustomize build sandbox/github-runners
+      - name: Validate Kustomize - Bedrock
+        run: |
+            kustomize build bedrock/cert-manager
+      - name: Validate Kustomize - Sandbox
+        run: |
+          kustomize build sandbox/github-runners
+  # validate-helm:
+  #   runs-on: self-hosted
+  #   container:
+  #     image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
+  #     credentials:
+  #       username: politeauthority
+  #       password: ${{ secrets.HARBOR_PASSWORD }}
+  #   strategy:
+  #       fail-fast: true
+  #   steps:
+  #       - uses: actions/checkout@v3
+  #       - name: Validate Helm - Bedrock
+  #         run: |
+  #           echo "Testing Helm Builds"
+  #           helm lint cluster/bedrock/ingress/ingress-private
+  #           helm lint cluster/bedrock/ingress/ingress-public
+  #           loki
