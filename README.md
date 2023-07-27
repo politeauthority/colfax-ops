@@ -1,5 +1,5 @@
 # Colfax Ops
-![Validated](https://github.com/politeauthority/dyndns/actions/workflows/validate.yaml/badge.svg)
+![Validated](https://github.com/politeauthority/colfax-ops/actions/workflows/validate.yaml/badge.svg)
 Homelab GitOps on Kubernetes, powered by ArgoCD and managed by Github Actions 🚀
 
 ## Table of Contents
@@ -8,6 +8,8 @@ Homelab GitOps on Kubernetes, powered by ArgoCD and managed by Github Actions �
   - [Building the Cluster from Scratch](#building-the-cluster-from-scratch)
     - [Cluster Build Steps](#cluster-build-steps)
     - [Cluster Configuration](#cluster-configuration)
+  - [Cluster Management](#cluster-management)
+    - [Current Applications](#current-applications)
 
 ## Building the Cluster from Scratch
 This virtual Kubernetes build consists of a 1 machine running Proxmox with 15 cores and 48 gigs of
@@ -18,8 +20,6 @@ Eventually another worker node will be added through Vagrant and managed through
 ### Cluster Build Steps
 Much of the initial cluster setup has been modified from this repo, but updated for more modern
 versions of Kubernetes and modified Ansible playbooks.
-
-Configuration
 
  - Run `virtual-k8s/promox-k8s/proxmox/terraform` against Promox server, setting up 1 
    control-plane and 2 worker nodes. The apply takes about 4.5 minutes.
@@ -45,7 +45,8 @@ Configuration
    ```bash
    ansible-playbook -i ansible/inventory.yaml ansible/bootstrap.yaml -K
    ```
-   ⚠️ This step will generate your first kube config, make sure to manage properly deal with the `admin.conf` file.
+   ⚠️ This step will generate your first kube config, make sure to properly manage the `admin.conf`
+   file.
 
 ### Cluster Configuration
 - Install MetalLB through ansible, for whatever reason this works better than anything else. MetalLB
@@ -53,5 +54,21 @@ Configuration
   ```bash
   ansible-playbook -i ansible/inventory.yaml ansible/metallb.yaml -K
   ```
-- Install Kube Seal, follow the [README.me](cluster/bedrock/kube-seal/README.md)
-- Installed ArgoCD, follow the [README.me](cluster/argocd/README.md).
+- Install Kube Seal, follow the [README.md](cluster/bedrock/kube-seal/README.md)
+- Installed ArgoCD, follow the [README.md](cluster/argocd/README.md).
+
+## Cluster Management
+Cluster applications are managed through ArgoCD. Most applications target the `main` branch of this
+repo. For more information on setting up a new ArgoCD app, check out the local
+[ArgoCD README.md](cluster/argocd/README.md).
+
+### Current Applications
+ - **ArgoCd** Auto Sync: _enabled_
+ - **Cert Manager** Auto Sync: _disabled_
+ - **Ingress Private** Auto Sync: _enabled_
+ - **Ingress Public** Auto Sync: _enabled_
+ - **Loki** Auto Sync: _disabled_
+ - **NFS-Client** Auto Sync: _enabled_
+ - **Prometheus Stack** Auto Sync: _enabled_
+ - **DynDNS** Auto Sync: _enabled_
+ - **Github Runners** Auto Sync: _enabled_
