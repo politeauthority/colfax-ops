@@ -44,3 +44,19 @@ jobs:
         - name: Validate Helm - Sandbox
           run: |
             helm lint cluster/sandbox/harbor
+
+
+  validate-yaml:
+    runs-on: self-hosted
+    container:
+      image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
+      credentials:
+        username: politeauthority
+        password: ${{ secrets.HARBOR_PASSWORD }}
+    strategy:
+        fail-fast: true
+    steps:
+        - uses: actions/checkout@v3
+        - name: Validate Yaml
+          run: |
+            yamllint -c config-yaml-lint.yaml ./ --no-warnings
