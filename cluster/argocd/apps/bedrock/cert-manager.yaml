@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
     path: cluster/bedrock/cert-manager
-    targetRevision: bootstrap
+    targetRevision: main
   destination:
     namespace: cert-manager
     name: in-cluster

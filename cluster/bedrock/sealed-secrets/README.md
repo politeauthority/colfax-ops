@@ -11,11 +11,16 @@ helm install sealed-secrets \
     --set-string fullnameOverride=sealed-secrets-controller \
     sealed-secrets/sealed-secrets
 ```
+ℹ️ Existing secrets will have to be regenerated anytime the KubeSeal controller is brought in new to a cluster.
 
 ## Creating a Sealed Secret
 ```bash
-kubectl create secret generic secret-name --dry-run=client --from-literal=foo=bar -o yaml | \
-kubeseal \
+kubectl \
+    create secret generic \
+    <secret-name> \
+    --dry-run=client \
+    --from-literal=foo=bar -o yaml | \
+    kubeseal \
     --controller-name=sealed-secrets-controller \
     --controller-namespace=kube-system \
     --format yaml > mysealedsecret.yaml
