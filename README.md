@@ -1,7 +1,15 @@
 # Colfax Ops
-Homelab Git Ops on Kubernetes.
+![Validated](https://github.com/politeauthority/dyndns/actions/workflows/validate.yaml/badge.svg)
+Homelab GitOps on Kubernetes, powered by ArgoCD and managed by Github Actions 🚀
 
-## Getting A Fresh Build
+## Table of Contents
+- [Colfax Ops](#colfax-ops)
+  - [Table of Contents](#table-of-contents)
+  - [Building the Cluster from Scratch](#building-the-cluster-from-scratch)
+    - [Cluster Build Steps](#cluster-build-steps)
+    - [Cluster Configuration](#cluster-configuration)
+
+## Building the Cluster from Scratch
 This virtual Kubernetes build consists of a 1 machine running Proxmox with 15 cores and 48 gigs of
 ram. This machine will be split into 3 VMs, 1 control plane and 2 worker nodes. These virtual
 machines will be managed with terraform and ansible.
@@ -16,7 +24,7 @@ Configuration
  - Run `virtual-k8s/promox-k8s/proxmox/terraform` against Promox server, setting up 1 
    control-plane and 2 worker nodes. The apply takes about 4.5 minutes.
 
-   ℹ️ **Note**
+   ✏️ **Confgiruation Edits**
    - In the Terraform [variables](virtual-k8s/proxmox-k8s/proxmox/terraform/variables.tf) file, 
     you'll want to update the the variables here with connection info to your Proxmox api.
 
@@ -37,8 +45,9 @@ Configuration
    ```bash
    ansible-playbook -i ansible/inventory.yaml ansible/bootstrap.yaml -K
    ```
-   ℹ️ *Note:* Pull the generated kubeconfig stored as `admin.conf`
-   
+   ⚠️ This step will generate your first kube config, make sure to manage properly deal with the `admin.conf` file.
+
+### Cluster Configuration
 - Install MetalLB through ansible, for whatever reason this works better than anything else. MetalLB
   allows us to establish an IP range we can later use as `LoadBalancer`` IP addresses.
   ```bash

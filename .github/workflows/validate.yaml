@@ -1,4 +1,4 @@
-name: Build and Test
+name: Validate
 
 on:
   push:
@@ -12,35 +12,49 @@ jobs:
       credentials:
         username: politeauthority
         password: ${{ secrets.HARBOR_PASSWORD }}
-    strategy:
-      fail-fast: true
     steps:
       - uses: actions/checkout@v3
       - name: Validate Kustomize - Argo
         run: |
-          kustomize build cluster/argocd
-          kustomize build bedrock/cert-manager
-          kustomize build sandbox/github-runners
+          kustomize build cluster/argocd -o argo.yaml
       - name: Validate Kustomize - Bedrock
         run: |
-            kustomize build bedrock/cert-manager
+          kustomize build cluster/bedrock/cert-manager -o cert-manager.yaml
       - name: Validate Kustomize - Sandbox
         run: |
-          kustomize build sandbox/github-runners
-  # validate-helm:
-  #   runs-on: self-hosted
-  #   container:
-  #     image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
-  #     credentials:
-  #       username: politeauthority
-  #       password: ${{ secrets.HARBOR_PASSWORD }}
-  #   strategy:
-  #       fail-fast: true
-  #   steps:
-  #       - uses: actions/checkout@v3
-  #       - name: Validate Helm - Bedrock
-  #         run: |
-  #           echo "Testing Helm Builds"
-  #           helm lint cluster/bedrock/ingress/ingress-private
-  #           helm lint cluster/bedrock/ingress/ingress-public
-  #           loki
+          kustomize build cluster/sandbox/github-runners -o github-runners.yaml
+  validate-helm:
+    runs-on: self-hosted
+    container:
+      image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
+      credentials:
+        username: politeauthority
+        password: ${{ secrets.HARBOR_PASSWORD }}
+    strategy:
+        fail-fast: true
+    steps:
+        - uses: actions/checkout@v3
+        - name: Validate Helm - Bedrock
+          run: |
+            helm lint cluster/bedrock/ingress/ingress-private
+            helm lint cluster/bedrock/ingress/ingress-public
+            helm lint cluster/bedrock/loki
+            helm lint cluster/bedrock/monitoring/prometheus-stack
+            helm lint cluster/bedrock/storage/nfs-client
+        - name: Validate Helm - Sandbox
+          run: |
+            helm lint cluster/sandbox/harbor
+  validate-yaml:
+    runs-on: self-hosted
+    container:
+      image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
+      credentials:
+        username: politeauthority
+        password: ${{ secrets.HARBOR_PASSWORD }}
+    strategy:
+        fail-fast: true
+    steps:
+        - uses: actions/checkout@v3
+        - name: Validate Yaml
+          run: |
+            yamllint -c config-yaml-lint.yaml ./ --no-warnings
