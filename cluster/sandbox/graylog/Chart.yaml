@@ -1,0 +1,11 @@
+apiVersion: v2
+name: Graylog
+description: A Helm chart for Kubernetes
+type: application
+version: 0.0.1
+appVersion: 0.0.1
+
+dependencies:
+- name: graylog
+  repository: https://charts.kong-z.com/
+  version: 2.3.2
