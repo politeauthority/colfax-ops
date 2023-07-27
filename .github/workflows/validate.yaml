@@ -44,8 +44,6 @@ jobs:
         - name: Validate Helm - Sandbox
           run: |
             helm lint cluster/sandbox/harbor
-
-
   validate-yaml:
     runs-on: self-hosted
     container:
