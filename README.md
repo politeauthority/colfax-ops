@@ -1,6 +1,7 @@
 # Colfax Ops
 ![Validated](https://github.com/politeauthority/colfax-ops/actions/workflows/validate.yaml/badge.svg)
-Homelab GitOps on Kubernetes, powered by ArgoCD and managed by Github Actions 🚀
+
+Homelab GitOps on Kubernetes, powered by ArgoCD and managed by Github Actions. 🚀
 
 ## Table of Contents
 - [Colfax Ops](#colfax-ops)
@@ -25,7 +26,7 @@ versions of Kubernetes and modified Ansible playbooks.
    control-plane and 2 worker nodes. The apply takes about 4.5 minutes.
 
    ✏️ **Confgiruation Edits**
-   - In the Terraform [variables](virtual-k8s/proxmox-k8s/proxmox/terraform/variables.tf) file, 
+   - In the Terraform [variables.tf](virtual-k8s/proxmox-k8s/proxmox/terraform/variables.tf) file, 
     you'll want to update the the variables here with connection info to your Proxmox api.
 
    - You also may want to change IP address and the virtual machine specs in the 
