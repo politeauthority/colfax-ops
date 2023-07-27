@@ -39,8 +39,8 @@ jobs:
             helm lint cluster/bedrock/ingress/ingress-private
             helm lint cluster/bedrock/ingress/ingress-public
             helm lint cluster/bedrock/loki
-            helm lint cluster/bedrock/monitoring
+            helm lint cluster/bedrock/monitoring/prometheus-stack
             helm lint cluster/bedrock/storage/nfs-client
-        - name: Validate Helm - Sanbox
+        - name: Validate Helm - Sandbox
           run: |
             helm lint cluster/sandbox/harbor
