@@ -3,8 +3,11 @@ name: Validate
 on:
   push:
     branches: ["main", "cicd"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
+
   validate-kustomize:
     runs-on: self-hosted
     container:
@@ -23,6 +26,7 @@ jobs:
       - name: Validate Kustomize - Sandbox
         run: |
           kustomize build cluster/sandbox/github-runners -o github-runners.yaml
+
   validate-helm:
     runs-on: self-hosted
     container:
@@ -37,13 +41,37 @@ jobs:
         - name: Validate Helm - Bedrock
           run: |
             helm lint cluster/bedrock/ingress/ingress-private
+            helm dependency build cluster/bedrock/ingress/ingress-private
+            helm template cluster/bedrock/ingress/ingress-private -f cluster/bedrock/ingress/ingress-private/values-colfax.yaml --dry-run > out.yaml
+
             helm lint cluster/bedrock/ingress/ingress-public
+            helm dependency build cluster/bedrock/ingress/ingress-private
+            helm template cluster/bedrock/ingress/ingress-public -f cluster/bedrock/ingress/ingress-public/values-colfax.yaml --dry-run > out.yaml
+
             helm lint cluster/bedrock/loki
+            helm dependency build cluster/bedrock/loki
+            helm template cluster/bedrock/loki -f cluster/bedrock/loki/values-colfax.yaml --dry-run > out.yaml
+
             helm lint cluster/bedrock/monitoring/prometheus-stack
+            helm dependency build cluster/bedrock/monitoring/prometheus-stack
+            helm template cluster/bedrock/monitoring/prometheus-stack -f cluster/bedrock/monitoring/prometheus-stack/values-colfax.yaml --dry-run > out.yaml
+
             helm lint cluster/bedrock/storage/nfs-client
+            helm dependency build cluster/bedrock/storage/nfs-client
+            helm template cluster/bedrock/storage/nfs-client -f cluster/bedrock/storage/nfs-client/values-colfax.yaml --dry-run > out.yaml
+
         - name: Validate Helm - Sandbox
           run: |
+            helm lint cluster/sandbox/graylog
+            helm dependency build cluster/sandbox/graylog
+            helm template cluster/sandbox/graylog -f cluster/sandbox/graylog/values-colfax.yaml --dry-run > out.yaml
+
+
             helm lint cluster/sandbox/harbor
+            helm dependency build cluster/sandbox/harbor
+            helm template cluster/sandbox/harbor -f cluster/sandbox/harbor/values-colfax.yaml --dry-run > out.yaml
+
+
   validate-yaml:
     runs-on: self-hosted
     container:
