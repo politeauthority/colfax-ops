@@ -45,6 +45,7 @@ jobs:
             helm dependency build cluster/bedrock/ingress/ingress-private
             helm template cluster/bedrock/ingress/ingress-private -f cluster/bedrock/ingress/ingress-private/values-colfax.yaml --dry-run > out.yaml
 
+            helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
             helm lint cluster/bedrock/ingress/ingress-public
             helm dependency build cluster/bedrock/ingress/ingress-private
             helm template cluster/bedrock/ingress/ingress-public -f cluster/bedrock/ingress/ingress-public/values-colfax.yaml --dry-run > out.yaml
