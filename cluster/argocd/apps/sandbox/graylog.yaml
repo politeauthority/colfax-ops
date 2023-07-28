@@ -15,8 +15,6 @@ spec:
     namespace: graylog
     name: in-cluster
   syncPolicy:
-    automated:
-      prune: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
