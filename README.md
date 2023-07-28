@@ -64,12 +64,14 @@ repo. For more information on setting up a new ArgoCD app, check out the local
 [ArgoCD README.md](cluster/argocd/README.md).
 
 ### Current Applications
- - **ArgoCd** Auto Sync: _enabled_
- - **Cert Manager** Auto Sync: _disabled_
- - **Ingress Private** Auto Sync: _enabled_
- - **Ingress Public** Auto Sync: _enabled_
- - **Loki** Auto Sync: _disabled_
- - **NFS-Client** Auto Sync: _enabled_
- - **Prometheus Stack** Auto Sync: _enabled_
- - **DynDNS** Auto Sync: _enabled_
- - **Github Runners** Auto Sync: _enabled_
+| App          | In Use    | Auto Sync Enabled |
+|--------------|-----------|------------|
+| [**ArgoCd**](cluster/argocd/README.md) | ✅ | ✅ |
+| [**Cert Manager**](cluster/bedrock/cert-manager/) | ✅ | ✅ |
+| [**Ingress Private**](cluster/bedrock/ingress/ingress-private/) | ✅ | ✅ |
+| [**Ingress Public**](cluster/bedrock/ingress/ingress-public) | ✅ | ✅ |
+| [**Loki**](cluster/bedrock/loki/) | ⛔️ | ⛔️ |
+| [**NFS-Client**](cluster/bedrock/storage/nfs-client/) | ✅ | ✅ |
+| [**Prometheus Stack**](cluster/bedrock/monitoring/prometheus-stack/README.md) | ✅ | ✅ |
+| **DynDNS** | ✅ | ✅ |
+| [**Github Runners**](cluster/sandbox/github-runners/README.md) | ✅ | ✅ |
