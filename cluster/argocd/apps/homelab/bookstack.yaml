@@ -13,7 +13,7 @@ spec:
         - values-colfax.yaml
   sources: []
   destination:
-    namespace: q-postgres
+    namespace: bookstack
     name: in-cluster
   syncPolicy:
     syncOptions:
