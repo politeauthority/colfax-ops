@@ -82,67 +82,67 @@ kube-prometheus-stack:
         static_configs:
           - targets: [192.168.50.6:9210]
 
-  prometheus-node-exporter:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # prometheus-node-exporter:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kube-state-metrics:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kube-state-metrics:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubeScheduler:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubeScheduler:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubernetesServiceMonitors:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubernetesServiceMonitors:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubeControllerManager:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubeControllerManager:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubeApiServer:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubeApiServer:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubelet:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubelet:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  coreDns:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # coreDns:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubeDns:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubeDns:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubeEtcd:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubeEtcd:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubeScheduler:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubeScheduler:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubeProxy:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubeProxy:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
 
-  kubeletService:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+  # kubeletService:
+  #   serviceMonitor:
+  #     additionalLabels:
+  #       prometheus: prometheus
