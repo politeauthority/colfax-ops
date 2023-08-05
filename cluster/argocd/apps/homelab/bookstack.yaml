@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
     path: bookstack
-    targetRevision: main
+    targetRevision: bookstack
     helm:
       valueFiles:
         - values-colfax.yaml
