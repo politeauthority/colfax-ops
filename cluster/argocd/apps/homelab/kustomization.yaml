@@ -7,5 +7,4 @@ resources:
 - q-redis.yaml
 - organizr.yaml
 - hello-world.yaml
-- synapse.yaml
 - bookstack.yaml
