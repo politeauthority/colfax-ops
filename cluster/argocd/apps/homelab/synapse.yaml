@@ -8,9 +8,6 @@ spec:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
     path: synapse
     targetRevision: synapse
-    helm:
-      valueFiles:
-        - values-colfax.yaml
   sources: []
   destination:
     namespace: synapse
