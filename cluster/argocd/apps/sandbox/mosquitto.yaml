@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mosquitto
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/politeauthority/colfax-ops.git'
+    path: cluster/sandbox/mosquitto
+    targetRevision: main
+  destination:
+    namespace: mosquitto
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
