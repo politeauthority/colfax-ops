@@ -5,7 +5,7 @@ metadata:
 data:
   mosquitto.conf: |
     # DO NOT USE IN PRODUCTION
-    allow_anonymous false
+    allow_anonymous true
 
     # MQTT with TLS (MQTTS)
     listener 8883
