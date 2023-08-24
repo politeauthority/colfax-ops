@@ -6,3 +6,5 @@ resources:
 - runner-polite-cicd.yaml
 - runner-dyndns.yaml
 - runner-colfax-ops.yaml
+- runner-quigley-api.yaml
+

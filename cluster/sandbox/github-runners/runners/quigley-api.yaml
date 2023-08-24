@@ -1,0 +1,9 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: runner-quigley-api
+spec:
+  replicas: 5
+  template:
+    spec:
+      repository: politeauthority/quilgey-api
