@@ -24,9 +24,9 @@ kube-prometheus-stack:
       hosts:
         - alertmanager.colfax.int
       path: /
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+    # serviceMonitor:
+    #   additionalLabels:
+    #     prometheus: prometheus
 
   grafana:
     ingress:
@@ -37,16 +37,9 @@ kube-prometheus-stack:
       path: /
     # persistence:
     #   enabled: true
-    # additionalDataSources:
-    # - name: loki
-    #   editable: false
-    #   orgId: 1
-    #   type: loki
-    #   url: http://loki.loki.svc.cluster.local:3100
-    #   version: 1
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+    # serviceMonitor:
+    #   additionalLabels:
+    #     prometheus: prometheus
 
   prometheus:
     ingress:
@@ -55,9 +48,9 @@ kube-prometheus-stack:
       hosts:
         - prometheus.colfax.int
       path: /
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+    # serviceMonitor:
+    #   additionalLabels:
+    #     prometheus: prometheus
     prometheusSpec:
       retention: 30d
       storageSpec: 
@@ -68,9 +61,9 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 10Gi
-      serviceMonitorSelector:
-        matchLabels:
-          prometheus: prometheus
+      # serviceMonitorSelector:
+      #   matchLabels:
+      #     prometheus: prometheus
       additionalScrapeConfigs:
       - job_name: "green-machine"
         static_configs:
