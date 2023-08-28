@@ -599,4 +599,3 @@ graylog:
     replicaCount: 1
     auth:
       enabled: false
-
