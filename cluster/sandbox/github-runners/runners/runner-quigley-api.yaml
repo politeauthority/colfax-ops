@@ -6,4 +6,4 @@ spec:
   replicas: 5
   template:
     spec:
-      repository: politeauthority/quilgey-api
+      repository: politeauthority/quigley-api
