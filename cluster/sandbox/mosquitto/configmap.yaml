@@ -8,10 +8,11 @@ data:
     allow_anonymous true
 
     # MQTT with TLS (MQTTS)
-    listener 8883
+    listener 1883
     protocol mqtt
+    # password_file /etc/mosquitto/password_file/password_file
 
-    # Fetch the generated certificates
-    cafile /etc/ssl/certs/ca-certificates.crt
-    keyfile /mosquitto/certs/tls.key
-    certfile /mosquitto/certs/tls.crt
+    # # Fetch the generated certificates
+    # cafile /etc/ssl/certs/ca-certificates.crt
+    # keyfile /mosquitto/certs/tls.key
+    # certfile /mosquitto/certs/tls.crt

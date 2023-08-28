@@ -3,8 +3,10 @@ kind: Service
 metadata:
   name: mosquitto-mqtts
 spec:
-  type: ClusterIP
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.50.82
   selector:
     app: mosquitto  
   ports:
-  - port: 8883
+  - port: 1883

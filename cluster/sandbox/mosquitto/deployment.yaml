@@ -22,12 +22,17 @@ spec:
         - mountPath: /mosquitto/config/mosquitto.conf
           subPath: mosquitto.conf
           name: config
-        # - mountPath: /mosquitto/certs/
-        #   name: certs
+        - mountPath: /etc/mosquitto/password_file
+          name: passwords
+          readOnly: true
+
       volumes:
       - name: config
         configMap:
           name: mosquitto-config
-      # - name: certs
-      #   secret:
-      #     secretName: mosquitto-tls
+      - name: passwords
+        secret:
+          secretName: mosquitto-passwords
+          items:
+            - key: passwords.txt
+              path: password_file
