@@ -1,2 +1,8 @@
 # Colfax Values for Graylog
 graylog:
+
+  opensearch:
+    volumeClaimTemplate:
+      resources:
+        requests:
+          storage: 30Gi # default 30Gi
