@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
     path: cluster/bedrock/fluentbit
-    targetRevision: main
+    targetRevision: fluentbit
     helm:
       valueFiles:
         - values-colfax.yaml
