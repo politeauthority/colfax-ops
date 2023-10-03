@@ -76,6 +76,7 @@ fluent-bit:
           Host                    192.168.50.6
           Port                    12201
           Mode                    udp
+          Short_Message_Key       message
           Gelf_Short_Message_Key  message
           Gelf_Host_Key           kubernetes_pod_name
 
