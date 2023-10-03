@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
-    path: cluster/bedrock/logging/fluentbit
+    path: cluster/bedrock/fluentbit
     targetRevision: main
     helm:
       valueFiles:
