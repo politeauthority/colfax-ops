@@ -8,3 +8,4 @@ resources:
 - organizr.yaml
 - hello-world.yaml
 - bookstack.yaml
+- home-assistant.yaml
