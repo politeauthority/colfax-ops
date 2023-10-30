@@ -24,4 +24,7 @@ kubectl create secret generic controller-manager \
 kubeseal --format yaml > sealed-secret-gha-pat.yaml
 ```
 
+## Update Secret
+Use the bash script it `/helper-scripts/update-gha-token.sh` to update the GHA token, this needs to be done every 90 days.
+
 ℹ️ If job's require k8s access, you'll need to base64 a kubeconfig and store it as a repo secret in Github called `KUBECONFIG`.
