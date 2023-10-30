@@ -11,7 +11,7 @@ spec:
   destination:
     namespace: actions-runner-system
     name: in-cluster
-  # syncPolicy:
+  syncPolicy:
   #   automated:
   #     prune: true
     syncOptions:
