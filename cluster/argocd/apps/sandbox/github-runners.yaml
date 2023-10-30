@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
     path: cluster/sandbox/github-runners
-    targetRevision: main
+    targetRevision: gha
   destination:
     namespace: actions-runner-system
     name: in-cluster
