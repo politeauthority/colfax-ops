@@ -9,11 +9,11 @@ spec:
     path: cluster/sandbox/github-runners
     targetRevision: main
   destination:
-    namespace: actions-runner-system-new
+    namespace: actions-runner-system
     name: in-cluster
-  syncPolicy:
-    automated:
-      prune: true
+  # syncPolicy:
+  #   automated:
+  #     prune: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
