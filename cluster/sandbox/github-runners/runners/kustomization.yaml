@@ -7,4 +7,4 @@ resources:
 - runner-dyndns.yaml
 - runner-colfax-ops.yaml
 - runner-quigley-api.yaml
-
+- ./runner-private-ops.yaml

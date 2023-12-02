@@ -1,0 +1,9 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: runner-private-ops
+spec:
+  replicas: 5
+  template:
+    spec:
+      repository: politeauthority/private-ops
