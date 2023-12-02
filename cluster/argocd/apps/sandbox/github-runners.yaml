@@ -11,7 +11,11 @@ spec:
   destination:
     namespace: actions-runner-system
     name: in-cluster
+<<<<<<< HEAD
   syncPolicy:
+=======
+  # syncPolicy:
+>>>>>>> 6c947e6 (Turning off GHA autosync, switching branches)
   #   automated:
   #     prune: true
     syncOptions:
