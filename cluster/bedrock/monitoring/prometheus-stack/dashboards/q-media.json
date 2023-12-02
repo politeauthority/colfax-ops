@@ -18,10 +18,77 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 47,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-1\"} * 100) / node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-1\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Disk 1",
+      "type": "gauge"
+    },
     {
       "datasource": {
         "type": "prometheus",
@@ -90,7 +157,10 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "/mnt/media-1"
+                  "/mnt/media-1",
+                  "/mnt/media-2",
+                  "/mnt/media-3",
+                  "/mnt/media-5"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -113,7 +183,7 @@
         "h": 13,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 5
       },
       "id": 1,
       "links": [],
@@ -165,6 +235,6 @@
   "timezone": "",
   "title": "Q-Media",
   "uid": "fec85230-3c85-42b5-bd00-b6b037ccd6c3",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
