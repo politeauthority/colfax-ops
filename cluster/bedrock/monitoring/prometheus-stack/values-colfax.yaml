@@ -74,6 +74,9 @@ kube-prometheus-stack:
       - job_name: emby
         static_configs:
           - targets: [192.168.50.6:9210]
+      - job_name: nginx-public
+        static_configs:
+          - targets: [ingresspublic-ingress-nginx-controller-metrics.ingress-public.svc.cluster.local:10254]
 
   # prometheus-node-exporter:
   #   serviceMonitor:
