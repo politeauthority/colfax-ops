@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
     path: cluster/bedrock/ingress/ingress-public
-    targetRevision: main
+    targetRevision: geo-ingress
     helm:
       valueFiles:
         - values-colfax.yaml
