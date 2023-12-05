@@ -15,6 +15,6 @@ spec:
     namespace: ingress-public
     name: in-cluster
   syncPolicy:
-    automated: {}
+    # automated: {}
     syncOptions:
       - CreateNamespace=true
