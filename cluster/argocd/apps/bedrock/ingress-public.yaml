@@ -5,9 +5,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
-    path: cluster/bedrock/ingress/ingress-public
-    targetRevision: geo-ingress
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: ingress-public
+    targetRevision: main
     helm:
       valueFiles:
         - values-colfax.yaml
