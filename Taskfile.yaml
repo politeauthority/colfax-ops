@@ -23,7 +23,7 @@ tasks:
       - |
         echo "Checking bedrock ingress-private"
         helm dependency build cluster/bedrock/ingress/ingress-private
-        helm repo add https://kubernetes.github.io/ingress-nginx
+        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
         helm lint cluster/bedrock/ingress/ingress-private
         helm template cluster/bedrock/ingress/ingress-private \
           -f cluster/bedrock/ingress/ingress-private/values-colfax.yaml > ingress-private.yaml
@@ -31,7 +31,7 @@ tasks:
 
         echo "Checking bedrock ingress-public"
         helm dependency build cluster/bedrock/ingress/ingress-public
-        helm repo add https://kubernetes.github.io/ingress-nginx
+        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
         helm lint cluster/bedrock/ingress/ingress-public
         helm template cluster/bedrock/ingress/ingress-public \
           -f cluster/bedrock/ingress/ingress-public/values-colfax.yaml > ingress-public.yaml
@@ -39,7 +39,7 @@ tasks:
 
         echo "Checking bedrock monitoring promeheus-stack"
         helm dependency build cluster/bedrock/monitoring/prometheus-stack
-        helm repo add https://prometheus-community.github.io/helm-charts
+        helm repo add kube-prometheus-stack https://prometheus-community.github.io/helm-charts
         helm lint cluster/bedrock/monitoring/prometheus-stack
         helm template cluster/bedrock/monitoring/prometheus-stack \
           -f cluster/bedrock/monitoring/prometheus-stack/values-colfax.yaml > prometheus-stack.yaml
