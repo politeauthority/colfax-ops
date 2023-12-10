@@ -59,9 +59,6 @@ fluent-bit:
           Nested_under  kubernetes
           Add_prefix    kubernetes_
 
-      [FILTER]
-          Name          stdout
-
       # [FILTER]
       #     Name          nest
       #     Match         kube.*
@@ -72,24 +69,24 @@ fluent-bit:
 
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
-      # [OUTPUT]
-      #     Name                    gelf
-      #     Match                   kube.*
-      #     Host                    192.168.50.6
-      #     Port                    12201
-      #     Mode                    udp
-      #     Gelf_Short_Message_Key  message
-      #     Gelf_Host_Key           kubernetes_pod_name
+      [OUTPUT]
+          Name                    gelf
+          Match                   kube.*
+          Host                    192.168.50.6
+          Port                    12201
+          Mode                    udp
+          Gelf_Short_Message_Key  message
+          Gelf_Host_Key           kubernetes_pod_name
 
       [OUTPUT]
           Name                    stdout
           Match                   kube.*
 
     ## https://docs.fluentbit.io/manual/pipeline/parsers
-    customParsers: |
-      [PARSER]
-          Name        cri
-          Format      regex
-          Regex       ^(?<time>[^ ]+) (?<stream>stdout|stderr) (?<logtag>[^ ]*) (?<message>.*)$
-          Time_Key    time
-          Time_Format %Y-%m-%dT%H:%M:%S.%L%z
+    # customParsers: |
+    #   [PARSER]
+    #       Name        cri
+    #       Format      regex
+    #       Regex       ^(?<time>[^ ]+) (?<stream>stdout|stderr) (?<logtag>[^ ]*) (?<message>.*)$
+    #       Time_Key    time
+    #       Time_Format %Y-%m-%dT%H:%M:%S.%L%z
