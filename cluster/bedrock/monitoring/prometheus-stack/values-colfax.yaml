@@ -14,7 +14,7 @@ kube-prometheus-stack:
     env:
       PUID: "1002"
       PGID: "1003"
-      GF_SECURITY_ADMIN_PASSWORD__FILE: "goodness"
+      # GF_SECURITY_ADMIN_PASSWORD__FILE: "goodness"
     persistence:
       enabled: true
       existingClaim: grafana-store
