@@ -11,6 +11,10 @@ kube-prometheus-stack:
       hosts:
         - grafana.colfax.int
       path: /
+    env:
+      PUID: "1002"
+      PGID: "1003"
+      GF_SECURITY_ADMIN_PASSWORD__FILE: "goodness"
     persistence:
       enabled: true
       existingClaim: grafana-store
