@@ -35,8 +35,8 @@ kube-prometheus-stack:
       hosts:
         - grafana.colfax.int
       path: /
-    # persistence:
-    #   enabled: true
+    persistence:
+      enabled: true
     # serviceMonitor:
     #   additionalLabels:
     #     prometheus: prometheus
