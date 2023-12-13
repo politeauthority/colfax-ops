@@ -1,32 +1,7 @@
 kube-prometheus-stack:
 
   alertmanager:
-    config:
-      templates:
-      - '/etc/alertmanager/config/*.tmpl'
-      - '/colfax'
-    # alertmanagerSpec:
-    #   volumeMounts:
-    #   - mountPath: /colfax/
-    #     name: colfax-config-volume
-    #     subPath: config.tmpl
-    #   volumes:
-    #   - name: colfax-config-volume
-    #     configMap:
-    #       name: colfax-alertmanager
-    #       items:
-    #       - key: config.yaml
-    #         path: config.tmpl
-
-    ingress:
-      enabled: true
-      ingressClassName: nginx-private
-      hosts:
-        - alertmanager.colfax.int
-      path: /
-    # serviceMonitor:
-    #   additionalLabels:
-    #     prometheus: prometheus
+    enabled: false
 
   grafana:
     ingress:
@@ -37,6 +12,7 @@ kube-prometheus-stack:
       path: /
     persistence:
       enabled: true
+      existingClaim: grafana-store
     # serviceMonitor:
     #   additionalLabels:
     #     prometheus: prometheus
