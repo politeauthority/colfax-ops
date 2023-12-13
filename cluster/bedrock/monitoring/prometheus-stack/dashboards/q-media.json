@@ -18,6 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -682,7 +683,26 @@
         {
           "id": "extractFields",
           "options": {
+            "format": "json",
             "source": "labels"
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "notEqual",
+                  "options": {
+                    "value": "q-media"
+                  }
+                },
+                "fieldName": "namespace_extracted"
+              }
+            ],
+            "match": "all",
+            "type": "exclude"
           }
         },
         {
@@ -699,25 +719,6 @@
               }
             ],
             "fields": {}
-          }
-        },
-        {
-          "disabled": true,
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "equal",
-                  "options": {
-                    "value": "q-media"
-                  }
-                },
-                "fieldName": "namespace_extracted"
-              }
-            ],
-            "match": "any",
-            "type": "include"
           }
         },
         {
@@ -877,13 +878,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Q-Media",
   "uid": "fec85230-3c85-42b5-bd00-b6b037ccd6c3",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
