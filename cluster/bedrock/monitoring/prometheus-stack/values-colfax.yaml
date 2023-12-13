@@ -18,6 +18,8 @@ kube-prometheus-stack:
     persistence:
       enabled: true
       existingClaim: grafana-store
+    initChownData:
+      enabled: false
     # serviceMonitor:
     #   additionalLabels:
     #     prometheus: prometheus
