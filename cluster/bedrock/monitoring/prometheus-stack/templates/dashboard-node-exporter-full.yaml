@@ -5,5 +5,5 @@ metadata:
     grafana_dashboard: "1"
   name: grafana-node-exporter-full
 data:
-  grafana-colfax-overview.json: |-
+  grafana-node-exporter-full.json: |-
 {{ .Files.Get "dashboards/node-exporter-fulljson" | indent 4}}

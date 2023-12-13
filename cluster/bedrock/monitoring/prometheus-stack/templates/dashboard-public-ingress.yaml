@@ -5,5 +5,5 @@ metadata:
     grafana_dashboard: "1"
   name: grafana-public-ingress
 data:
-  grafana-colfax-overview.json: |-
+  grafana-public-ingress.json: |-
 {{ .Files.Get "dashboards/public-ingress.json" | indent 4}}

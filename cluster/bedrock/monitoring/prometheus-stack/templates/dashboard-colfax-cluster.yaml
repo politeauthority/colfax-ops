@@ -5,5 +5,5 @@ metadata:
     grafana_dashboard: "1"
   name: grafana-q-media
 data:
-  grafana-q-media.json: |-
-{{ .Files.Get "dashboards/q-media.json" | indent 4}}
+  grafana-colfax-cluster.json: |-
+{{ .Files.Get "dashboards/colfax.cluster.json" | indent 4}}

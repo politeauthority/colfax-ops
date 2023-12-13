@@ -57,7 +57,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 18,
+        "h": 22,
         "w": 16,
         "x": 0,
         "y": 0
@@ -187,7 +187,33 @@
           },
           "mappings": []
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "id (changeCount)",
+                  "Romania"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -337,6 +363,123 @@
         "x": 16,
         "y": 9
       },
+      "id": 4,
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^id \\(count\\)$/",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dcc4014c-1cdc-4b1e-a946-8e39fd6361a5"
+          },
+          "editorMode": "builder",
+          "expr": "{namespace=\"ingress-public\"} | json | __error__=``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Request by Namespace",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "format": "json",
+            "jsonPaths": [
+              {
+                "alias": "",
+                "path": "namespace_extracted"
+              }
+            ],
+            "keepTime": false,
+            "replace": false,
+            "source": "labels"
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "id": {
+                "aggregations": [
+                  "count"
+                ],
+                "operation": "aggregate"
+              },
+              "labels": {
+                "aggregations": [
+                  "distinctCount"
+                ]
+              },
+              "method": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "namespace_extraced": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "namespace_extracted": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "ns": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "dcc4014c-1cdc-4b1e-a946-8e39fd6361a5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 18
+      },
       "id": 2,
       "options": {
         "displayLabels": [
@@ -428,6 +571,6 @@
   "timezone": "",
   "title": "Public Ingress",
   "uid": "acb616cb-0a73-49e6-b94b-4b305ff165e7",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
