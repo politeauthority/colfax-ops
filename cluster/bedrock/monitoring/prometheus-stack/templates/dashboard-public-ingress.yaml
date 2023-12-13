@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-public-ingress
+data:
+  grafana-colfax-overview.json: |-
+{{ .Files.Get "dashboards/public-ingress.json" | indent 4}}

@@ -673,12 +673,11 @@
           "editorMode": "code",
           "expr": "{namespace=\"ingress-public\"} |= `geoip2_latitude` | json\n\n",
           "legendFormat": "",
-          "maxLines": null,
           "queryType": "instant",
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "Public Ingress Requests",
       "transformations": [
         {
           "id": "extractFields",
@@ -700,6 +699,43 @@
               }
             ],
             "fields": {}
+          }
+        },
+        {
+          "disabled": true,
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": "q-media"
+                  }
+                },
+                "fieldName": "namespace_extracted"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "geoip2_latitude"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
           }
         }
       ],
@@ -841,13 +877,13 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Q-Media",
   "uid": "fec85230-3c85-42b5-bd00-b6b037ccd6c3",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
