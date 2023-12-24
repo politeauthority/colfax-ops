@@ -18,14 +18,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 31,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "loki",
-        "uid": "dcc4014c-1cdc-4b1e-a946-8e39fd6361a5"
+        "uid": "fc2fa82e-69c5-4b3c-a297-592a9ed2e1bc"
       },
       "fieldConfig": {
         "defaults": {
@@ -57,7 +56,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 22,
+        "h": 27,
         "w": 16,
         "x": 0,
         "y": 0
@@ -114,12 +113,10 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "dcc4014c-1cdc-4b1e-a946-8e39fd6361a5"
+            "uid": "fc2fa82e-69c5-4b3c-a297-592a9ed2e1bc"
           },
-          "editorMode": "code",
-          "expr": "{namespace=\"ingress-public\"} |= `geoip2_latitude` | json\n\n",
-          "legendFormat": "",
-          "queryType": "instant",
+          "expr": "{namespace=\"ingress-public\"}",
+          "queryType": "range",
           "refId": "A"
         }
       ],
@@ -571,6 +568,6 @@
   "timezone": "",
   "title": "Public Ingress",
   "uid": "acb616cb-0a73-49e6-b94b-4b305ff165e7",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
