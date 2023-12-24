@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -245,7 +244,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "dcc4014c-1cdc-4b1e-a946-8e39fd6361a5"
+        "uid": "fc2fa82e-69c5-4b3c-a297-592a9ed2e1bc"
       },
       "fieldConfig": {
         "defaults": {
@@ -334,12 +333,10 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "dcc4014c-1cdc-4b1e-a946-8e39fd6361a5"
+            "uid": "fc2fa82e-69c5-4b3c-a297-592a9ed2e1bc"
           },
-          "editorMode": "code",
-          "expr": "{namespace=\"ingress-public\"} |= `geoip2_latitude` | json\n\n",
-          "legendFormat": "",
-          "queryType": "instant",
+          "expr": "{namespace=\"ingress-public\"}",
+          "queryType": "range",
           "refId": "A"
         }
       ],
@@ -1040,13 +1037,13 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Q-Media",
   "uid": "fec85230-3c85-42b5-bd00-b6b037ccd6c3",
-  "version": 7,
+  "version": 1,
   "weekStart": ""
 }
