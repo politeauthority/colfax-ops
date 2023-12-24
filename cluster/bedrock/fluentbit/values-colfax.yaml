@@ -82,6 +82,15 @@ fluent-bit:
           Name                    stdout
           Match                   kube.*
 
+      [OUTPUT]
+          name                   loki
+          match                  kube.*
+          host                   loki.loki.svc.cluster.local
+          port                   3100
+          labels                 job=fluentbit
+          auto_kubernetes_labels on
+
+
     ## https://docs.fluentbit.io/manual/pipeline/parsers
     # customParsers: |
     #   [PARSER]
