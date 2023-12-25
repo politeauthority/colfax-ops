@@ -9,7 +9,7 @@ spec:
     path: cluster/sandbox/github-runners
     targetRevision: gha
   destination:
-    namespace: actions-runner-system-new
+    namespace: actions-runner-system
     name: in-cluster
   syncPolicy:
     automated:
