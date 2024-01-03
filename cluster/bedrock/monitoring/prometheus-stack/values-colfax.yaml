@@ -1,42 +1,25 @@
 kube-prometheus-stack:
 
   alertmanager:
-    config:
-      templates:
-      - '/etc/alertmanager/config/*.tmpl'
-      - '/colfax'
-    # alertmanagerSpec:
-    #   volumeMounts:
-    #   - mountPath: /colfax/
-    #     name: colfax-config-volume
-    #     subPath: config.tmpl
-    #   volumes:
-    #   - name: colfax-config-volume
-    #     configMap:
-    #       name: colfax-alertmanager
-    #       items:
-    #       - key: config.yaml
-    #         path: config.tmpl
-
-    ingress:
-      enabled: true
-      ingressClassName: nginx-private
-      hosts:
-        - alertmanager.colfax.int
-      path: /
-    # serviceMonitor:
-    #   additionalLabels:
-    #     prometheus: prometheus
+    enabled: false
 
   grafana:
+    enabled: true
     ingress:
       enabled: true
       ingressClassName: nginx-private
       hosts:
         - grafana.colfax.int
       path: /
-    # persistence:
-    #   enabled: true
+    env:
+      PUID: "1002"
+      PGID: "1003"
+      # GF_SECURITY_ADMIN_PASSWORD__FILE: "goodness"
+    persistence:
+      enabled: true
+      existingClaim: grafana-store
+    initChownData:
+      enabled: false
     # serviceMonitor:
     #   additionalLabels:
     #     prometheus: prometheus
@@ -74,6 +57,30 @@ kube-prometheus-stack:
       - job_name: emby
         static_configs:
           - targets: [192.168.50.6:9210]
+      - job_name: nginx-public
+        static_configs:
+          - targets: [ingresspublic-ingress-nginx-controller-metrics.ingress-public.svc.cluster.local:10254]
+      # Harbor Metrcis
+      - job_name: 'harbor-exporter'
+        scrape_interval: 20s
+        static_configs:
+          # Scrape metrics from the Harbor exporter component
+          - targets: ['harbor-exporter.harbor.svc.cluster.local:8001']
+      - job_name: 'harbor-core'
+        scrape_interval: 20s
+        params:
+          # Scrape metrics from the Harbor core component
+          comp: ['core']
+        static_configs:
+          - targets: ['harbor-exporter.harbor.svc.cluster.local:8001']
+      - job_name: 'harbor-registry'
+        scrape_interval: 20s
+        params:
+          # Scrape metrics from the Harbor registry component
+          comp: ['registry']
+        static_configs:
+          - targets: ['harbor-exporter.harbor.svc.cluster.local:8001']
+
 
   # prometheus-node-exporter:
   #   serviceMonitor:

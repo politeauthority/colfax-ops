@@ -18,6 +18,7 @@ spec:
     namespace: monitoring
     name: in-cluster
   syncPolicy:
+    automated: {}
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true

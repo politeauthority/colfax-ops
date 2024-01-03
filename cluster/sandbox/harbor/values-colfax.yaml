@@ -19,3 +19,17 @@ harbor:
   #     host: qpostgres-postgresql.q-postgres.svc.cluster.local
   #     username: postgres
   #     existingSecret: qpostgres
+  metrics:
+    enabled: true
+    core:
+      path: /metrics
+      port: 8001
+    registry:
+      path: /metrics
+      port: 8001
+    jobservice:
+      path: /metrics
+      port: 8001
+    exporter:
+      path: /metrics
+      port: 8001

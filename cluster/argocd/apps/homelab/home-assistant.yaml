@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
     path: home-assistant
-    targetRevision: home-assistant
+    targetRevision: main
   destination:
     namespace: home-assistant
     name: in-cluster

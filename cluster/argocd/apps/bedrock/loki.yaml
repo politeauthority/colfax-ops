@@ -6,8 +6,8 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
-    path: cluster/bedrock/loki
-    targetRevision: main
+    path: cluster/bedrock/monitoring/loki
+    targetRevision: monitoring-tweaks
     helm:
       # skipCrds: true
       valueFiles:
