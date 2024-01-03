@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: github-actions
+data:
+  grafana-github-actions.json: |-
+{{ .Files.Get "dashboards/github-actions.json" | indent 4}}
