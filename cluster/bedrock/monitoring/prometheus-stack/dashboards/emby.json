@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 39,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -488,7 +487,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -498,7 +497,7 @@
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -514,7 +513,7 @@
           },
           "decimals": 0,
           "mappings": [],
-          "max": 20,
+          "max": 8,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -524,10 +523,11 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 10
               }
             ]
-          }
+          },
+          "unit": "streams"
         },
         "overrides": []
       },
@@ -817,13 +817,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Emby Dashboard",
   "uid": "lj1NDKqnk",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
