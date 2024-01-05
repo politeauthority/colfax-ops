@@ -1,9 +1,9 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: runner-cver
+  name: runner-polite-lib
 spec:
-  replicas: 30
+  replicas: 4
   template:
     spec:
-      repository: politeauthority/cver
+      repository: politeauthority/polite-lib
