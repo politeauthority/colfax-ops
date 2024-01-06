@@ -22,12 +22,105 @@
   "liveNow": false,
   "panels": [
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 - ((node_filesystem_avail_bytes{mountpoint=~\"/\"} * 100) / node_filesystem_size_bytes{mountpoint=~\"/\"})",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "K8s OS Disks",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 12
       },
       "id": 1,
       "panels": [],
@@ -69,7 +162,7 @@
         "h": 9,
         "w": 7,
         "x": 0,
-        "y": 1
+        "y": 13
       },
       "id": 3,
       "options": {
@@ -189,7 +282,7 @@
         "h": 9,
         "w": 9,
         "x": 7,
-        "y": 1
+        "y": 13
       },
       "id": 2,
       "options": {
@@ -256,7 +349,7 @@
         "h": 3,
         "w": 4,
         "x": 16,
-        "y": 1
+        "y": 13
       },
       "id": 8,
       "interval": "1m",
@@ -324,7 +417,7 @@
         "h": 3,
         "w": 4,
         "x": 20,
-        "y": 1
+        "y": 13
       },
       "id": 9,
       "interval": "1m",
@@ -395,7 +488,7 @@
         "h": 3,
         "w": 4,
         "x": 16,
-        "y": 4
+        "y": 16
       },
       "id": 4,
       "options": {
@@ -476,7 +569,7 @@
         "h": 3,
         "w": 4,
         "x": 20,
-        "y": 4
+        "y": 16
       },
       "id": 6,
       "options": {
@@ -557,7 +650,7 @@
         "h": 3,
         "w": 4,
         "x": 16,
-        "y": 7
+        "y": 19
       },
       "id": 5,
       "options": {
@@ -624,7 +717,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 7
+        "y": 19
       },
       "id": 7,
       "links": [],
@@ -669,13 +762,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Colfax Cluster",
   "uid": "c3d8eb03-130a-482c-821b-7ac5886bbb0c",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
