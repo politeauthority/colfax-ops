@@ -464,32 +464,7 @@
           },
           "unit": "percent"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "Total"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -772,7 +747,7 @@
               },
               {
                 "color": "red",
-                "value": 95
+                "value": 98.5
               }
             ]
           },
@@ -843,7 +818,7 @@
               },
               {
                 "color": "red",
-                "value": 95
+                "value": 98.5
               }
             ]
           },
@@ -914,7 +889,7 @@
               },
               {
                 "color": "red",
-                "value": 95
+                "value": 98.5
               }
             ]
           },
@@ -984,7 +959,7 @@
               },
               {
                 "color": "red",
-                "value": 95
+                "value": 98.5
               }
             ]
           },
@@ -1037,13 +1012,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Q-Media",
   "uid": "fec85230-3c85-42b5-bd00-b6b037ccd6c3",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
