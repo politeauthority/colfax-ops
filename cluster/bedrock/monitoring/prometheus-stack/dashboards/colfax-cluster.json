@@ -26,6 +26,38 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "alertInstanceLabelFilter": "",
+        "alertName": "",
+        "dashboardAlerts": false,
+        "groupBy": [],
+        "groupMode": "custom",
+        "maxItems": 20,
+        "sortOrder": 1,
+        "stateFilter": {
+          "error": true,
+          "firing": true,
+          "noData": false,
+          "normal": false,
+          "pending": true
+        },
+        "viewMode": "list"
+      },
+      "title": "Alerts",
+      "type": "alertlist"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -78,13 +110,39 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "192.168.50.71:9100",
+                  "192.168.50.70:9100"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 10,
       "options": {
@@ -122,7 +180,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 20
       },
       "id": 1,
       "panels": [],
@@ -164,7 +222,7 @@
         "h": 9,
         "w": 7,
         "x": 0,
-        "y": 13
+        "y": 21
       },
       "id": 3,
       "options": {
@@ -284,7 +342,7 @@
         "h": 9,
         "w": 9,
         "x": 7,
-        "y": 13
+        "y": 21
       },
       "id": 2,
       "options": {
@@ -351,7 +409,7 @@
         "h": 3,
         "w": 4,
         "x": 16,
-        "y": 13
+        "y": 21
       },
       "id": 8,
       "interval": "1m",
@@ -419,7 +477,7 @@
         "h": 3,
         "w": 4,
         "x": 20,
-        "y": 13
+        "y": 21
       },
       "id": 9,
       "interval": "1m",
@@ -490,7 +548,7 @@
         "h": 3,
         "w": 4,
         "x": 16,
-        "y": 16
+        "y": 24
       },
       "id": 4,
       "options": {
@@ -571,7 +629,7 @@
         "h": 3,
         "w": 4,
         "x": 20,
-        "y": 16
+        "y": 24
       },
       "id": 6,
       "options": {
@@ -652,7 +710,7 @@
         "h": 3,
         "w": 4,
         "x": 16,
-        "y": 19
+        "y": 27
       },
       "id": 5,
       "options": {
@@ -719,7 +777,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 19
+        "y": 27
       },
       "id": 7,
       "links": [],
@@ -764,13 +822,13 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Colfax Cluster",
   "uid": "c3d8eb03-130a-482c-821b-7ac5886bbb0c",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
