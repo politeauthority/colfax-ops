@@ -47,7 +47,7 @@ resource "proxmox_vm_qemu" "worker_nodes" {
   bootdisk          = "scsi0"
 
   disk {
-    size            = "50G"
+    size            = "100G"
     type            = "scsi"
     storage         = "colfax"
     iothread        = 1

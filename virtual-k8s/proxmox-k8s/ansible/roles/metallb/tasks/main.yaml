@@ -14,10 +14,14 @@
   become: yes
   command: kubectl create namespace metallb-system --kubeconfig=/etc/kubernetes/admin.conf
 
-- name: install MetalLB config
-  become: yes
-  command: kubectl apply -f /etc/metallb-config.yaml --kubeconfig=/etc/kubernetes/admin.conf
-
 - name: install MetalLB
   become: yes
   command: kubectl apply -f /etc/metallb.yaml --kubeconfig=/etc/kubernetes/admin.conf
+
+- name: Pause for MetalLB
+  pause:
+    seconds: 30
+
+- name: install MetalLB config
+  become: yes
+  command: kubectl apply -f /etc/metallb-config.yaml --kubeconfig=/etc/kubernetes/admin.conf
