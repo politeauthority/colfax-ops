@@ -6,4 +6,3 @@ resources:
 - github-runners.yaml
 - harbor.yaml
 - mosquitto.yaml
-- synapse.yaml
