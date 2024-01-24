@@ -5,7 +5,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/politeauthority/private-ops.git'
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
     path: synapse/env
     targetRevision: synapse
   destination:
