@@ -12,5 +12,7 @@ spec:
     namespace: mosquitto
     name: in-cluster
   syncPolicy:
+    automated:
+      prune: true
     syncOptions:
       - CreateNamespace=true
