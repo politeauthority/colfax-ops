@@ -1,18 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: organizr
+  name: synapse
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:politeauthority/private-ops.git'
-    path: organizr
-    targetRevision: main
+    repoURL: 'https://github.com/politeauthority/private-ops.git'
+    path: synapse/env
+    targetRevision: synapse
   destination:
-    namespace: organizr
+    namespace: synapse
     name: in-cluster
   syncPolicy:
-    # automated:
-    #   prune: true
     syncOptions:
       - CreateNamespace=true

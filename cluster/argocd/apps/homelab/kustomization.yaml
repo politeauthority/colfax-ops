@@ -2,9 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: argocd
 resources:
+# - hello-world.yaml
+- home-assistant.yaml
 - q-media.yaml
 - q-postgres.yaml
 - q-redis.yaml
-- organizr.yaml
-- hello-world.yaml
-- home-assistant.yaml
+- synapse.yaml
