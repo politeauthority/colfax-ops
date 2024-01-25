@@ -34,3 +34,16 @@ harbor:
     exporter:
       path: /metrics
       port: 8001
+
+  database:
+    type: external
+    external:
+      host: "qpostgres-postgresql.q-postgres.svc.cluster.local"
+      port: "5432"
+      username: "harbor_db_admin"
+      coreDatabase: "harbor_registry"
+      notaryServerDatabase: "harbor_notary_server"
+      notarySignerDatabase: "harbor_notary_signer"
+      # if using existing secret, the key must be "password"
+      existingSecret: "harbor-postgres"
+      sslmode: "disable"
