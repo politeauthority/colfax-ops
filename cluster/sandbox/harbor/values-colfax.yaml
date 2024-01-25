@@ -1,11 +1,12 @@
 harbor:
+  caSecretName: harbor-squid-ink-us-tls
   expose:
     tls:
       enabled: true
       certSource: secret
       secret:
         secretName: harbor-squid-ink-us-tls
-        notarySecretName: "notary-squid-ink-us-tls"
+        notarySecretName: notary-squid-ink-us-tls
     ingress:
       hosts:
         core: harbor.squid-ink.us
