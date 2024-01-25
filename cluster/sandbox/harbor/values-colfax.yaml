@@ -2,6 +2,7 @@ harbor:
   expose:
     tls:
       enabled: true
+      certSource: none
       secret:
         secretName: "harbor-squid-ink-us-tls"
         notarySecretName: "notary-squid-ink-us-tls"
