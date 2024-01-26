@@ -60,7 +60,7 @@ kube-prometheus-stack:
       - job_name: nginx-public
         static_configs:
           - targets: [ingresspublic-ingress-nginx-controller-metrics.ingress-public.svc.cluster.local:10254]
-      # Harbor Metrcis
+      # Harbor Metrics
       - job_name: 'harbor-exporter'
         scrape_interval: 20s
         static_configs:
@@ -80,7 +80,11 @@ kube-prometheus-stack:
           comp: ['registry']
         static_configs:
           - targets: ['harbor-exporter.harbor.svc.cluster.local:8001']
-
+      # Q Postgres Metrics
+      - job_name: 'q-postgres'
+        scrape_interval: 20s
+        static_configs:
+          - targets: ['qpostgres-postgresql-metrics.q-postgres.svc.cluster.local:9187']
 
   # prometheus-node-exporter:
   #   serviceMonitor:
