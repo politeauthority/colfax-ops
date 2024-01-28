@@ -3,7 +3,7 @@ kind: RunnerDeployment
 metadata:
   name: runner-cver
 spec:
-  replicas: 30
+  replicas: 10
   template:
     spec:
       repository: politeauthority/cver
