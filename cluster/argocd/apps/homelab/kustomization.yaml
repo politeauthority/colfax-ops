@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: argocd
 resources:
 # - hello-world.yaml
+- cloud-native-pg.yaml
 - home-assistant.yaml
 - q-media.yaml
 - q-postgres.yaml
