@@ -3,7 +3,7 @@ kind: RunnerDeployment
 metadata:
   name: runner-polite-lib
 spec:
-  replicas: 4
+  replicas: 0
   template:
     spec:
       repository: politeauthority/polite-lib

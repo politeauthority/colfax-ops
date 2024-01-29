@@ -3,7 +3,7 @@ kind: RunnerDeployment
 metadata:
   name: runner-quigley-api
 spec:
-  replicas: 3
+  replicas: 0
   template:
     spec:
       repository: politeauthority/quigley-api
