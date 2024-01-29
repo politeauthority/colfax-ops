@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
-    path: synapse/env
+    path: synapse/k8s-manifests/
     targetRevision: synapse
   destination:
     namespace: synapse
