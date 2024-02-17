@@ -20,9 +20,6 @@ kube-prometheus-stack:
       existingClaim: grafana-store
     initChownData:
       enabled: false
-    # serviceMonitor:
-    #   additionalLabels:
-    #     prometheus: prometheus
 
   prometheus:
     ingress:
@@ -31,9 +28,7 @@ kube-prometheus-stack:
       hosts:
         - prometheus.colfax.int
       path: /
-    # serviceMonitor:
-    #   additionalLabels:
-    #     prometheus: prometheus
+
     prometheusSpec:
       retention: 30d
       storageSpec: 
@@ -44,9 +39,7 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 10Gi
-      # serviceMonitorSelector:
-      #   matchLabels:
-      #     prometheus: prometheus
+
       additionalScrapeConfigs:
       - job_name: "green-machine"
         static_configs:
@@ -79,83 +72,16 @@ kube-prometheus-stack:
         static_configs:
           - targets: ['harbor-exporter.harbor.svc.cluster.local:8001']
       # Q Postgres Metrics
-      - job_name: 'q-postgres'
-        scrape_interval: 20s
-        static_configs:
-          - targets: ['qpostgres-postgresql-metrics.q-postgres.svc.cluster.local:9187']
+      # - job_name: 'q-postgres'
+      #   scrape_interval: 20s
+      #   static_configs:
+      #     - targets: ['qpostgres-postgresql-metrics.q-postgres.svc.cluster.local:9187']
 
-      - job_name: 'q-postgres'
-        scrape_interval: 20s
-        static_configs:
-          - targets: ['.q-media.svc.cluster.local:9187']
+      # - job_name: 'q-postgres'
+      #   scrape_interval: 20s
+      #   static_configs:
+      #     - targets: ['.q-media.svc.cluster.local:9187']
 
       - job_name: emby
         static_configs:
           - targets: [emby-exporter.q-media.svc.cluster.local:9100]
-
-
-
-  # prometheus-node-exporter:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kube-state-metrics:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubeScheduler:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubernetesServiceMonitors:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubeControllerManager:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubeApiServer:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubelet:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # coreDns:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubeDns:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubeEtcd:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubeScheduler:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubeProxy:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
-
-  # kubeletService:
-  #   serviceMonitor:
-  #     additionalLabels:
-  #       prometheus: prometheus
