@@ -6,18 +6,26 @@ tasks:
       - |
         echo "Checking argocd"
         kustomize build cluster/argocd -o argocd.yaml
+        yamllint argocd.yaml
+        rm argocd.yaml
         echo "✅ argocd"
 
         echo "Checking bedrock cert-manager"
         kustomize build cluster/bedrock/cert-manager -o cert-manager.yaml
+        yamllint cert-manager.yaml
+        rm cert-manager.yaml
         echo "✅ bedrock cert-manager"
 
         echo "Checking github-runners"
         kustomize build cluster/sandbox/github-runners -o github-runners.yaml
+        yamllint github-runners.yaml
+        rm github-runners.yaml
         echo "✅ github-runners"
 
         echo "Checking mosquitto"
         kustomize build cluster/sandbox/mosquitto -o mosquitto.yaml
+        yamllint mosquitto.yaml
+        rm mosquitto.yaml
         echo "✅ mosquitto"
     silent: true
 
@@ -35,6 +43,7 @@ tasks:
         helm lint $HELM_DIR
         helm template ${HELM_DIR} \
           -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        yamllint ${HELM_INSTALL}.yaml
         echo "✅ ${HELM_INSTALL}"
         rm ${HELM_INSTALL}.yaml
 
@@ -50,6 +59,7 @@ tasks:
         helm lint $HELM_DIR
         helm template ${HELM_DIR} \
           -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        yamllint ${HELM_INSTALL}.yaml
         echo "✅ ${HELM_INSTALL}"
         rm ${HELM_INSTALL}.yaml
 
@@ -64,9 +74,9 @@ tasks:
         helm lint $HELM_DIR
         helm template ${HELM_DIR} \
           -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        yamllint ${HELM_INSTALL}.yaml
         echo "✅ ${HELM_INSTALL}"
         rm ${HELM_INSTALL}.yaml
-
 
         HELM_INSTALL="promeheus-stack"
         HELM_REPO_NAME="kube-prometheus-stack"
@@ -80,6 +90,7 @@ tasks:
         helm template ${HELM_DIR} \
           -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
         echo "✅ ${HELM_INSTALL}"
+        yamllint ${HELM_INSTALL}.yaml
         rm ${HELM_INSTALL}.yaml
 
         HELM_INSTALL="nfs-client"
@@ -93,6 +104,7 @@ tasks:
         helm lint $HELM_DIR
         helm template ${HELM_DIR} \
           -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        yamllint ${HELM_INSTALL}.yaml
         echo "✅ ${HELM_INSTALL}"
         rm ${HELM_INSTALL}.yaml
 
@@ -107,6 +119,7 @@ tasks:
         helm lint $HELM_DIR
         helm template ${HELM_DIR} \
           -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        yamllint ${HELM_INSTALL}.yaml
         echo "✅ ${HELM_INSTALL}"
         rm ${HELM_INSTALL}.yaml
 
