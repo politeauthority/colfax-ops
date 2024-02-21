@@ -1,13 +1,11 @@
-# apiVersion: actions.summerwind.dev/v1alpha1
-# kind: RunnerDeployment
-# metadata:
-#   name: cver
-# spec:
-#   replicas: 0
-#   template:
-#     spec:
-#       repository: politeauthority/cver
-# ---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: cver
+spec:
+  template:
+    spec:
+      repository: politeauthority/cver
 # apiVersion: actions.summerwind.dev/v1alpha1
 # kind: HorizontalRunnerAutoscaler
 # metadata:
