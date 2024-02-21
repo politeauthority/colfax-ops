@@ -8,7 +8,7 @@ on:
 
 jobs:
   validate-kustomize:
-    runs-on: arc-colfax-ops
+    runs-on: self-hosted
     container:
       image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
       credentials:
@@ -21,7 +21,7 @@ jobs:
           task check-k
 
   validate-helm:
-    runs-on: arc-colfax-ops
+    runs-on: self-hosted
     container:
       image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
       credentials:
