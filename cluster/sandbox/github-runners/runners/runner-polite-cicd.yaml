@@ -3,7 +3,6 @@ kind: RunnerDeployment
 metadata:
   name: runner-polite-cicd
 spec:
-  replicas: 0
   template:
     spec:
       repository: politeauthority/polite-cicd

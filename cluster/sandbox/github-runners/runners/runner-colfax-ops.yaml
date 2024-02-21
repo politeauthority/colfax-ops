@@ -3,7 +3,6 @@ kind: RunnerDeployment
 metadata:
   name: colfax-ops
 spec:
-  replicas: 2
   template:
     spec:
       repository: politeauthority/colfax-ops

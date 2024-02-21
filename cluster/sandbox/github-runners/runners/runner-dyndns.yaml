@@ -3,7 +3,6 @@ kind: RunnerDeployment
 metadata:
   name: runner-dyndns
 spec:
-  replicas: 0
   template:
     spec:
       repository: politeauthority/dyndns
