@@ -15,7 +15,7 @@ jobs:
         username: politeauthority
         password: ${{ secrets.HARBOR_PASSWORD }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Validate Kustomize - Argo
         run: |
           task check-k
@@ -30,7 +30,7 @@ jobs:
     strategy:
         fail-fast: true
     steps:
-        - uses: actions/checkout@v3
+        - uses: actions/checkout@v4
         - name: Validate Helm - Bedrock
           run: |
             task check-helm
