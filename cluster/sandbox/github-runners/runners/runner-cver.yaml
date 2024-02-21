@@ -1,9 +1,27 @@
-apiVersion: actions.summerwind.dev/v1alpha1
-kind: RunnerDeployment
-metadata:
-  name: runner-cver
-spec:
-  replicas: 0
-  template:
-    spec:
-      repository: politeauthority/cver
+# apiVersion: actions.summerwind.dev/v1alpha1
+# kind: RunnerDeployment
+# metadata:
+#   name: cver
+# spec:
+#   replicas: 0
+#   template:
+#     spec:
+#       repository: politeauthority/cver
+# ---
+# apiVersion: actions.summerwind.dev/v1alpha1
+# kind: HorizontalRunnerAutoscaler
+# metadata:
+#   name: cver
+# spec:
+#   scaleDownDelaySecondsAfterScaleOut: 180
+#   scaleTargetRef:
+#     kind: RunnerDeployment
+#     name: cver
+#   minReplicas: 3
+#   maxReplicas: 20
+#   metrics:
+#   - type: PercentageRunnersBusy
+#     scaleUpThreshold: '0.75'    # The percentage of busy runners at which the number of desired runners are re-evaluated to scale up
+#     scaleDownThreshold: '0.3'   # The percentage of busy runners at which the number of desired runners are re-evaluated to scale down
+#     scaleUpAdjustment: 2        # The scale up runner count added to desired count
+#     scaleDownAdjustment: 1      # The scale down runner count subtracted from the desired count
