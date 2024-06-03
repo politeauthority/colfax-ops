@@ -1,27 +1,9 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: colfax-ops
+  name: runner-colfax-ops
 spec:
   replicas: 2
   template:
     spec:
       repository: politeauthority/colfax-ops
-# ---
-# apiVersion: actions.summerwind.dev/v1alpha1
-# kind: HorizontalRunnerAutoscaler
-# metadata:
-#   name: colfax-ops
-# spec:
-#   scaleDownDelaySecondsAfterScaleOut: 300
-#   scaleTargetRef:
-#     kind: RunnerDeployment
-#     name: colfax-ops
-#   minReplicas: 2
-#   maxReplicas: 4
-#   metrics:
-#   - type: PercentageRunnersBusy
-#     scaleUpThreshold: '0.75'
-#     scaleDownThreshold: '0.25'
-#     scaleUpFactor: '2'
-#     scaleDownFactor: '0.5'

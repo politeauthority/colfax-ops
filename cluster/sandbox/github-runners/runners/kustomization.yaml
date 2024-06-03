@@ -3,9 +3,9 @@ kind: Kustomization
 namespace: actions-runner-system
 resources:
   - runner-polite-lib.yaml
+  - runner-colfax-ops.yaml
+  - runner-private-ops.yaml
 # - runner-cver.yaml
 # - runner-polite-cicd.yaml
 # - runner-dyndns.yaml
-# - runner-colfax-ops.yaml
 # - runner-quigley-api.yaml
-# - runner-private-ops.yaml

@@ -3,6 +3,7 @@ kind: RunnerDeployment
 metadata:
   name: runner-private-ops
 spec:
+  replicas: 2
   template:
     spec:
       repository: politeauthority/private-ops
