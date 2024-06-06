@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: wordpress
+resources:
+  - ../../core/
+  - wordpress-deployment.yaml
+  - wordpress-service.yaml
+  - wordpress-ingress.yaml
+  - wordpress-storage.yaml
+  - secret-sealed-mysql.yaml
+  - secret-sealed-wordpress-db.yaml
+# patches:
+#   # - target:
+#   #     kind: Deplpyment
+#   #     name: wordpess-core
+#   #   patch: |-
+#   #     - op: replace
+#   #       path: /metadata/name
+#   #       value: politeauthority-io
+#   - target:
+#       kind: Service
+#       name: wordpress-core
+#     path: patch-service.yaml

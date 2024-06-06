@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: politeauthority-io
+  labels:
+    app: politeauthority-io
+spec:
+  selector:
+    matchLabels:
+      app: politeauthority-io
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: politeauthority-io
+    spec:
+      containers:
+        - image: wordpress:6.5.3-apache
+          name: wordpress
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: wordpress-mysql-8
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-creds-politeauthority-io
+                  key: db_pass
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-creds-politeauthority-io
+                  key: db_user
+            - name: WORDPRESS_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-creds-politeauthority-io
+                  key: db_name
+          ports:
+            - containerPort: 80
+              name: wordpress
+          volumeMounts:
+            - name: wordpress-pv
+              mountPath: /var/www/html/
+      volumes:
+        - name: wordpress-pv
+          persistentVolumeClaim:
+            claimName: politeauthority-claim
