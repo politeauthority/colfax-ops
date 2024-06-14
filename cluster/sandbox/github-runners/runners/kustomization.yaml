@@ -5,7 +5,7 @@ resources:
   - runner-polite-lib.yaml
   - runner-colfax-ops.yaml
   - runner-private-ops.yaml
+  - runner-polite-cicd.yaml
+  - runner-quigley-api.yaml
 # - runner-cver.yaml
-# - runner-polite-cicd.yaml
 # - runner-dyndns.yaml
-# - runner-quigley-api.yaml

@@ -1,7 +1,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: runner-polite-lib
+  name: polite-lib
 spec:
   replicas: 2
   template:

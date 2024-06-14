@@ -1,8 +1,9 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: runner-polite-cicd
+  name: polite-cicd
 spec:
+  replicas: 0
   template:
     spec:
       repository: politeauthority/polite-cicd
