@@ -1,5 +1,4 @@
 kube-prometheus-stack:
-
   alertmanager:
     enabled: false
 
@@ -31,7 +30,7 @@ kube-prometheus-stack:
 
     prometheusSpec:
       retention: 30d
-      storageSpec: 
+      storageSpec:
         volumeClaimTemplate:
           spec:
             storageClassName: nfs-client
@@ -41,47 +40,58 @@ kube-prometheus-stack:
                 storage: 10Gi
 
       additionalScrapeConfigs:
-      - job_name: "green-machine"
-        static_configs:
-          - targets: [192.168.50.6:9100]
-      - job_name: colfax
-        static_configs:
-          - targets: [192.168.50.50:9100]
+        - job_name: "green-machine-bare"
+          static_configs:
+            - targets: [192.168.50.6:9200]
+        - job_name: colfax
+          static_configs:
+            - targets: [192.168.50.50:9100]
 
-      - job_name: nginx-public
-        static_configs:
-          - targets: [ingresspublic-ingress-nginx-controller-metrics.ingress-public.svc.cluster.local:10254]
-      # Harbor Metrics
-      - job_name: 'harbor-exporter'
-        scrape_interval: 20s
-        static_configs:
-          # Scrape metrics from the Harbor exporter component 
-          - targets: ['harbor-exporter.harbor.svc.cluster.local:8001']
-      - job_name: 'harbor-core'
-        scrape_interval: 20s
-        params:
-          # Scrape metrics from the Harbor core component
-          comp: ['core']
-        static_configs:
-          - targets: ['harbor-exporter.harbor.svc.cluster.local:8001']
-      - job_name: 'harbor-registry'
-        scrape_interval: 20s
-        params:
-          # Scrape metrics from the Harbor registry component
-          comp: ['registry']
-        static_configs:
-          - targets: ['harbor-exporter.harbor.svc.cluster.local:8001']
-      # Q Postgres Metrics
-      # - job_name: 'q-postgres'
-      #   scrape_interval: 20s
-      #   static_configs:
-      #     - targets: ['qpostgres-postgresql-metrics.q-postgres.svc.cluster.local:9187']
+        - job_name: nginx-public
+          static_configs:
+            - targets:
+                [
+                  ingresspublic-ingress-nginx-controller-metrics.ingress-public.svc.cluster.local:10254,
+                ]
+        # Harbor Metrics
+        - job_name: "harbor-exporter"
+          scrape_interval: 20s
+          static_configs:
+            # Scrape metrics from the Harbor exporter component
+            - targets: ["harbor-exporter.harbor.svc.cluster.local:8001"]
+        - job_name: "harbor-core"
+          scrape_interval: 20s
+          params:
+            # Scrape metrics from the Harbor core component
+            comp: ["core"]
+          static_configs:
+            - targets: ["harbor-exporter.harbor.svc.cluster.local:8001"]
+        - job_name: "harbor-registry"
+          scrape_interval: 20s
+          params:
+            # Scrape metrics from the Harbor registry component
+            comp: ["registry"]
+          static_configs:
+            - targets: ["harbor-exporter.harbor.svc.cluster.local:8001"]
 
-      # - job_name: 'q-postgres'
-      #   scrape_interval: 20s
-      #   static_configs:
-      #     - targets: ['.q-media.svc.cluster.local:9187']
+        - job_name: minio-job
+          bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiNEFpZEFZczhvcVpoNlFoWUpmQU0iLCJleHAiOjQ4NjY5NjU0NTN9.betUHXpxjI5NOzxj88GqoXgagqWde_FTt9pVVNUY-dx9ACi2sGCc9mH9VcQo7jBiMuyY2YpsnTSH-eAM5hjo4A
+          metrics_path: /minio/v2/metrics/cluster
+          scheme: https
+          static_configs:
+            - targets: [a1.alix.lol]
 
-      - job_name: emby
-        static_configs:
-          - targets: [emby-exporter.q-media.svc.cluster.local:9100]
+        # Q Postgres Metrics
+        # - job_name: 'q-postgres'
+        #   scrape_interval: 20s
+        #   static_configs:
+        #     - targets: ['qpostgres-postgresql-metrics.q-postgres.svc.cluster.local:9187']
+
+        # - job_name: 'q-postgres'
+        #   scrape_interval: 20s
+        #   static_configs:
+        #     - targets: ['.q-media.svc.cluster.local:9187']
+
+        - job_name: emby
+          static_configs:
+            - targets: [emby-exporter.q-media.svc.cluster.local:9100]

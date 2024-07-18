@@ -96,7 +96,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((sum(node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-.*\"}) * 100) / sum(node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-.*\"}))",
+          "expr": "100 - ((sum(node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-.*\"}) * 100) / sum(node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-.*\"}))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -170,7 +170,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media.*\"})",
+          "expr": "sum(node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media.*\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -828,7 +828,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((sum(node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-.*\"}) * 100) / sum(node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-.*\"}))",
+          "expr": "100 - ((sum(node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-.*\"}) * 100) / sum(node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-.*\"}))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -890,7 +890,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media.*\"})",
+          "expr": "sum(node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media.*\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -964,7 +964,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media.*\"})",
+          "expr": "sum(node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media.*\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1035,7 +1035,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-1\"} * 100) / node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-1\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-1\"} * 100) / node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-1\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1106,7 +1106,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-2\"} * 100) / node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-2\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-2\"} * 100) / node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-2\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1177,7 +1177,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-3\"} * 100) / node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-3\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-3\"} * 100) / node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-3\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1248,7 +1248,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-4\"} * 100) / node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-4\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-4\"} * 100) / node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-4\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1318,7 +1318,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-5\"} * 100) / node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media-5\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-5\"} * 100) / node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media-5\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1392,7 +1392,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-1\"} / 1073741824",
+          "expr": "node_filesystem_avail_bytes{job=\"green-machine-bare\", mountpoint=\"/mnt/media-1\"} / 1073741824",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1466,7 +1466,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-2\"} / 1073741824",
+          "expr": "node_filesystem_avail_bytes{job=\"green-machine-bare\", mountpoint=\"/mnt/media-2\"} / 1073741824",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1540,7 +1540,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-3\"} / 1073741824",
+          "expr": "node_filesystem_avail_bytes{job=\"green-machine-bare\", mountpoint=\"/mnt/media-3\"} / 1073741824",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1614,7 +1614,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-4\"} / 1073741824",
+          "expr": "node_filesystem_avail_bytes{job=\"green-machine-bare\", mountpoint=\"/mnt/media-4\"} / 1073741824",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1688,7 +1688,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-5\"} / 1073741824",
+          "expr": "node_filesystem_avail_bytes{job=\"green-machine-bare\", mountpoint=\"/mnt/media-5\"} / 1073741824",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1812,7 +1812,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media.*\"} * 100) / node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media.*\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media.*\"} * 100) / node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media.*\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{mountpoint}}",
@@ -1826,7 +1826,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - ((sum(node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media.*\"}) * 100) / sum(node_filesystem_size_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media.*\"}))",
+          "expr": "100 - ((sum(node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media.*\"}) * 100) / sum(node_filesystem_size_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media.*\"}))",
           "hide": false,
           "legendFormat": "Total",
           "range": true,
@@ -1950,7 +1950,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "node_filesystem_avail_bytes{job=\"green-machine\",mountpoint=~\"/mnt/media.*\"} / 1073741824",
+          "expr": "node_filesystem_avail_bytes{job=\"green-machine-bare\",mountpoint=~\"/mnt/media.*\"} / 1073741824",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{mountpoint}}",
