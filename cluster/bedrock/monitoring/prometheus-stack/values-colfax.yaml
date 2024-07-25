@@ -13,7 +13,6 @@ kube-prometheus-stack:
     env:
       PUID: "1002"
       PGID: "1003"
-      # GF_SECURITY_ADMIN_PASSWORD__FILE: "goodness"
     persistence:
       enabled: true
       existingClaim: grafana-store
@@ -80,6 +79,12 @@ kube-prometheus-stack:
           scheme: https
           static_configs:
             - targets: [a1.alix.lol]
+
+        - job_name: jellyfin
+          metrics_path: /metrics
+          scheme: http
+          static_configs:
+            - targets: [jellyfin.q-media.svc.cluster.local]
 
         # Q Postgres Metrics
         # - job_name: 'q-postgres'
