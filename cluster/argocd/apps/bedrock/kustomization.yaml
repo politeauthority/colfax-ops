@@ -5,6 +5,7 @@ resources:
 - argocd.yaml
 - cert-manager.yaml
 - nfs-client.yaml
+- fluentbit.yaml
 - ingress-public.yaml
 - ingress-private.yaml
 - loki.yaml

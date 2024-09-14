@@ -1,20 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: graylog
+  name: mosquitto
 spec:
   project: default
   source:
     repoURL: 'https://github.com/politeauthority/colfax-ops.git'
-    path: cluster/sandbox/graylog
-    targetRevision: graylog
-    helm:
-      valueFiles:
-        - values-colfax.yaml
+    path: cluster/sandbox/mosquitto
+    targetRevision: main
   destination:
-    namespace: graylog
+    namespace: mosquitto
     name: in-cluster
   syncPolicy:
+    automated:
+      prune: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true

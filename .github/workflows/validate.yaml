@@ -1,5 +1,9 @@
 name: Validate
 
+# concurrency:
+# 	group: ${{ github.ref }}
+# 	cancel-in-progress: true
+
 on:
   push:
     branches: ["main"]
@@ -16,7 +20,7 @@ jobs:
         username: politeauthority
         password: ${{ secrets.HARBOR_PASSWORD }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Validate Kustomize - Argo
         run: |
           kustomize build cluster/argocd -o argo.yaml
@@ -37,7 +41,7 @@ jobs:
     strategy:
         fail-fast: true
     steps:
-        - uses: actions/checkout@v3
+        - uses: actions/checkout@v4
         - name: Validate Helm - Bedrock
           run: |
             helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx

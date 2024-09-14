@@ -1,18 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: organizr
+  name: home-assistant
 spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
-    path: organizr
+    path: home-assistant
     targetRevision: main
   destination:
-    namespace: organizr
+    namespace: home-assistant
     name: in-cluster
   syncPolicy:
-    # automated:
-    #   prune: true
     syncOptions:
       - CreateNamespace=true

@@ -5,4 +5,4 @@ resources:
 - dyndns.yaml
 - github-runners.yaml
 - harbor.yaml
-- graylog.yaml
+- mosquitto.yaml

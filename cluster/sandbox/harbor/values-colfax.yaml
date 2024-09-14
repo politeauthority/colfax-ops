@@ -1,10 +1,12 @@
 harbor:
+  caSecretName: harbor-squid-ink-us-tls
   expose:
     tls:
       enabled: true
+      certSource: secret
       secret:
-        secretName: "harbor-squid-ink-us-tls"
-        notarySecretName: "notary-squid-ink-us-tls"
+        secretName: harbor-squid-ink-us-tls
+        notarySecretName: notary-squid-ink-us-tls
     ingress:
       hosts:
         core: harbor.squid-ink.us
@@ -13,9 +15,36 @@ harbor:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
   externalURL: https://harbor.squid-ink.us
-  # database:
-  #   type: external
-  #   external:
-  #     host: qpostgres-postgresql.q-postgres.svc.cluster.local
-  #     username: postgres
-  #     existingSecret: qpostgres
+  database:
+    type: external
+    external:
+      host: q-postgres-rw.q-postgres.svc.cluster.local
+      username: harbor_db_admin
+      existingSecret: harbor-postgres
+  metrics:
+    enabled: true
+    core:
+      path: /metrics
+      port: 8001
+    registry:
+      path: /metrics
+      port: 8001
+    jobservice:
+      path: /metrics
+      port: 8001
+    exporter:
+      path: /metrics
+      port: 8001
+
+  database:
+    type: external
+    external:
+      host: "q-postgres-rw.q-postgres.svc.cluster.local"
+      port: "5432"
+      username: "harbor_db_admin"
+      coreDatabase: "harbor_registry"
+      notaryServerDatabase: "harbor_notary_server"
+      notarySignerDatabase: "harbor_notary_signer"
+      # if using existing secret, the key must be "password"
+      existingSecret: "harbor-postgres"
+      sslmode: "disable"

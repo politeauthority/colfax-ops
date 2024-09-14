@@ -6,12 +6,8 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
-    path: synapse
+    path: synapse/k8s-manifests/
     targetRevision: synapse
-    helm:
-      valueFiles:
-        - values-colfax.yaml
-  sources: []
   destination:
     namespace: synapse
     name: in-cluster

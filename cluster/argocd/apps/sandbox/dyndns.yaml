@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'https://github.com/politeauthority/dyndns.git'
     path: kubernetes-manifests/env/colfax
-    targetRevision: main
+    targetRevision: remove-notifications
   destination:
     namespace: dyndns
     name: in-cluster

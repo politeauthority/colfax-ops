@@ -1,52 +1,23 @@
 kube-prometheus-stack:
-
   alertmanager:
-    config:
-      templates:
-      - '/etc/alertmanager/config/*.tmpl'
-      - '/colfax'
-    # alertmanagerSpec:
-    #   volumeMounts:
-    #   - mountPath: /colfax/
-    #     name: colfax-config-volume
-    #     subPath: config.tmpl
-    #   volumes:
-    #   - name: colfax-config-volume
-    #     configMap:
-    #       name: colfax-alertmanager
-    #       items:
-    #       - key: config.yaml
-    #         path: config.tmpl
-
-    ingress:
-      enabled: true
-      ingressClassName: nginx-private
-      hosts:
-        - alertmanager.colfax.int
-      path: /
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+    enabled: false
 
   grafana:
+    enabled: true
     ingress:
       enabled: true
       ingressClassName: nginx-private
       hosts:
         - grafana.colfax.int
       path: /
-    # persistence:
-    #   enabled: true
-    # additionalDataSources:
-    # - name: loki
-    #   editable: false
-    #   orgId: 1
-    #   type: loki
-    #   url: http://loki.loki.svc.cluster.local:3100
-    #   version: 1
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+    env:
+      PUID: "1002"
+      PGID: "1003"
+    persistence:
+      enabled: true
+      existingClaim: grafana-store
+    initChownData:
+      enabled: false
 
   prometheus:
     ingress:
@@ -55,12 +26,10 @@ kube-prometheus-stack:
       hosts:
         - prometheus.colfax.int
       path: /
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+
     prometheusSpec:
       retention: 30d
-      storageSpec: 
+      storageSpec:
         volumeClaimTemplate:
           spec:
             storageClassName: nfs-client
@@ -68,81 +37,66 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 10Gi
-      serviceMonitorSelector:
-        matchLabels:
-          prometheus: prometheus
+
       additionalScrapeConfigs:
-      - job_name: "green-machine"
-        static_configs:
-          - targets: [192.168.50.6:9100]
-      - job_name: colfax
-        static_configs:
-          - targets: [192.168.50.50:9100]
-      - job_name: emby
-        static_configs:
-          - targets: [192.168.50.6:9210]
+        - job_name: "green-machine-bare"
+          static_configs:
+            - targets: [192.168.50.6:9200]
+        - job_name: colfax
+          static_configs:
+            - targets: [192.168.50.50:9100]
 
-  prometheus-node-exporter:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+        - job_name: nginx-public
+          static_configs:
+            - targets:
+                [
+                  ingresspublic-ingress-nginx-controller-metrics.ingress-public.svc.cluster.local:10254,
+                ]
+        # Harbor Metrics
+        - job_name: "harbor-exporter"
+          scrape_interval: 20s
+          static_configs:
+            # Scrape metrics from the Harbor exporter component
+            - targets: ["harbor-exporter.harbor.svc.cluster.local:8001"]
+        - job_name: "harbor-core"
+          scrape_interval: 20s
+          params:
+            # Scrape metrics from the Harbor core component
+            comp: ["core"]
+          static_configs:
+            - targets: ["harbor-exporter.harbor.svc.cluster.local:8001"]
+        - job_name: "harbor-registry"
+          scrape_interval: 20s
+          params:
+            # Scrape metrics from the Harbor registry component
+            comp: ["registry"]
+          static_configs:
+            - targets: ["harbor-exporter.harbor.svc.cluster.local:8001"]
 
-  kube-state-metrics:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+        - job_name: minio-job
+          bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiNEFpZEFZczhvcVpoNlFoWUpmQU0iLCJleHAiOjQ4NjY5NjU0NTN9.betUHXpxjI5NOzxj88GqoXgagqWde_FTt9pVVNUY-dx9ACi2sGCc9mH9VcQo7jBiMuyY2YpsnTSH-eAM5hjo4A
+          metrics_path: /minio/v2/metrics/cluster
+          scheme: https
+          static_configs:
+            - targets: [a1.alix.lol]
 
-  kubeScheduler:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+        - job_name: jellyfin
+          metrics_path: /metrics
+          scheme: http
+          static_configs:
+            - targets: [jellyfin.q-media.svc.cluster.local]
 
-  kubernetesServiceMonitors:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+        # Q Postgres Metrics
+        # - job_name: 'q-postgres'
+        #   scrape_interval: 20s
+        #   static_configs:
+        #     - targets: ['qpostgres-postgresql-metrics.q-postgres.svc.cluster.local:9187']
 
-  kubeControllerManager:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+        # - job_name: 'q-postgres'
+        #   scrape_interval: 20s
+        #   static_configs:
+        #     - targets: ['.q-media.svc.cluster.local:9187']
 
-  kubeApiServer:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
-
-  kubelet:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
-
-  coreDns:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
-
-  kubeDns:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
-
-  kubeEtcd:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
-
-  kubeScheduler:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
-
-  kubeProxy:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
-
-  kubeletService:
-    serviceMonitor:
-      additionalLabels:
-        prometheus: prometheus
+        - job_name: emby
+          static_configs:
+            - targets: [emby-exporter.q-media.svc.cluster.local:9100]

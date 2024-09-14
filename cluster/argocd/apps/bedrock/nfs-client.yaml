@@ -18,6 +18,6 @@ spec:
     namespace: nfs-client
     name: in-cluster
   syncPolicy:
-    automated: {}
+    # automated: {}
     syncOptions:
       - CreateNamespace=true

@@ -1,9 +1,9 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: runner-colfax-ops
+  name: colfax-ops
 spec:
-  replicas: 5
+  replicas: 2
   template:
     spec:
       repository: politeauthority/colfax-ops

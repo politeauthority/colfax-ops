@@ -6,9 +6,15 @@ ingress-nginx:
     service:
       loadBalancerIP: "192.168.50.80"
       externalIPs: ["192.168.50.80"]
+      externalTrafficPolicy: "Local"
     metrics:
       enabled: true
       serviceMonitor:
         enabled: true
-        additionalLabels:
-          prometheus: prometheus
+    maxmindLicenseKey: MAX-MIND-KEY
+    config:
+      enable-real-ip: true
+      use-geoip2: true
+      proxy-real-ip-cidr: "192.168.50.80/31"
+      log-format-escape-json: "true"
+      log-format-upstream: '{"namespace": "$namespace", "ingress_name": "$ingress_name", "geoip_country_code": "$geoip2_city_country_code", "geoip_country_name": "$geoip2_city_country_name", "geoip_city": "$geoip2_city", "geoip_timezone": "$geoip2_time_zone", "time": "$time_iso8601", "x_forwarded_for": "$proxy_add_x_forwarded_for", "request_id": "$req_id", "host": "$host", "method": "$request_method", "uri": "$request_uri", "status": "$status", "body_bytes_sent": "$body_bytes_sent", "http_referer": "$http_referer", "http_user_agent": "$http_user_agent", "request_length": "$request_length", "upstream_response_time": "$upstream_response_time"}'
