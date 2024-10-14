@@ -35,7 +35,7 @@ harbor:
     external:
       host: "qpostgres-postgresql.q-postgres.svc.cluster.local"
       port: "5432"
-      username: "harbor_db_admin"
+      username: "harbor_admin"
       coreDatabase: "harbor_registry"
       notaryServerDatabase: "harbor_notary_server"
       notarySignerDatabase: "harbor_notary_signer"
