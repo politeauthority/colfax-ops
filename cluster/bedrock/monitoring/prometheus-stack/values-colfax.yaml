@@ -14,7 +14,7 @@ kube-prometheus-stack:
       PUID: "1002"
       PGID: "1003"
     persistence:
-      enabled: true
+      enabled: false
       existingClaim: grafana-store
     initChownData:
       enabled: false
