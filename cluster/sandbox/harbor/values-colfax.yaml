@@ -15,12 +15,6 @@ harbor:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
   externalURL: https://harbor.squid-ink.us
-  database:
-    type: external
-    external:
-      host: q-postgres-rw.q-postgres.svc.cluster.local
-      username: harbor_db_admin
-      existingSecret: harbor-postgres
   metrics:
     enabled: true
     core:
@@ -39,7 +33,7 @@ harbor:
   database:
     type: external
     external:
-      host: "q-postgres-rw.q-postgres.svc.cluster.local"
+      host: "qpostgres-postgresql.q-postgres.svc.cluster.local"
       port: "5432"
       username: "harbor_db_admin"
       coreDatabase: "harbor_registry"
