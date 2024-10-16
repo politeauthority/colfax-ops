@@ -1,8 +1,9 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: bookmarky-api
+  name: quigley-bot
 spec:
+  replicas: 2
   template:
     spec:
-      repository: politeauthority/bookmarky-api
+      repository: politeauthority/quigley-bot

@@ -9,8 +9,8 @@ harbor:
         notarySecretName: notary-squid-ink-us-tls
     ingress:
       hosts:
-        core: harbor.squid-ink.us
-        notary: notary.squid-ink.us
+        core: harbor.alix.lol
+        notary: notary.alix.lol
       className: nginx-public
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod

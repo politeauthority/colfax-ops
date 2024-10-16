@@ -1,8 +1,9 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: bookmarky-api
+  name: bookmarky-web
 spec:
+  replicas: 2
   template:
     spec:
-      repository: politeauthority/bookmarky-api
+      repository: politeauthority/bookmarky-web-simple
