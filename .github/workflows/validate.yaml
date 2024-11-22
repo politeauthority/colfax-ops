@@ -11,6 +11,7 @@ on:
     branches: ["main"]
 
 jobs:
+
   validate-kustomize:
     runs-on: self-hosted
     container:
@@ -22,7 +23,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate Kustomize - Argo
         run: |
-          task check-k
+          kustomize build cluster/argocd -o argo.yaml
+      - name: Validate Kustomize - Bedrock
+        run: |
+          kustomize build cluster/bedrock/cert-manager -o cert-manager.yaml
+      - name: Validate Kustomize - Sandbox
+        run: |
+          kustomize build cluster/sandbox/github-runners -o github-runners.yaml
 
   validate-helm:
     runs-on: self-hosted
@@ -37,4 +44,54 @@ jobs:
         - uses: actions/checkout@v4
         - name: Validate Helm - Bedrock
           run: |
-            task check-helm
+            helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+            helm lint cluster/bedrock/ingress/ingress-private
+            helm dependency build cluster/bedrock/ingress/ingress-private
+            helm template cluster/bedrock/ingress/ingress-private -f cluster/bedrock/ingress/ingress-private/values-colfax.yaml --dry-run > out.yaml
+
+            helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+            helm lint cluster/bedrock/ingress/ingress-public
+            helm dependency build cluster/bedrock/ingress/ingress-private
+            helm template cluster/bedrock/ingress/ingress-public -f cluster/bedrock/ingress/ingress-public/values-colfax.yaml --dry-run > out.yaml
+
+            helm repo add loki-stack https://grafana.github.io/helm-charts/
+            helm lint cluster/bedrock/loki
+            helm dependency build cluster/bedrock/loki
+            helm template cluster/bedrock/loki -f cluster/bedrock/loki/values-colfax.yaml --dry-run > out.yaml
+
+            helm repo add kube-prometheus-stack https://prometheus-community.github.io/helm-charts
+            helm lint cluster/bedrock/monitoring/prometheus-stack
+            helm dependency build cluster/bedrock/monitoring/prometheus-stack
+            helm template cluster/bedrock/monitoring/prometheus-stack -f cluster/bedrock/monitoring/prometheus-stack/values-colfax.yaml --dry-run > out.yaml
+
+            helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+            helm lint cluster/bedrock/storage/nfs-client
+            helm dependency build cluster/bedrock/storage/nfs-client
+            helm template cluster/bedrock/storage/nfs-client -f cluster/bedrock/storage/nfs-client/values-colfax.yaml --dry-run > out.yaml
+
+        - name: Validate Helm - Sandbox
+          run: |
+            helm repo add graylog https://charts.kong-z.com/
+            helm lint cluster/sandbox/graylog
+            helm dependency build cluster/sandbox/graylog
+            helm template cluster/sandbox/graylog -f cluster/sandbox/graylog/values-colfax.yaml --dry-run > out.yaml
+
+            helm repo add harbor https://helm.goharbor.io/
+            helm lint cluster/sandbox/harbor
+            helm dependency build cluster/sandbox/harbor
+            helm template cluster/sandbox/harbor -f cluster/sandbox/harbor/values-colfax.yaml --dry-run > out.yaml
+
+  validate-yaml:
+    runs-on: self-hosted
+    container:
+      image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
+      credentials:
+        username: politeauthority
+        password: ${{ secrets.HARBOR_PASSWORD }}
+    strategy:
+        fail-fast: true
+    steps:
+        - uses: actions/checkout@v3
+        - name: Validate Yaml
+          run: |
+            yamllint -c config-yaml-lint.yaml ./ --no-warnings
