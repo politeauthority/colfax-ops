@@ -1,8 +1,8 @@
-# NFS Client
+# NFS Client Zeta
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nfsclient
+  name: nfsclientzeta
 spec:
   project: default
   source:
@@ -11,7 +11,7 @@ spec:
     targetRevision: main
     helm:
       valueFiles:
-        - values-colfax.yaml
+        - values-zeta.yaml
   sources: []
   destination:
     namespace: nfs-client
