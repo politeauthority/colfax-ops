@@ -24,6 +24,6 @@ spec:
   resources:
     requests:
       storage: 2G
-  storageClassName: nfs-client
+  storageClassName: nfs-zeta
   volumeMode: Filesystem
   volumeName: grafana-store
