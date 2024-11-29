@@ -4,7 +4,7 @@ metadata:
   name: prometheus-store
 spec:
   capacity:
-    storage: 50G
+    storage: 50Gi
   volumeMode: Filesystem
   storageClassName: nfs-client
   accessModes:
