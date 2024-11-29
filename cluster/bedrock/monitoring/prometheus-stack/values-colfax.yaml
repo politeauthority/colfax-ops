@@ -32,9 +32,8 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            volumeName: prometheus-store
+            storageClassName: nfs-zeta
             accessModes: ["ReadWriteOnce"]
-            storageClassName: nfs-client
             resources:
               requests:
                 storage: 50Gi

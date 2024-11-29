@@ -6,7 +6,7 @@ spec:
   capacity:
     storage: 2G
   volumeMode: Filesystem
-  storageClassName: nfs-client
+  storageClassName: nfs-zeta
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
