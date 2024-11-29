@@ -1,0 +1,14 @@
+# NFS-Client Zeta Values
+nfs-subdir-external-provisioner:
+  nfs:
+    server: 192.168.50.51
+    path: /mnt/media-1/container-data
+    mountOptions:
+    - nolock
+    volumeName: nfs-subdir-external-provisioner-root
+    # Reclaim policy for the main nfs volume
+    reclaimPolicy: Retain
+
+  storageClass:
+    name: nfs-zeta
+    defaultClass: true
