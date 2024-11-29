@@ -11,8 +11,8 @@ kube-prometheus-stack:
         - grafana.colfax.int
       path: /
     env:
-      PUID: "1002"
-      PGID: "1003"
+      PUID: "1001"
+      PGID: "1002"
     persistence:
       enabled: false
       existingClaim: grafana-store
@@ -32,11 +32,12 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: nfs-client
+            volumeName: prometheus-store
             accessModes: ["ReadWriteOnce"]
+            storageClassName: nfs-client
             resources:
               requests:
-                storage: 10Gi
+                storage: 50Gi
 
       additionalScrapeConfigs:
         - job_name: "green-machine-bare"
@@ -73,12 +74,12 @@ kube-prometheus-stack:
           static_configs:
             - targets: ["harbor-exporter.harbor.svc.cluster.local:8001"]
 
-        - job_name: minio-job
-          bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoiNEFpZEFZczhvcVpoNlFoWUpmQU0iLCJleHAiOjQ4NjY5NjU0NTN9.betUHXpxjI5NOzxj88GqoXgagqWde_FTt9pVVNUY-dx9ACi2sGCc9mH9VcQo7jBiMuyY2YpsnTSH-eAM5hjo4A
-          metrics_path: /minio/v2/metrics/cluster
-          scheme: https
-          static_configs:
-            - targets: [a1.alix.lol]
+        # - job_name: minio-job
+        #   bearer_token: x
+        #   metrics_path: /minio/v2/metrics/cluster
+        #   scheme: https
+        #   static_configs:
+        #     - targets: [a1.alix.lol]
 
         - job_name: jellyfin
           metrics_path: /metrics
@@ -96,7 +97,3 @@ kube-prometheus-stack:
         #   scrape_interval: 20s
         #   static_configs:
         #     - targets: ['.q-media.svc.cluster.local:9187']
-
-        - job_name: emby
-          static_configs:
-            - targets: [emby-exporter.q-media.svc.cluster.local:9100]
