@@ -14,7 +14,7 @@ spec:
         - values-zeta.yaml
   sources: []
   destination:
-    namespace: nfs-client
+    namespace: nfs-client-zeta
     name: in-cluster
   syncPolicy:
     # automated: {}
