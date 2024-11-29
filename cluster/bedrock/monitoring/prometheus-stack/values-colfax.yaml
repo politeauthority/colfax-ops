@@ -42,9 +42,9 @@ kube-prometheus-stack:
         - job_name: "hoyt"
           static_configs:
             - targets: [192.168.50.52:9100]
-        # - job_name: "zeta"
-        #   static_configs:
-        #     - targets: [192.168.50.51:9100]
+        - job_name: "zeta"
+          static_configs:
+            - targets: [192.168.50.51:9100]
         - job_name: colfax
           static_configs:
             - targets: [192.168.50.50:9100]
