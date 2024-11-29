@@ -11,19 +11,5 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: /srv/k8s-data/prometheus-db
-    server: 192.168.50.6
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: prometheus-store
-spec:
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 50G
-  storageClassName: nfs-client
-  volumeMode: Filesystem
-  volumeName: prometheus-store
+    path: /srv/k8s/prometheus-db
+    server: 192.168.50.51
