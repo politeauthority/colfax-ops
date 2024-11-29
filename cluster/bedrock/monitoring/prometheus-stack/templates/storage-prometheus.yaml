@@ -11,5 +11,5 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: /srv/k8s/prometheus-db
+    path: /mnt/media-1/container-data/prometheus-db
     server: 192.168.50.51

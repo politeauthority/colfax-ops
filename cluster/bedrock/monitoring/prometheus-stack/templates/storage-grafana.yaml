@@ -11,7 +11,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: /srv/k8s/grafana
+    path: /mnt/media-1/container-data/grafana
     server: 192.168.50.51
 ---
 apiVersion: v1
