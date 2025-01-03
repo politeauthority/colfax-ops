@@ -8,6 +8,9 @@ spec:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
     path: q-postgres
     targetRevision: main
+    helm:
+      valueFiles:
+        - values-colfax.yaml
   sources: []
   destination:
     namespace: q-postgres
