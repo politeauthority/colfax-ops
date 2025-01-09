@@ -2,7 +2,7 @@
 nfs-subdir-external-provisioner:
   nfs:
     server: 192.168.50.52
-    path: /srv/k8s
+    path: /mnt/media-1/container-data/
     mountOptions:
     - nolock
     volumeName: nfs-subdir-external-provisioner-root

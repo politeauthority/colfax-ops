@@ -1,0 +1,9 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: alix-docs
+spec:
+  replicas: 2
+  template:
+    spec:
+      repository: politeauthority/alix-docs

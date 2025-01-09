@@ -4,6 +4,7 @@ namespace: actions-runner-system
 resources:
   - runner-bookmarky-api.yaml
   - runner-bookmarky-web.yaml
+  - runner-lan-nanny.yaml
   # - runner-polite-lib.yaml
   # - runner-colfax-ops.yaml
   # - runner-private-ops.yaml
