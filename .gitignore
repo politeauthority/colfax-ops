@@ -7,3 +7,8 @@ Chart.lock
 charts
 colfax/old/
 colfax/really-old/
+
+# Virtual K8s Ignores
+virtual-k8s/proxmox-k8s/admin.conf
+virtual-k8s/proxmox-k8s/ansible/.run/
+virtual-k8s/proxmox-k8s/proxmox/terraform/terraform.tfstate*
