@@ -1,13 +1,13 @@
 - name: adding Kubernetes repository apt key
   become: yes
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  ansible.builtin.apt_key:
+    url: https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key
     state: present
 
 - name: adding Kubernetes deb repository
   become: yes
   apt_repository:
-    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    repo: deb https://pkgs.k8s.io kubernetes-focal main
     state: present
     filename: kubernetes
 
