@@ -1,6 +1,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
+  namespace: actions-runner-system
   name: alix-docs
 spec:
   replicas: 2

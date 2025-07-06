@@ -1,9 +1,9 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: bookmarky-web
+  name: lan-nanny
 spec:
   replicas: 2
   template:
     spec:
-      repository: politeauthority/bookmarky-web-simple
+      repository: politeauthority/lan-nanny2

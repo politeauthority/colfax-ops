@@ -1,9 +1,9 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: lan-nanny
+  namespace: actions-runner-system
+  name: bookmarky-api
 spec:
-  replicas: 2
   template:
     spec:
-      repository: politeauthority/alix-docs
+      repository: politeauthority/bookmarky-api
