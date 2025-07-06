@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: linkwarden
+    targetRevision: main
+  destination:
+    namespace: linkwarden
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
