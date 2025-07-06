@@ -85,6 +85,11 @@ kube-prometheus-stack:
           scheme: http
           static_configs:
             - targets: [jellyfin.q-media.svc.cluster.local]
+        - job_name: q-postgres
+          metrics_path: /metrics
+          scheme: http
+          static_configs:
+            - targets: [q-post-gressive-postgresql-metrics.q-post-gressive.svc.cluster.local:9187]
 
         # Q Postgres Metrics
         # - job_name: 'q-postgres'
