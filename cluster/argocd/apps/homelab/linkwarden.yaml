@@ -1,20 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: qpostgres
+  name: linkwarden
 spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
-    path: q-postgres
+    path: linkwarden
     targetRevision: main
-    helm:
-      valueFiles:
-        - values-colfax.yaml
-  sources: []
   destination:
-    namespace: q-postgres
+    namespace: linkwarden
     name: in-cluster
   syncPolicy:
+    automated:
+      prune: true
     syncOptions:
       - CreateNamespace=true
