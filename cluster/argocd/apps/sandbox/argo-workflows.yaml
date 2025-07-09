@@ -1,0 +1,22 @@
+# Argo Workflows Helm
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argoworkflows
+spec:
+  project: default
+  source:
+    repoURL: "git@github.com:politeauthority/private-ops.git"
+    path: argo-workflows
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values-colfax.yaml
+  sources: []
+  destination:
+    namespace: argo-workflows
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
