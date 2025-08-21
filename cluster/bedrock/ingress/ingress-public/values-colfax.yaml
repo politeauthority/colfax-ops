@@ -11,7 +11,7 @@ ingress-nginx:
       enabled: true
       serviceMonitor:
         enabled: true
-    maxmindLicenseKey: MAX-MIND-KEY
+    # maxmindLicenseKey: MAX-MIND-KEY
     config:
       enable-real-ip: true
       use-geoip2: true
