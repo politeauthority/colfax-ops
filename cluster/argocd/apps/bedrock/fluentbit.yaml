@@ -5,8 +5,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
-    path: cluster/bedrock/fluentbit
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: fluentbit
     targetRevision: main
     helm:
       valueFiles:
