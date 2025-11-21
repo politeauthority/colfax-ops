@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: graylog-forwarder-1
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/politeauthority/private-ops.git'
+    path: graylog/forwarder
+    targetRevision: remove-notifications
+  destination:
+    namespace: dyndns
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
