@@ -7,13 +7,11 @@ spec:
   source:
     repoURL: 'https://github.com/politeauthority/private-ops.git'
     path: graylog/forwarder
-    targetRevision: remove-notifications
+    targetRevision: main
   destination:
-    namespace: dyndns
+    namespace: graylog
     name: in-cluster
   syncPolicy:
-    automated:
-      prune: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
