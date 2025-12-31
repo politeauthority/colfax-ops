@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: immich
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: immich
+    targetRevision: main
+  destination:
+    namespace: immich
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
