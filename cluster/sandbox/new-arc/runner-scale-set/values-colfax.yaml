@@ -1,0 +1,42 @@
+githubConfigUrl: https://github.com/politeauthority/colfax-ops
+githubConfigSecret: pre-defined-secret
+maxRunners: 5
+minRunners: 1
+# containerMode:
+#   type: "kubernetes"
+#     kubernetesModeWorkVolumeClaim:
+#       accessModes: ["ReadWriteOnce"]
+#       # storageClassName: "dynamic-blob-storage"
+#       resources:
+#         requests:
+#           storage: 1Gi
+containerMode:
+  type: "dind"
+# template:
+#   spec:
+#     containers:
+#     - name: dind
+#       image: docker:dind
+#       args:
+#         - dockerd
+#         - --host=unix:///run/docker/docker.sock
+#         - --group=$(DOCKER_GROUP_GID)
+#       # env:
+#       #   - name: DOCKER_GROUP_GID
+#       #     value: "123"
+#       securityContext:
+#         privileged: true
+#       volumeMounts:
+#         - name: work
+#           mountPath: /home/runner/_work
+#         - name: dind-sock
+#           mountPath: /run/docker
+#         - name: dind-externals
+#           mountPath: /home/runner/externals
+#   volumes:
+#     - name: work
+#       emptyDir: {}
+#     - name: dind-sock
+#       emptyDir: {}
+#     - name: dind-externals
+#       emptyDir: {}

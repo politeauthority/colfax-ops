@@ -1,0 +1,20 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: cloudnativepg
+# spec:
+#   project: default
+#   source:
+#     repoURL: 'git@github.com:politeauthority/private-ops.git'
+#     path: cloud-native-pg
+#     targetRevision: q-postgres-updates
+#     helm:
+#       valueFiles:
+#         - values-colfax.yaml
+#   sources: []
+#   destination:
+#     namespace: cpng
+#     name: in-cluster
+#   syncPolicy:
+#     syncOptions:
+#       - CreateNamespace=true

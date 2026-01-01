@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-console
+  labels:
+    app: minio
+    kubernetes.io/name: "minio"
+spec:
+  selector:
+    app: minio
+  ports:
+    - port: 80
+      targetPort: 9090
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-console
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 60m
+spec:
+  ingressClassName: nginx-private
+  rules:
+    - host: minio.colfax.int
+      http:
+        paths:
+          - backend:
+              service:
+                name: minio-console
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

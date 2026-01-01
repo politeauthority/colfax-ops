@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: minio
+images:
+  - name: minio/minio:latest
+    # newName: harbor.squid-ink.us/docker-hub/minio/minio
+    newTag: RELEASE.2024-07-31T05-46-26Z
+resources:
+  - ./base/deployment.yaml
+  - ./base/storage.yaml
+  - ./base/network-console.yaml
+  - ./base/network-api.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: quigley-api
+    patch: |-
+      - op: add
+        path: /spec/template/spec/imagePullSecrets
+        name: harbor-registry

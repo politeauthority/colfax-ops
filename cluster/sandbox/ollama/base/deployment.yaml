@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      # securityContext:
+      #   runAsUser: 1002
+      #   runAsGroup: 1003
+      #   fsGroup: 1003
+      nodeSelector:
+        kubernetes.io/hostname: kube-master
+      imagePullSecrets:
+        - name: harbor-registry
+      containers:
+        - name: ollama
+          image: harbor.squid-ink.us/docker-hub/ollama/ollama
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 11434
+          # volumeMounts:
+          #   - name: ollama-drive
+          #     mountPath: /root/.ollama
+          command:
+            - "tail"
+            - "-f"
+            - "/dev/null"
+      volumes:
+        - name: ollama-drive
+          persistentVolumeClaim:
+            claimName: ollama-drive

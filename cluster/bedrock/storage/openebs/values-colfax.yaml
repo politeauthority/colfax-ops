@@ -1,0 +1,17 @@
+openebs:
+  release:
+    version: "4.1.0"
+
+  engines:
+    local:
+      lvm:
+        enabled: true
+      zfs:
+        enabled: true
+    replicated:
+      mayastor:
+        enabled: false
+
+  mayastor:
+    etcd:
+      replicaCount: 2

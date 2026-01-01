@@ -1,0 +1,4 @@
+githubConfigUrl: https://github.com/politeauthority/colfax-ops
+githubConfigSecret: pre-defined-secret
+maxRunners: 5
+minRunners: 0

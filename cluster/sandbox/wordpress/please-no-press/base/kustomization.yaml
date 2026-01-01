@@ -1,0 +1,5 @@
+# kustomization.yaml
+namespace: please-no-press
+resources:
+  - mysql.yaml
+  - wordpress.yaml

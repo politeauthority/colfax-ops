@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+  name: argo-workflows
+  namespace: argo
+spec:
+  ingressClassName: nginx-private
+  rules:
+  - host: argo-workflows.colfax.int
+    http:
+      paths:
+      - backend:
+          service:
+            name: argo-server
+            port:
+              name: 2746
+        path: /
+        pathType: Prefix

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: public-ingress-log-exporter
+  labels:
+    app: public-ingress-log-exporter
+    kubernetes.io/name: public-ingress-log-exporter
+spec:
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingresspublic
+    app.kubernetes.io/name: ingress-nginx
+  ports:
+  - name: metrics
+    port: 4040
+    targetPort: 4040
+  - name: ingest
+    port: 5531
+    targetPort: 5531
