@@ -1,26 +1,26 @@
 # Prometheus - Helm
 # NOT IN USE
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: prometheusstack
-spec:
-  project: default
-  source:
-    repoURL: "git@github.com:politeauthority/colfax-ops.git"
-    path: cluster/bedrock/monitoring/prometheus-stack/
-    targetRevision: main
-    helm:
-      valueFiles:
-        - values-colfax.yaml
-  sources: []
-  destination:
-    namespace: monitoring
-    name: in-cluster
-  syncPolicy:
-    automated:
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
-      - Replace=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: prometheusstack
+# spec:
+#   project: default
+#   source:
+#     repoURL: "git@github.com:politeauthority/colfax-ops.git"
+#     path: cluster/bedrock/monitoring/prometheus-stack/
+#     targetRevision: main
+#     helm:
+#       valueFiles:
+#         - values-colfax.yaml
+#   sources: []
+#   destination:
+#     namespace: monitoring
+#     name: in-cluster
+#   syncPolicy:
+#     automated:
+#       prune: true
+#     syncOptions:
+#       - CreateNamespace=true
+#       - ServerSideApply=true
+#       - Replace=true
