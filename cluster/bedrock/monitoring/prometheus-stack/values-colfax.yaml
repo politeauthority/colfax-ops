@@ -2,6 +2,8 @@ kube-prometheus-stack:
   prometheusOperator:
     admissionWebhooks:
       enabled: false
+    tls:
+      enabled: false
 
   alertmanager:
     enabled: false
