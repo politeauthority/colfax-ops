@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-q-media-services
+data:
+  grafana-q-media-services.json: |-
+{{ .Files.Get "dashboards/q-media-services.json" | indent 4}}
