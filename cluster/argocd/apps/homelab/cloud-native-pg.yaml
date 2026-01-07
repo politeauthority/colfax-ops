@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
     path: cloud-native-pg
-    targetRevision: q-postgres-updates
+    targetRevision: main
     helm:
       valueFiles:
         - values-colfax.yaml
