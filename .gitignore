@@ -3,7 +3,7 @@ plan
 .tfstate
 *.tgz
 .DS_Store
-Chart.lock
+# Chart.lock
 charts
 colfax/old/
 colfax/really-old/
