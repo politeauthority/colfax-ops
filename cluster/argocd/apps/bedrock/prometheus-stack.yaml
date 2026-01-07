@@ -19,6 +19,14 @@ spec:
   ignoreDifferences:
     - group: ""
       kind: PersistentVolumeClaim
+      managedFieldsManagers:
+        - kube-controller-manager
+      jsonPointers:
+        - /status
+    - group: ""
+      kind: PersistentVolume
+      managedFieldsManagers:
+        - kube-controller-manager
       jsonPointers:
         - /status
     - group: admissionregistration.k8s.io
