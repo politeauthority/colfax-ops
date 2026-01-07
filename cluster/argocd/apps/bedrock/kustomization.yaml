@@ -9,4 +9,4 @@ resources:
 - ingress-public.yaml
 - ingress-private.yaml
 - loki.yaml
-- prometheus-stack.yaml
+# - prometheus-stack.yaml  # temporarily removed for reinstall
