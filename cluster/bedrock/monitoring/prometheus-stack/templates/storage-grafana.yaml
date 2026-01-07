@@ -6,7 +6,7 @@ spec:
   capacity:
     storage: 2G
   volumeMode: Filesystem
-  storageClassName: nfs-zeta
+  storageClassName: nfs-client
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -24,6 +24,6 @@ spec:
   resources:
     requests:
       storage: 2G
-  storageClassName: nfs-zeta
+  storageClassName: nfs-client
   volumeMode: Filesystem
   volumeName: grafana-store
