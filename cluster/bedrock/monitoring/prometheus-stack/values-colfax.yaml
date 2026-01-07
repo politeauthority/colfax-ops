@@ -16,15 +16,15 @@ kube-prometheus-stack:
       hosts:
         - grafana.colfax.int
       path: /
-    env:
-      PUID: "1001"
-      PGID: "1002"
-    persistence:
-      enabled: false
-      storageClassName: nfs-client
-      size: 2Gi
-    initChownData:
-      enabled: false
+    # env:
+    #   PUID: "1001"
+    #   PGID: "1002"
+    # persistence:
+    #   enabled: false
+    #   storageClassName: nfs-client
+    #   size: 2Gi
+    # initChownData:
+    #   enabled: false
 
   prometheus:
     ingress:
