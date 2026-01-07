@@ -11,3 +11,4 @@ resources:
 - synapse.yaml
 - linkwarden.yaml
 - immich.yaml
+- q-postgres.yaml
