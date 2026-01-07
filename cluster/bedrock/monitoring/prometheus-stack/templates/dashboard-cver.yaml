@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-    grafana_dashboard: "1"
-  name: grafana-cver
-data:
-  grafana-cver.json: |-
-{{ .Files.Get "dashboards/cver.json" | indent 4}}
