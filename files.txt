@@ -1,0 +1,104 @@
+total 444
+drwxrwxrwx 101 media media-group  4096 Mar 18 15:53 .
+drwxrwxrwx   4 media media-group  4096 Feb 24 16:34 ..
+drwxr-xr-x   3 media media-group  4096 Mar 17 18:40 American Horror Stories
+drwxr-xr-x  17 root  root         4096 Mar 16 10:08 Aqua Teen Hunger Force
+drwxr-xr-x  16 media media-group  4096 Mar 16 10:18 Archer (2009)
+drwxr-xr-x   3 root  root         4096 Mar 16 10:20 Band of Brothers
+drwxr-xr-x   6 root  root         4096 Mar 16 10:25 Barry
+drwxr-xr-x  12 root  root         4096 Mar 16 10:31 Beavis and Butthead
+drwxr-xr-x   9 root  root         4096 Mar 16 10:47 Better Call Saul
+drwxr-xr-x   4 root  root         4096 Mar 16 10:50 Better Off Ted
+drwxr-xr-x   7 root  root         4096 Mar 16 10:52 Breaking Bad
+drwxr-xr-x   3 root  root         4096 Mar 16 10:52 Building Britain's Biggest Nuclear Power Station
+drwxr-xr-x   6 root  root         4096 Mar 16 10:54 Chappelles Show
+drwxr-xr-x   3 root  root         4096 Mar 16 10:54 Chernobyl
+drwxr-xr-x   3 root  root         4096 Mar 16 10:54 Chernobyl - The New Evidence
+drwxrwsrwx   5 media media-group  4096 Mar 18 15:17 Cops
+drwxr-xr-x  17 root  root         4096 Mar 16 11:01 Curb Your Enthusiasm
+drwxr-xr-x   5 root  root         4096 Mar 16 11:04 Da Ali G Show
+drwxr-xr-x   5 root  root         4096 Mar 16 11:10 DAVE
+drwxr-xr-x  10 root  root         4096 Mar 16 11:21 Dexter
+drwxr-xr-x   4 root  root         4096 Mar 16 11:23 Dilbert
+drwxr-xr-x   8 root  root         4096 Mar 16 11:24 Dr. Katz, Professional Therapist
+drwxr-xr-x   8 root  root         4096 Mar 16 11:26 Drunk History
+drwxr-xr-x   6 root  root         4096 Mar 16 11:35 Eastbound & Down
+drwxr-xr-x  23 media media-group 36864 Mar 18 15:44 Family Guy (1999) [tvdbid-75978]
+drwxr-xr-x   3 root  root         4096 Mar 16 11:36 FBI Takedowns
+-rw-r--r--   1 root  root            0 Mar 18 15:53 files.txt
+drwxr-xr-x   3 root  root         4096 Mar 16 11:43 Firefly
+drwxr-xr-x  13 root  root         4096 Mar 16 11:54 Friends
+drwxr-xr-x  11 media media-group  4096 Mar 16 12:01 Futurama
+drwxr-xr-x  18 root  root         4096 Mar 16 12:12 Game of Thrones
+drwxr-xr-x   5 root  root         4096 Mar 16 12:17 Hacks (2021)
+drwxr-xr-x   6 root  root         4096 Mar 16 12:42 Halt and Catch Fire
+-rwxr-xr-x   1 root  root           20 Mar 16 12:45 hello.txt
+drwxr-xr-x   6 root  root         4096 Mar 16 12:47 Heros
+drwxr-xr-x   7 root  root         4096 Mar 16 12:55 Home Movies
+drwxr-xr-x   4 root  root         4096 Mar 16 13:00 Invasion (2021)
+drwxr-xr-x  18 media media-group  4096 Feb 26 01:31 Its Always Sunny in Philadelphia
+drwxr-xr-x   3 root  root         4096 Mar 16 13:06 Jury Duty
+drwxr-xr-x   8 root  root         4096 Mar 16 13:11 Key & Peele
+drwxr-xr-x   7 root  root         4096 Mar 16 13:13 Kids in the Hall
+drwxr-xr-x   5 root  root         4096 Mar 16 13:15 Kroll Show
+drwxr-xr-x  19 root  root         4096 Mar 16 13:18 Lost
+drwxr-xr-x   9 root  root         4096 Mar 16 13:36 Mad Men
+drwxr-xr-x  10 root  root         4096 Mar 16 13:42 Monk
+drwxr-xr-x   3 root  root         4096 Mar 16 13:42 Moonbase 8
+drwxr-xr-x   4 root  root         4096 Mar 16 13:48 Moonshiners - Master Distiller
+drwxrwsrwx   6 media media-group  4096 Jun  6  2023 Mr Robot
+drwxr-xr-x   7 root  root         4096 Mar 15 23:39 Mr Show
+drwxr-xr-x   5 root  root         4096 Mar 16 13:54 Mystery at Blind Frog Ranch
+drwxr-xr-x  20 root  root         4096 Mar 16 14:35 Myth Busters
+drwxr-xr-x   6 root  root         4096 Mar 16 14:41 Nathan for You
+drwxr-xr-x  14 root  root         4096 Mar 16 14:45 Oz
+drwxr-xr-x   4 root  root         4096 Mar 16 14:46 Pachinko
+drwxr-xr-x   9 root  root         4096 Mar 16 14:53 Parks and Recreation
+drwxr-xr-x   3 root  root         4096 Mar 16 14:53 Preacher
+drwxr-xr-x   9 root  root         4096 Mar 16 15:06 Ray Donovan
+drwxr-xr-x  10 root  root         4096 Mar 16 15:11 Reno 911!
+drwxr-xr-x  14 root  root         4096 Mar 16 15:16 Robot Chicken
+drwxr-xr-x  17 root  root         4096 Mar 16 15:27 Scrubs
+drwxr-xr-x   7 root  root         4096 Mar 16 15:28 Sealab 2021
+drwxr-xr-x  11 root  root         4096 Mar 16 15:43 Seinfeld (1989) [tvdbid-79169]
+drwxr-xr-x   8 root  root         4096 Mar 16 15:55 Silicon Valey
+drwxr-xr-x   4 root  root         4096 Mar 16 16:03 Six Feet Under
+drwxr-xr-x  29 root  root         4096 Mar 16 16:34 South Park (1997) [tvdbid-75897]
+drwxr-xr-x   5 root  root         4096 Mar 16 16:54 Star Trek
+drwxr-xr-x   5 root  root         4096 Mar 16 17:19 Star Trek - Picard
+drwxr-xr-x   4 root  root         4096 Mar 16 17:25 Star Trek - Strange New Worlds
+drwxr-xr-x  10 root  root         4096 Mar 16 17:37 Star Trek The Next Generation
+drwxr-xr-x   6 root  root         4096 Mar 16 17:39 Super Jail
+drwxr-xr-x   4 root  root         4096 Mar 16 17:40 Super Pumped
+drwxr-xr-x   9 root  root         4096 Mar 16 17:44 Tales From The Crypt
+drwxr-xr-x   3 root  root         4096 Mar 16 17:45 Terminator The Sarah Connor Chronicles
+drwxr-xr-x   4 root  root         4096 Mar 16 17:47 The Birthday Boys
+drwxr-xr-x   3 root  root         4096 Mar 16 17:51 The Comey Rule
+drwxr-xr-x  20 media media-group  4096 Mar 16 18:11 The First 48
+drwxr-xr-x   7 root  root         4096 Mar 16 18:16 The Handmaids Tale
+drwxr-xr-x   7 media media-group  4096 Feb 26 08:40 The Handmaid's Tale (2017) [tvdbid-321239]
+drwxr-xr-x   8 root  root         4096 Mar 16 18:39 The Larry Sanders Show
+drwxr-xr-x   5 root  root         4096 Mar 16 18:47 The Mandalorian
+drwxr-xr-x   7 root  root         4096 Mar 16 18:57 The Marvelous Mrs. Maisel
+drwxr-xr-x   3 root  root         4096 Mar 16 19:08 The Offer
+drwxrwsrwx  11 media media-group  4096 Jun  6  2023 The Office (US)
+drwxr-xr-x   4 root  root         4096 Mar 16 19:09 The PJs
+drwxr-xr-x  39 root  root         4096 Mar 16 21:16 The Simpsons
+drwxr-xr-x  16 root  root         4096 Mar 16 21:21 The Sopranos
+drwxr-xr-x   3 root  root         4096 Mar 16 21:24 The Thing About Pam
+drwxr-xr-x   7 root  root         4096 Mar 16 21:39 The Twilight Zone
+drwxr-xr-x   6 root  root         4096 Mar 16 21:47 The Umbrella Academy
+drwxr-xr-x   9 root  root         4096 Mar 16 21:56 The Venture Bros.
+drwxr-xr-x  13 root  root         4096 Mar 16 22:16 The X-Files
+drwxr-xr-x   4 root  root         4096 Mar 16 22:18 Tim and Eric's Bedtime Stories
+drwxr-xr-x  22 root  root         4096 Mar 16 22:50 Top Gear
+drwxr-xr-x   9 root  root         4096 Mar 16 23:13 Tosh.0
+drwxr-xr-x   9 root  root         4096 Mar 16 23:55 True Blood
+drwxr-xr-x   5 root  root         4096 Mar 17 00:00 Ugly Americans
+drwxr-xr-x   4 root  root         4096 Mar 17 00:02 Vice Principals
+drwxr-xr-x   4 root  root         4096 Mar 17 00:03 Wecrashed
+drwxr-xr-x  10 root  root         4096 Mar 17 00:14 Weeds
+drwxr-xr-x   3 root  root         4096 Mar 17 00:19 We Own This City
+drwxr-xr-x   6 root  root         4096 Mar 17 00:41 Westworld
+drwxr-xr-x   3 root  root         4096 Mar 17 00:48 Who Is America!
+drwxr-xr-x  10 root  root         4096 Mar 17 00:52 Workaholics

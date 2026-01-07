@@ -1402,14 +1402,6 @@ rules:
   - create
   - patch
 - apiGroups:
-  - policy
-  resourceNames:
-  - controller
-  resources:
-  - podsecuritypolicies
-  verbs:
-  - use
-- apiGroups:
   - admissionregistration.k8s.io
   resources:
   - validatingwebhookconfigurations
@@ -1467,14 +1459,6 @@ rules:
   verbs:
   - create
   - patch
-- apiGroups:
-  - policy
-  resourceNames:
-  - speaker
-  resources:
-  - podsecuritypolicies
-  verbs:
-  - use
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -1588,7 +1572,7 @@ spec:
           value: memberlist
         - name: METALLB_DEPLOYMENT
           value: controller
-        image: quay.io/metallb/controller:v0.13.7
+        image: quay.io/metallb/controller:v0.14.9
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -1684,7 +1668,7 @@ spec:
             secretKeyRef:
               key: secretkey
               name: memberlist
-        image: quay.io/metallb/speaker:v0.13.7
+        image: quay.io/metallb/speaker:v0.14.9
         livenessProbe:
           failureThreshold: 3
           httpGet:

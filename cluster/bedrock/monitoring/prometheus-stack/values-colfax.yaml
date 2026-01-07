@@ -21,7 +21,8 @@ kube-prometheus-stack:
       PGID: "1002"
     persistence:
       enabled: true
-      existingClaim: grafana-store
+      storageClassName: nfs-client
+      size: 2Gi
     initChownData:
       enabled: false
 

@@ -6,7 +6,7 @@
     vm:
       cloud_image_url: https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
       cloud_image_path: /tmp/ubuntu-2004-server-amd64.qcow2
-      template_id: 1001
+      template_id: 1002
       template_name: ubuntu-2004-cloudinit-template
       template_memory: 4096
   tasks:
@@ -21,15 +21,15 @@
       become: yes
 
     - name: import disk image
-      command: "qm importdisk {{ vm.template_id }} {{ vm.cloud_image_path }} colfax"
+      command: "qm importdisk {{ vm.template_id }} {{ vm.cloud_image_path }} zeta"
       become: yes
 
     - name: configure VM to use imported image
-      command: "qm set {{ vm.template_id }} --scsihw virtio-scsi-pci --scsi0 colfax:vm-{{ vm.template_id }}-disk-0"
+      command: "qm set {{ vm.template_id }} --scsihw virtio-scsi-pci --scsi0 zeta:vm-{{ vm.template_id }}-disk-0"
       become: yes
 
     - name: add cloud-init image as CDROM
-      command: "qm set {{ vm.template_id }} --ide2 colfax:cloudinit"
+      command: "qm set {{ vm.template_id }} --ide2 zeta:cloudinit"
       become: yes
 
     - name: configure boot from the image

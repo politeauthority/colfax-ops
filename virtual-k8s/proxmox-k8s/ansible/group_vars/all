@@ -1,7 +1,7 @@
 kubernetes:
   name: colfax
-  version: v1.28.2
-  apt_version: 1.28.2-00
+  version: v1.32.0
+  apt_version: 1.32.0-00
 
 networking:
   domain: cluster.local
@@ -9,9 +9,9 @@ networking:
   service_subnet: 10.2.0.0/16
 
 packages:
-  containerd_download_url: https://github.com/containerd/containerd/releases/download/v1.7.8/containerd-1.7.8-linux-amd64.tar.gz
-  crictl_download_url: https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.28.0/crictl-v1.28.0-linux-amd64.tar.gz
-  runc_download_url: https://github.com/opencontainers/runc/releases/download/v1.1.10/runc.amd64
+  containerd_download_url: https://github.com/containerd/containerd/releases/download/v1.7.24/containerd-1.7.24-linux-amd64.tar.gz
+  crictl_download_url: https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.32.0/crictl-v1.32.0-linux-amd64.tar.gz
+  runc_download_url: https://github.com/opencontainers/runc/releases/download/v1.2.3/runc.amd64
 
 local:
   artifact_dir: .run

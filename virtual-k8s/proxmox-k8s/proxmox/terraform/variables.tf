@@ -1,9 +1,9 @@
 variable "pm_api_url" {
-  default = "https://localhost:8006/api2/json"
+  default = "https://192.168.50.50:8006/api2/json"
 }
 
 variable "pm_node" {
-  default = "colfax"
+  default = "hoyt"
 }
 
 variable "pm_user" {
@@ -11,7 +11,7 @@ variable "pm_user" {
 }
 
 variable "pm_password" {
-  default = "<your-password>"
+  default = "cleancut"
 }
 
 variable "ssh_key_file" {
