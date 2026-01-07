@@ -20,7 +20,7 @@ kube-prometheus-stack:
       PUID: "1001"
       PGID: "1002"
     persistence:
-      enabled: true
+      enabled: false
       storageClassName: nfs-client
       size: 2Gi
     initChownData:
