@@ -4,6 +4,6 @@ namespace: argocd
 resources:
 - argo-workflows.yaml
 - dyndns.yaml
-- github-runners.yaml
+# - github-runners.yaml
 - harbor.yaml
 - mosquitto.yaml
