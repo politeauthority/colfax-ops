@@ -16,6 +16,19 @@ spec:
   destination:
     namespace: monitoring
     name: in-cluster
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      jsonPointers:
+        - /status
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      jqPathExpressions:
+        - '.webhooks[]?.clientConfig.caBundle'
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jqPathExpressions:
+        - '.webhooks[]?.clientConfig.caBundle'
   syncPolicy:
     automated:
       prune: true
@@ -23,3 +36,4 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
       - Replace=true
+      - RespectIgnoreDifferences=true
