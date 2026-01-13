@@ -72,7 +72,7 @@ fluent-bit:
       [OUTPUT]
           Name                    gelf
           Match                   kube.*
-          Host                    https://helm.dev.graylog.cloud
+          Host                    192.168.50.84
           Port                    12201
           Mode                    tcp
           Gelf_Short_Message_Key  message
