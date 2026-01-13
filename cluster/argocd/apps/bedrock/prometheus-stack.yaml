@@ -37,10 +37,10 @@ spec:
       kind: MutatingWebhookConfiguration
       jqPathExpressions:
         - '.webhooks[]?.clientConfig.caBundle'
-  syncPolicy:
-    automated:
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
-      - RespectIgnoreDifferences=true
+  # syncPolicy:
+  #   automated:
+  #     prune: true
+  #   syncOptions:
+  #     - CreateNamespace=true
+  #     - ServerSideApply=true
+  #     - RespectIgnoreDifferences=true
