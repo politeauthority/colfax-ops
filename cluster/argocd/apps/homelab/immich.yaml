@@ -11,8 +11,8 @@ spec:
   destination:
     namespace: immich
     name: in-cluster
-  syncPolicy:
-    automated:
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
+  # syncPolicy:
+  #   automated:
+  #     prune: true
+  #   syncOptions:
+  #     - CreateNamespace=true
