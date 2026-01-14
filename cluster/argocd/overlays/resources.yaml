@@ -1,4 +1,3 @@
-# Resource limits for ArgoCD components
 ---
 apiVersion: apps/v1
 kind: Deployment
