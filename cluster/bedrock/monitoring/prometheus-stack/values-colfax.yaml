@@ -36,10 +36,12 @@ kube-prometheus-stack:
 
     prometheusSpec:
       retention: 30d
+      nodeSelector:
+        kubernetes.io/hostname: colfax-1
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: nfs-client
+            storageClassName: local-storage
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
