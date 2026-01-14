@@ -10,6 +10,10 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
+    sidecar:
+      datasources:
+        enabled: true
+        skipReload: false
     ingress:
       enabled: true
       ingressClassName: nginx-private
