@@ -3,6 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: prometheusstack
+  namespace: argocd
 spec:
   project: default
   source:
@@ -19,14 +20,14 @@ spec:
   ignoreDifferences:
     - group: ""
       kind: PersistentVolumeClaim
-      managedFieldsManagers:
-        - kube-controller-manager
       jsonPointers:
         - /status
     - group: ""
       kind: PersistentVolume
-      managedFieldsManagers:
-        - kube-controller-manager
+      jsonPointers:
+        - /status
+    - group: monitoring.coreos.com
+      kind: Prometheus
       jsonPointers:
         - /status
     - group: admissionregistration.k8s.io
@@ -40,3 +41,4 @@ spec:
   syncPolicy:
     syncOptions:
       - ServerSideApply=true
+      - RespectIgnoreDifferences=true
