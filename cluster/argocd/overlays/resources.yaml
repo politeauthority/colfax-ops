@@ -117,16 +117,6 @@ spec:
     spec:
       containers:
         - name: argocd-application-controller
-          env:
-            # Throttle reconciliation to reduce load spikes
-            - name: ARGOCD_RECONCILIATION_TIMEOUT
-              value: "300s"
-            - name: ARGOCD_APPLICATION_CONTROLLER_OPERATION_PROCESSORS
-              value: "5"
-            - name: ARGOCD_APPLICATION_CONTROLLER_STATUS_PROCESSORS
-              value: "10"
-            - name: ARGOCD_APPLICATION_CONTROLLER_REPO_SERVER_TIMEOUT_SECONDS
-              value: "120"
           resources:
             requests:
               cpu: 100m
