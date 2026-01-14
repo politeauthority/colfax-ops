@@ -6,8 +6,8 @@ resources:
 - apps/
 - overlays/ingress.yaml
 
-patches:
-- path: overlays/resources.yaml
+patchesStrategicMerge:
+- overlays/resources.yaml
 # - base/repository.yaml
 # - base/ingress.yaml
 # - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.6
