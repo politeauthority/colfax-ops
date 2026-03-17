@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-alix-lol-tls
+spec:
+  secretName: wildcard-alix-lol-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "alix.lol"
+    - "*.alix.lol"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-squid-ink-us-tls
+spec:
+  secretName: wildcard-squid-ink-us-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "squid-ink.us"
+    - "*.squid-ink.us"

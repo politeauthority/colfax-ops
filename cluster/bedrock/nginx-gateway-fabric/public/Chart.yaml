@@ -1,0 +1,11 @@
+apiVersion: v2
+name: nginx-gateway-fabric-public
+description: NGINX Gateway Fabric - public internet-facing gateway
+type: application
+version: 0.0.1
+appVersion: 2.4.2
+
+dependencies:
+- name: nginx-gateway-fabric
+  repository: https://helm.nginx.com/stable
+  version: 2.4.2

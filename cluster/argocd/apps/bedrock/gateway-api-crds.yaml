@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gateway-api-crds
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
+    path: cluster/bedrock/gateway-api-crds
+    targetRevision: main
+  destination:
+    namespace: default
+    name: in-cluster
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - Replace=true
