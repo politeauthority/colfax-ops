@@ -8,5 +8,7 @@ resources:
 - fluentbit.yaml
 - ingress-public.yaml
 - ingress-private.yaml
+- nginx-gateway-fabric-private.yaml
+- nginx-gateway-fabric-public.yaml
 - loki.yaml
 - prometheus-stack.yaml
