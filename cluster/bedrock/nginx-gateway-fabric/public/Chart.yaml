@@ -7,5 +7,5 @@ appVersion: 2.4.2
 
 dependencies:
 - name: nginx-gateway-fabric
-  repository: https://helm.nginx.com/stable
+  repository: oci://ghcr.io/nginx/charts
   version: 2.4.2

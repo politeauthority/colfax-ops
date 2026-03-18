@@ -1,20 +1,19 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
-  name: argocd-server-http
+  name: argocd-server
   namespace: argocd
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
-  ingressClassName: "nginx-private"
+  parentRefs:
+    - name: nginx-private
+      namespace: nginx-gateway-fabric-private
+  hostnames:
+    - argocd.colfax.int
   rules:
-  - host: argocd.colfax.int
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              name: http
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: argocd-server
+          port: 80
