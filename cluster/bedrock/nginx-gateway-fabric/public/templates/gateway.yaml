@@ -17,8 +17,8 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: wildcard-alix-lol-tls
-          - name: wildcard-squid-ink-us-tls
+          - name: alix-lol-tls
+          - name: squid-ink-us-tls
       allowedRoutes:
         namespaces:
           from: All

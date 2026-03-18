@@ -6,7 +6,6 @@ resources:
 - cert-manager.yaml
 - nfs-client.yaml
 - fluentbit.yaml
-- ingress-public.yaml
 - gateway-api-crds.yaml
 - nginx-gateway-fabric-private.yaml
 - nginx-gateway-fabric-public.yaml
