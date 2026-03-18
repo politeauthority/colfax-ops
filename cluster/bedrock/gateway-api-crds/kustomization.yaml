@@ -1,2 +1,2 @@
 resources:
-  - https://github.com/kubernetes-sigs/gateway-api/config/crd/standard?ref=v1.2.1
+  - standard-install.yaml
