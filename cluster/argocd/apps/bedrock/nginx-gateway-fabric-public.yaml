@@ -14,7 +14,7 @@ spec:
       valueFiles:
         - values-colfax.yaml
   destination:
-    namespace: nginx-gateway-fabric
+    namespace: nginx-gateway-fabric-public
     name: in-cluster
   syncPolicy:
     automated: {}
