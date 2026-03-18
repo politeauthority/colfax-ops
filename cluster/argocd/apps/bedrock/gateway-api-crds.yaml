@@ -16,4 +16,4 @@ spec:
   syncPolicy:
     automated: {}
     syncOptions:
-      - Replace=true
+      - ServerSideApply=true

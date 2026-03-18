@@ -1,2 +1,3 @@
 resources:
   - standard-install.yaml
+  - ngf-crds.yaml
