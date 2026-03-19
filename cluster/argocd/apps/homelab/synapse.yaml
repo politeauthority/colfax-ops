@@ -4,16 +4,13 @@ metadata:
   name: synapse
 spec:
   project: default
-  sources:
-    - repoURL: 'ghcr.io/element-hq/ess-helm'
-      chart: matrix-stack
-      targetRevision: 26.3.0
-      helm:
-        valueFiles:
-          - $values/synapse/values-colfax.yaml
-    - repoURL: 'git@github.com:politeauthority/private-ops.git'
-      targetRevision: main
-      ref: values
+  source:
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: synapse/matrix-stack
+    targetRevision: main
+    helm:
+      valueFiles:
+        - ../values-colfax.yaml
   destination:
     namespace: synapse
     name: in-cluster
