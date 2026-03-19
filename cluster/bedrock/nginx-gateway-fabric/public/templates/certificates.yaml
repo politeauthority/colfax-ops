@@ -16,3 +16,6 @@ spec:
     - "ha.squid-ink.us"
     - "harbor.squid-ink.us"
     - "matrix.squid-ink.us"
+    - "offline.gold"
+    - "matrix.offline.gold"
+    - "account.offline.gold"
