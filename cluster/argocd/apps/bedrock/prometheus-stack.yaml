@@ -39,6 +39,8 @@ spec:
       jqPathExpressions:
         - '.webhooks[]?.clientConfig.caBundle'
   syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
       - ServerSideApply=true
       - RespectIgnoreDifferences=true
