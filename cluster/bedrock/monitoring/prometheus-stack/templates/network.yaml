@@ -1,0 +1,37 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: grafana
+spec:
+  parentRefs:
+    - name: nginx-private
+      namespace: nginx-gateway-fabric-private
+  hostnames:
+    - grafana.colfax.int
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: prometheusstack-grafana
+          port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: prometheus
+spec:
+  parentRefs:
+    - name: nginx-private
+      namespace: nginx-gateway-fabric-private
+  hostnames:
+    - prometheus.colfax.int
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: prometheusstack-kube-prome-prometheus
+          port: 9090
