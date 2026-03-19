@@ -5,8 +5,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: 'oci://ghcr.io/element-hq/ess-helm'
-      chart: matrix-stack
+    - repoURL: 'oci://ghcr.io/element-hq/ess-helm/matrix-stack'
       targetRevision: 26.3.0
       helm:
         valueFiles:
