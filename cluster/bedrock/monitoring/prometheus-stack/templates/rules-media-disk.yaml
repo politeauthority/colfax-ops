@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: media-disk-alerts
+  namespace: monitoring
+  labels:
+    release: prometheusstack
+spec:
+  groups:
+    - name: media-disk
+      rules:
+        - alert: MediaDiskCriticalLow
+          expr: |
+            node_filesystem_avail_bytes{
+              job="prox-node-hoyt",
+              mountpoint=~"/mnt/media-.*",
+              fstype!="tmpfs"
+            } < 100 * 1024 * 1024 * 1024
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Media disk critically low on {{ $labels.instance }}"
+            description: "Disk {{ $labels.mountpoint }} on {{ $labels.instance }} has {{ $value | humanize }}B free (threshold: 100GB)."
