@@ -12,5 +12,6 @@ spec:
     namespace: q-media
     name: in-cluster
   syncPolicy:
+    automated:
     syncOptions:
       - CreateNamespace=true

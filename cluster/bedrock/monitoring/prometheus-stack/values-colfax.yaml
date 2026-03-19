@@ -15,11 +15,7 @@ kube-prometheus-stack:
         enabled: true
         skipReload: false
     ingress:
-      enabled: true
-      ingressClassName: nginx-private
-      hosts:
-        - grafana.colfax.int
-      path: /
+      enabled: false
     # env:
     #   PUID: "1001"
     #   PGID: "1002"
@@ -32,11 +28,7 @@ kube-prometheus-stack:
 
   prometheus:
     ingress:
-      enabled: true
-      ingressClassName: nginx-private
-      hosts:
-        - prometheus.colfax.int
-      path: /
+      enabled: false
 
     prometheusSpec:
       retention: 30d
@@ -98,6 +90,11 @@ kube-prometheus-stack:
           scheme: http
           static_configs:
             - targets: [jellyfin.q-media.svc.cluster.local]
+        - job_name: jellyfin-exporter
+          metrics_path: /metrics
+          scheme: http
+          static_configs:
+            - targets: [jellyfin-exporter.q-media.svc.cluster.local:9594]
         - job_name: q-postgres
           metrics_path: /metrics
           scheme: http
