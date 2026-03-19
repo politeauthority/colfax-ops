@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: synapse-gateway
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: synapse-gateway/
+    targetRevision: main
+  destination:
+    namespace: synapse
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -9,6 +9,7 @@ resources:
 - q-post-gressive.yaml
 - q-redis.yaml
 - synapse.yaml
+- synapse-gateway.yaml
 - linkwarden.yaml
 - immich.yaml
 - q-postgres.yaml
