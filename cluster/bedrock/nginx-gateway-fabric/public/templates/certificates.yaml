@@ -1,9 +1,9 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: alix-lol-tls
+  name: public-tls
 spec:
-  secretName: alix-lol-tls
+  secretName: public-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
@@ -12,17 +12,6 @@ spec:
     - "jellyfin.alix.lol"
     - "photos.alix.lol"
     - "linkwarden.alix.lol"
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: squid-ink-us-tls
-spec:
-  secretName: squid-ink-us-tls
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-  dnsNames:
     - "squid-ink.us"
     - "ha.squid-ink.us"
     - "matrix.squid-ink.us"
