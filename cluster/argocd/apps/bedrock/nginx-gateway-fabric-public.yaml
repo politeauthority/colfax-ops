@@ -18,8 +18,7 @@ spec:
     namespace: nginx-gateway-fabric-public
     name: in-cluster
   syncPolicy:
-    automated:
-      prune: true
+    automated: {}
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
