@@ -2,4 +2,5 @@ cert-manager:
   crds:
     enabled: true
     keep: true
-  featureGates: "ExperimentalGatewayAPISupport=true"
+  config:
+    enableGatewayAPI: true
