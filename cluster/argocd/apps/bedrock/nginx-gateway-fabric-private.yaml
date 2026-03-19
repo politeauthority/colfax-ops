@@ -11,6 +11,7 @@ spec:
     path: cluster/bedrock/nginx-gateway-fabric/private
     targetRevision: main
     helm:
+      skipCrds: true
       valueFiles:
         - values-colfax.yaml
   destination:
