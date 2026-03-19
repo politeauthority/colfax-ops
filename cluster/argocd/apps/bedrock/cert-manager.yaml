@@ -8,9 +8,15 @@ spec:
     repoURL: 'git@github.com:politeauthority/colfax-ops.git'
     path: cluster/bedrock/cert-manager
     targetRevision: main
+    helm:
+      valueFiles:
+        - values-colfax.yaml
   destination:
     namespace: cert-manager
     name: in-cluster
-  # syncPolicy:
-  #   syncOptions:
-  #     - CreateNamespace=true
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
