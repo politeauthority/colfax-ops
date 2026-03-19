@@ -1,19 +1,8 @@
 harbor:
-  caSecretName: harbor-squid-ink-us-tls
   expose:
+    type: clusterIP
     tls:
-      enabled: true
-      certSource: secret
-      secret:
-        secretName: harbor-squid-ink-us-tls
-        notarySecretName: notary-squid-ink-us-tls
-    ingress:
-      hosts:
-        core: harbor.squid-ink.us
-        notary: notary.squid-ink.us
-      className: nginx-public
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-prod
+      enabled: false
   externalURL: https://harbor.squid-ink.us
   persistence:
     enabled: true
