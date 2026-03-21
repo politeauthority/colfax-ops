@@ -13,3 +13,4 @@ resources:
 - linkwarden.yaml
 - immich.yaml
 - q-postgres.yaml
+- n8n.yaml
