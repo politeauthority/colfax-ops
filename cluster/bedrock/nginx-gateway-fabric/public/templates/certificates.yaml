@@ -9,6 +9,7 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - "alix.lol"
+    - "api.alix.lol"
     - "jellyfin.alix.lol"
     - "photos.alix.lol"
     - "linkwarden.alix.lol"
