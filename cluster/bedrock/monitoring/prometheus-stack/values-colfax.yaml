@@ -19,7 +19,12 @@ kube-prometheus-stack:
         group_interval: 5m
         repeat_interval: 12h
         receiver: quigley-matrix
+        routes:
+          - receiver: 'null'
+            matchers:
+              - alertname = "Watchdog"
       receivers:
+        - name: 'null'
         - name: quigley-matrix
           webhook_configs:
             - url: https://api.alix.lol/grafana-alerts
