@@ -6,7 +6,27 @@ kube-prometheus-stack:
       enabled: false
 
   alertmanager:
-    enabled: false
+    enabled: true
+    alertmanagerSpec:
+      secrets:
+        - grafana-alerting-creds
+    config:
+      global:
+        resolve_timeout: 5m
+      route:
+        group_by: ['alertname', 'namespace']
+        group_wait: 30s
+        group_interval: 5m
+        repeat_interval: 12h
+        receiver: quigley-matrix
+      receivers:
+        - name: quigley-matrix
+          webhook_configs:
+            - url: https://api.alix.lol/grafana-alerts
+              http_config:
+                basic_auth:
+                  username: grafana
+                  password_file: /etc/alertmanager/secrets/grafana-alerting-creds/QUIGLEY_GRAFANA_PASSWORD
 
   defaultRules:
     disabled:
@@ -65,32 +85,6 @@ kube-prometheus-stack:
         skipReload: false
     ingress:
       enabled: false
-    envFromSecrets:
-      - name: grafana-alerting-creds
-    alerting:
-      contactpoints.yaml:
-        apiVersion: 1
-        contactPoints:
-          - orgId: 1
-            name: Quigley Matrix
-            receivers:
-              - uid: quigley-matrix
-                type: webhook
-                settings:
-                  url: https://api.alix.lol/grafana-alerts
-                  httpMethod: POST
-                  username: grafana
-                  password: $__env{QUIGLEY_GRAFANA_PASSWORD}
-                  authorizationScheme: basic
-      policies.yaml:
-        apiVersion: 1
-        policies:
-          - orgId: 1
-            receiver: Quigley Matrix
-            group_by: ['grafana_folder', 'alertname']
-            group_wait: 30s
-            group_interval: 5m
-            repeat_interval: 12h
     # env:
     #   PUID: "1001"
     #   PGID: "1002"
@@ -106,12 +100,6 @@ kube-prometheus-stack:
       enabled: false
 
     prometheusSpec:
-      additionalAlertManagerConfigs:
-        - static_configs:
-            - targets:
-                - prometheusstack-grafana.monitoring.svc:80
-          path_prefix: /api/alertmanager/grafana
-
       retention: 30d
       nodeSelector:
         kubernetes.io/hostname: colfax-1
