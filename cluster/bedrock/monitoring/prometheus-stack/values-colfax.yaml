@@ -77,8 +77,9 @@ kube-prometheus-stack:
                 settings:
                   url: https://api.alix.lol/grafana-alerts
                   httpMethod: POST
-                  basicAuthUser: grafana
-                  basicAuthPassword: $__env{QUIGLEY_GRAFANA_PASSWORD}
+                  username: grafana
+                  password: $__env{QUIGLEY_GRAFANA_PASSWORD}
+                  authorizationScheme: basic
       policies.yaml:
         apiVersion: 1
         policies:
