@@ -16,6 +16,32 @@ kube-prometheus-stack:
         skipReload: false
     ingress:
       enabled: false
+    extraEnvFrom:
+      - secretRef:
+          name: grafana-alerting-creds
+    alerting:
+      contactpoints.yaml:
+        apiVersion: 1
+        contactPoints:
+          - orgId: 1
+            name: Quigley Matrix
+            receivers:
+              - uid: quigley-matrix
+                type: webhook
+                settings:
+                  url: https://api.alix.lol/grafana-alerts
+                  httpMethod: POST
+                  basicAuthUser: grafana
+                  basicAuthPassword: $__env{QUIGLEY_GRAFANA_PASSWORD}
+      policies.yaml:
+        apiVersion: 1
+        policies:
+          - orgId: 1
+            receiver: Quigley Matrix
+            group_by: ['grafana_folder', 'alertname']
+            group_wait: 30s
+            group_interval: 5m
+            repeat_interval: 12h
     # env:
     #   PUID: "1001"
     #   PGID: "1002"
