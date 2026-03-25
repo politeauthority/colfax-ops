@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pod-startup-alerts
+  namespace: monitoring
+  labels:
+    release: prometheusstack
+spec:
+  groups:
+    - name: pod-startup
+      rules:
+        - alert: PodCreateContainerError
+          expr: |
+            kube_pod_container_status_waiting_reason{reason="CreateContainerError"} == 1
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} stuck in CreateContainerError"
+            description: >
+              Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }}
+              has been unable to start for more than 5 minutes (CreateContainerError).
+              This can indicate a stale containerd container name reservation — check
+              `crictl ps -a` on the node and remove any exited containers for this pod.
