@@ -56,6 +56,9 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
+    grafana.ini:
+      feature_toggles:
+        onCallAlerting: "false"
     sidecar:
       datasources:
         enabled: true
