@@ -106,6 +106,12 @@ kube-prometheus-stack:
       enabled: false
 
     prometheusSpec:
+      additionalAlertManagerConfigs:
+        - static_configs:
+            - targets:
+                - prometheusstack-grafana.monitoring.svc:80
+          path_prefix: /api/alertmanager/grafana
+
       retention: 30d
       nodeSelector:
         kubernetes.io/hostname: colfax-1
