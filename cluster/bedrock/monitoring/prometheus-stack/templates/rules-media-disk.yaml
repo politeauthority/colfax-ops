@@ -20,5 +20,5 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: "Media disk critically low on {{ $labels.instance }}"
-            description: "Disk {{ $labels.mountpoint }} on {{ $labels.instance }} has {{ $value | humanize }}B free (threshold: 100GB)."
+            summary: "Media disk critically low on {{`{{ $labels.instance }}`}}"
+            description: "Disk {{`{{ $labels.mountpoint }}`}} on {{`{{ $labels.instance }}`}} has {{`{{ $value | humanize }}`}}B free (threshold: 100GB)."
