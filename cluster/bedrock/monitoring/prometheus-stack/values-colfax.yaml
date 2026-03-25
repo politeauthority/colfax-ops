@@ -65,9 +65,8 @@ kube-prometheus-stack:
         skipReload: false
     ingress:
       enabled: false
-    extraEnvFrom:
-      - secretRef:
-          name: grafana-alerting-creds
+    envFromSecrets:
+      - name: grafana-alerting-creds
     alerting:
       contactpoints.yaml:
         apiVersion: 1
