@@ -10,6 +10,7 @@ resources:
 - q-redis.yaml
 - synapse.yaml
 - synapse-gateway.yaml
+- harbor-gateway.yaml
 - linkwarden.yaml
 - immich.yaml
 - q-postgres.yaml
