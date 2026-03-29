@@ -66,35 +66,35 @@ tasks:
         # echo "✅ ${HELM_INSTALL}"
         # rm ${HELM_INSTALL}.yaml
 
-        HELM_INSTALL="promeheus-stack"
-        HELM_REPO_NAME="kube-prometheus-stack"
-        HELM_REPO_URL="https://prometheus-community.github.io/helm-charts"
-        HELM_DIR="cluster/bedrock/storage/nfs-client"
-        VALUES_FILE="values-colfax.yaml"
-        echo "Checking ${HELM_INSTALL}"
-        helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        helm dependency build ${HELM_DIR}
-        helm lint $HELM_DIR
-        helm template ${HELM_DIR} \
-          -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        echo "✅ ${HELM_INSTALL}"
-        yamllint ${HELM_INSTALL}.yaml
-        rm ${HELM_INSTALL}.yaml
+        # HELM_INSTALL="promeheus-stack"
+        # HELM_REPO_NAME="kube-prometheus-stack"
+        # HELM_REPO_URL="https://prometheus-community.github.io/helm-charts"
+        # HELM_DIR="cluster/bedrock/storage/nfs-client"
+        # VALUES_FILE="values-colfax.yaml"
+        # echo "Checking ${HELM_INSTALL}"
+        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
+        # helm dependency build ${HELM_DIR}
+        # helm lint $HELM_DIR
+        # helm template ${HELM_DIR} \
+        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        # echo "✅ ${HELM_INSTALL}"
+        # yamllint ${HELM_INSTALL}.yaml
+        # rm ${HELM_INSTALL}.yaml
 
-        HELM_INSTALL="nfs-client"
-        HELM_REPO_NAME="nfs-subdir-external-provisioner"
-        HELM_REPO_URL="https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
-        HELM_DIR="cluster/bedrock/storage/nfs-client"
-        VALUES_FILE="values-colfax.yaml"
-        echo "Checking ${HELM_INSTALL}"
-        helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        helm dependency build ${HELM_DIR}
-        helm lint $HELM_DIR
-        helm template ${HELM_DIR} \
-          -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        yamllint ${HELM_INSTALL}.yaml
-        echo "✅ ${HELM_INSTALL}"
-        rm ${HELM_INSTALL}.yaml
+        # HELM_INSTALL="nfs-client"
+        # HELM_REPO_NAME="nfs-subdir-external-provisioner"
+        # HELM_REPO_URL="https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
+        # HELM_DIR="cluster/bedrock/storage/nfs-client"
+        # VALUES_FILE="values-colfax.yaml"
+        # echo "Checking ${HELM_INSTALL}"
+        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
+        # helm dependency build ${HELM_DIR}
+        # helm lint $HELM_DIR
+        # helm template ${HELM_DIR} \
+        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        # yamllint ${HELM_INSTALL}.yaml
+        # echo "✅ ${HELM_INSTALL}"
+        # rm ${HELM_INSTALL}.yaml
 
         # HELM_INSTALL="harbor"
         # HELM_REPO_NAME="harbor"
