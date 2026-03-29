@@ -1,8 +1,8 @@
 name: Validate
 
-# concurrency:
-# 	group: ${{ github.ref }}
-# 	cancel-in-progress: true
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
     branches: ["main"]
 
 jobs:
-  validate-kustomize:
+  validate:
     runs-on: colfax-ops
     container:
       image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
@@ -20,21 +20,7 @@ jobs:
         password: ${{ secrets.HARBOR_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
-      - name: Validate Kustomize - Argo
+      - name: Validate Kubernetes Manifests
         run: |
           task check-k
-
-  validate-helm:
-    runs-on: self-hosted
-    container:
-      image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
-      credentials:
-        username: politeauthority
-        password: ${{ secrets.HARBOR_PASSWORD }}
-    strategy:
-        fail-fast: true
-    steps:
-        - uses: actions/checkout@v4
-        - name: Validate Helm - Bedrock
-          run: |
-            task check-helm
+          task check-helm
