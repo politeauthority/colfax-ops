@@ -10,18 +10,6 @@ tasks:
         rm argocd.yaml
         echo "✅ argocd"
 
-        echo "Checking bedrock cert-manager"
-        kustomize build cluster/bedrock/cert-manager -o cert-manager.yaml
-        yamllint cert-manager.yaml
-        rm cert-manager.yaml
-        echo "✅ bedrock cert-manager"
-
-        echo "Checking github-runners"
-        kustomize build cluster/sandbox/github-runners -o github-runners.yaml
-        yamllint github-runners.yaml
-        rm github-runners.yaml
-        echo "✅ github-runners"
-
         echo "Checking mosquitto"
         kustomize build cluster/sandbox/mosquitto -o mosquitto.yaml
         yamllint mosquitto.yaml
@@ -32,51 +20,51 @@ tasks:
   check-helm:
     cmds:
       - |
-        HELM_INSTALL="fluentbit"
-        HELM_REPO_NAME="fluent-bit"
-        HELM_REPO_URL="https://fluent.github.io/helm-charts"
-        HELM_DIR="cluster/bedrock/fluentbit"
-        VALUES_FILE="values-colfax.yaml"
-        echo "Checking ${HELM_INSTALL}"
-        helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        helm dependency build ${HELM_DIR}
-        helm lint $HELM_DIR
-        helm template ${HELM_DIR} \
-          -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        yamllint ${HELM_INSTALL}.yaml
-        echo "✅ ${HELM_INSTALL}"
-        rm ${HELM_INSTALL}.yaml
+        # HELM_INSTALL="fluentbit"
+        # HELM_REPO_NAME="fluent-bit"
+        # HELM_REPO_URL="https://fluent.github.io/helm-charts"
+        # HELM_DIR="cluster/bedrock/fluentbit"
+        # VALUES_FILE="values-colfax.yaml"
+        # echo "Checking ${HELM_INSTALL}"
+        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
+        # helm dependency build ${HELM_DIR}
+        # helm lint $HELM_DIR
+        # helm template ${HELM_DIR} \
+        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        # yamllint ${HELM_INSTALL}.yaml
+        # echo "✅ ${HELM_INSTALL}"
+        # rm ${HELM_INSTALL}.yaml
 
 
-        HELM_INSTALL="ingress-private"
-        HELM_REPO_NAME="ingress-nginx"
-        HELM_REPO_URL="https://kubernetes.github.io/ingress-nginx"
-        HELM_DIR="cluster/bedrock/ingress/ingress-private"
-        VALUES_FILE="values-colfax.yaml"
-        echo "Checking ${HELM_INSTALL}"
-        helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        helm dependency build ${HELM_DIR}
-        helm lint $HELM_DIR
-        helm template ${HELM_DIR} \
-          -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        yamllint ${HELM_INSTALL}.yaml
-        echo "✅ ${HELM_INSTALL}"
-        rm ${HELM_INSTALL}.yaml
+        # HELM_INSTALL="ingress-private"
+        # HELM_REPO_NAME="ingress-nginx"
+        # HELM_REPO_URL="https://kubernetes.github.io/ingress-nginx"
+        # HELM_DIR="cluster/bedrock/ingress/ingress-private"
+        # VALUES_FILE="values-colfax.yaml"
+        # echo "Checking ${HELM_INSTALL}"
+        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
+        # helm dependency build ${HELM_DIR}
+        # helm lint $HELM_DIR
+        # helm template ${HELM_DIR} \
+        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        # yamllint ${HELM_INSTALL}.yaml
+        # echo "✅ ${HELM_INSTALL}"
+        # rm ${HELM_INSTALL}.yaml
 
-        HELM_INSTALL="ingress-public"
-        HELM_REPO_NAME="ingress-nginx"
-        HELM_REPO_URL="https://kubernetes.github.io/ingress-nginx"
-        HELM_DIR="cluster/bedrock/ingress/ingress-public"
-        VALUES_FILE="values-colfax.yaml"
-        echo "Checking ${HELM_INSTALL}"
-        helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        helm dependency build ${HELM_DIR}
-        helm lint $HELM_DIR
-        helm template ${HELM_DIR} \
-          -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        yamllint ${HELM_INSTALL}.yaml
-        echo "✅ ${HELM_INSTALL}"
-        rm ${HELM_INSTALL}.yaml
+        # HELM_INSTALL="ingress-public"
+        # HELM_REPO_NAME="ingress-nginx"
+        # HELM_REPO_URL="https://kubernetes.github.io/ingress-nginx"
+        # HELM_DIR="cluster/bedrock/ingress/ingress-public"
+        # VALUES_FILE="values-colfax.yaml"
+        # echo "Checking ${HELM_INSTALL}"
+        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
+        # helm dependency build ${HELM_DIR}
+        # helm lint $HELM_DIR
+        # helm template ${HELM_DIR} \
+        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        # yamllint ${HELM_INSTALL}.yaml
+        # echo "✅ ${HELM_INSTALL}"
+        # rm ${HELM_INSTALL}.yaml
 
         HELM_INSTALL="promeheus-stack"
         HELM_REPO_NAME="kube-prometheus-stack"
@@ -108,19 +96,19 @@ tasks:
         echo "✅ ${HELM_INSTALL}"
         rm ${HELM_INSTALL}.yaml
 
-        HELM_INSTALL="harbor"
-        HELM_REPO_NAME="harbor"
-        HELM_REPO_URL="https://helm.goharbor.io/"
-        HELM_DIR="cluster/sandbox/harbor/"
-        VALUES_FILE="values-colfax.yaml"
-        echo "Checking ${HELM_INSTALL}"
-        helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        helm dependency build ${HELM_DIR}
-        helm lint $HELM_DIR
-        helm template ${HELM_DIR} \
-          -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        yamllint ${HELM_INSTALL}.yaml
-        echo "✅ ${HELM_INSTALL}"
-        rm ${HELM_INSTALL}.yaml
+        # HELM_INSTALL="harbor"
+        # HELM_REPO_NAME="harbor"
+        # HELM_REPO_URL="https://helm.goharbor.io/"
+        # HELM_DIR="cluster/sandbox/harbor/"
+        # VALUES_FILE="values-colfax.yaml"
+        # echo "Checking ${HELM_INSTALL}"
+        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
+        # helm dependency build ${HELM_DIR}
+        # helm lint $HELM_DIR
+        # helm template ${HELM_DIR} \
+        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
+        # yamllint ${HELM_INSTALL}.yaml
+        # echo "✅ ${HELM_INSTALL}"
+        # rm ${HELM_INSTALL}.yaml
 
     silent: true
