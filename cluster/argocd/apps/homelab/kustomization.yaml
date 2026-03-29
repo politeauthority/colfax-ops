@@ -14,5 +14,4 @@ resources:
 - immich.yaml
 - q-postgres.yaml
 - n8n.yaml
-- arc-controller.yaml
-- arc-runners.yaml
+- arc.yaml
