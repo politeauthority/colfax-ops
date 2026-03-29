@@ -12,7 +12,7 @@ on:
 
 jobs:
   validate-kustomize:
-    runs-on: self-hosted
+    runs-on: colfax-ops
     container:
       image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
       credentials:
