@@ -11,6 +11,7 @@ resources:
 - synapse.yaml
 - synapse-gateway.yaml
 - harbor-gateway.yaml
+- devpi.yaml
 - linkwarden.yaml
 - immich.yaml
 - q-postgres.yaml
