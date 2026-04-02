@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-longhorn
+data:
+  longhorn.json: |-
+{{ .Files.Get "dashboards/longhorn.json" | indent 4}}
