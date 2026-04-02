@@ -106,16 +106,14 @@ kube-prometheus-stack:
 
     prometheusSpec:
       retention: 30d
-      nodeSelector:
-        kubernetes.io/hostname: colfax-1
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: local-storage
+            storageClassName: longhorn
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 50Gi
+                storage: 25Gi
 
       additionalScrapeConfigs:
         - job_name: "prox-node-hoyt"

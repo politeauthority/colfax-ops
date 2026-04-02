@@ -6,6 +6,24 @@ harbor:
   externalURL: https://harbor.squid-ink.us
   persistence:
     enabled: true
+    persistentVolumeClaim:
+      registry:
+        existingClaim: harbor-registry-longhorn
+        storageClass: longhorn
+        size: 5Gi
+      jobservice:
+        jobLog:
+          existingClaim: harbor-jobservice-longhorn
+          storageClass: longhorn
+          size: 1Gi
+      redis:
+        existingClaim: harbor-redis-longhorn
+        storageClass: longhorn
+        size: 1Gi
+      trivy:
+        existingClaim: harbor-trivy-longhorn
+        storageClass: longhorn
+        size: 1Gi
   metrics:
     enabled: true
     core:
