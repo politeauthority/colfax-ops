@@ -4,111 +4,75 @@ tasks:
   check-k:
     cmds:
       - |
-        echo "Checking argocd"
-        kustomize build cluster/argocd -o argocd.yaml
-        yamllint argocd.yaml
-        rm argocd.yaml
-        echo "✅ argocd"
+        echo "Checking cluster/argocd"
+        kustomize build cluster/argocd
 
-        echo "Checking mosquitto"
-        kustomize build cluster/sandbox/mosquitto -o mosquitto.yaml
-        yamllint mosquitto.yaml
-        rm mosquitto.yaml
-        echo "✅ mosquitto"
+        echo "Checking cluster/bedrock/gateway-api-crds"
+        kustomize build cluster/bedrock/gateway-api-crds
+
+        echo "Checking cluster/sandbox/mosquitto"
+        kustomize build cluster/sandbox/mosquitto
+
+        echo "Checking cluster/sandbox/github-runners"
+        kustomize build cluster/sandbox/github-runners
+
+    silent: true
+
+  setup-helm:
+    cmds:
+      - |
+        helm repo add jetstack https://charts.jetstack.io
+        helm repo add fluent https://fluent.github.io/helm-charts
+        helm repo add grafana https://grafana.github.io/helm-charts
+        helm repo add harbor https://helm.goharbor.io
+        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+        helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+        helm repo update
     silent: true
 
   check-helm:
+    deps: [setup-helm]
     cmds:
       - |
-        # HELM_INSTALL="fluentbit"
-        # HELM_REPO_NAME="fluent-bit"
-        # HELM_REPO_URL="https://fluent.github.io/helm-charts"
-        # HELM_DIR="cluster/bedrock/fluentbit"
-        # VALUES_FILE="values-colfax.yaml"
-        # echo "Checking ${HELM_INSTALL}"
-        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        # helm dependency build ${HELM_DIR}
-        # helm lint $HELM_DIR
-        # helm template ${HELM_DIR} \
-        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        # yamllint ${HELM_INSTALL}.yaml
-        # echo "✅ ${HELM_INSTALL}"
-        # rm ${HELM_INSTALL}.yaml
+        echo "Checking cert-manager"
+        helm dependency build cluster/bedrock/cert-manager
+        helm lint cluster/bedrock/cert-manager -f cluster/bedrock/cert-manager/values-colfax.yaml
 
+        echo "Checking fluentbit"
+        helm dependency build cluster/bedrock/fluentbit
+        helm lint cluster/bedrock/fluentbit -f cluster/bedrock/fluentbit/values-colfax.yaml
 
-        # HELM_INSTALL="ingress-private"
-        # HELM_REPO_NAME="ingress-nginx"
-        # HELM_REPO_URL="https://kubernetes.github.io/ingress-nginx"
-        # HELM_DIR="cluster/bedrock/ingress/ingress-private"
-        # VALUES_FILE="values-colfax.yaml"
-        # echo "Checking ${HELM_INSTALL}"
-        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        # helm dependency build ${HELM_DIR}
-        # helm lint $HELM_DIR
-        # helm template ${HELM_DIR} \
-        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        # yamllint ${HELM_INSTALL}.yaml
-        # echo "✅ ${HELM_INSTALL}"
-        # rm ${HELM_INSTALL}.yaml
+        echo "Checking ingress-private"
+        helm dependency build cluster/bedrock/ingress/ingress-private
+        helm lint cluster/bedrock/ingress/ingress-private -f cluster/bedrock/ingress/ingress-private/values-colfax.yaml
 
-        # HELM_INSTALL="ingress-public"
-        # HELM_REPO_NAME="ingress-nginx"
-        # HELM_REPO_URL="https://kubernetes.github.io/ingress-nginx"
-        # HELM_DIR="cluster/bedrock/ingress/ingress-public"
-        # VALUES_FILE="values-colfax.yaml"
-        # echo "Checking ${HELM_INSTALL}"
-        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        # helm dependency build ${HELM_DIR}
-        # helm lint $HELM_DIR
-        # helm template ${HELM_DIR} \
-        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        # yamllint ${HELM_INSTALL}.yaml
-        # echo "✅ ${HELM_INSTALL}"
-        # rm ${HELM_INSTALL}.yaml
+        echo "Checking ingress-public"
+        helm dependency build cluster/bedrock/ingress/ingress-public
+        helm lint cluster/bedrock/ingress/ingress-public -f cluster/bedrock/ingress/ingress-public/values-colfax.yaml
 
-        # HELM_INSTALL="promeheus-stack"
-        # HELM_REPO_NAME="kube-prometheus-stack"
-        # HELM_REPO_URL="https://prometheus-community.github.io/helm-charts"
-        # HELM_DIR="cluster/bedrock/storage/nfs-client"
-        # VALUES_FILE="values-colfax.yaml"
-        # echo "Checking ${HELM_INSTALL}"
-        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        # helm dependency build ${HELM_DIR}
-        # helm lint $HELM_DIR
-        # helm template ${HELM_DIR} \
-        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        # echo "✅ ${HELM_INSTALL}"
-        # yamllint ${HELM_INSTALL}.yaml
-        # rm ${HELM_INSTALL}.yaml
+        echo "Checking nginx-gateway-fabric/private"
+        helm dependency build cluster/bedrock/nginx-gateway-fabric/private
+        helm lint cluster/bedrock/nginx-gateway-fabric/private -f cluster/bedrock/nginx-gateway-fabric/private/values-colfax.yaml
 
-        # HELM_INSTALL="nfs-client"
-        # HELM_REPO_NAME="nfs-subdir-external-provisioner"
-        # HELM_REPO_URL="https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
-        # HELM_DIR="cluster/bedrock/storage/nfs-client"
-        # VALUES_FILE="values-colfax.yaml"
-        # echo "Checking ${HELM_INSTALL}"
-        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        # helm dependency build ${HELM_DIR}
-        # helm lint $HELM_DIR
-        # helm template ${HELM_DIR} \
-        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        # yamllint ${HELM_INSTALL}.yaml
-        # echo "✅ ${HELM_INSTALL}"
-        # rm ${HELM_INSTALL}.yaml
+        echo "Checking nginx-gateway-fabric/public"
+        helm dependency build cluster/bedrock/nginx-gateway-fabric/public
+        helm lint cluster/bedrock/nginx-gateway-fabric/public -f cluster/bedrock/nginx-gateway-fabric/public/values-colfax.yaml
 
-        # HELM_INSTALL="harbor"
-        # HELM_REPO_NAME="harbor"
-        # HELM_REPO_URL="https://helm.goharbor.io/"
-        # HELM_DIR="cluster/sandbox/harbor/"
-        # VALUES_FILE="values-colfax.yaml"
-        # echo "Checking ${HELM_INSTALL}"
-        # helm repo add ${HELM_REPO_NAME} ${HELM_REPO_URL}
-        # helm dependency build ${HELM_DIR}
-        # helm lint $HELM_DIR
-        # helm template ${HELM_DIR} \
-        #   -f ${HELM_DIR}/values-colfax.yaml > ${HELM_INSTALL}.yaml
-        # yamllint ${HELM_INSTALL}.yaml
-        # echo "✅ ${HELM_INSTALL}"
-        # rm ${HELM_INSTALL}.yaml
+        echo "Checking monitoring/loki"
+        helm dependency build cluster/bedrock/monitoring/loki
+        helm lint cluster/bedrock/monitoring/loki -f cluster/bedrock/monitoring/loki/values-colfax.yaml
+
+        echo "Checking monitoring/prometheus-stack"
+        helm dependency build cluster/bedrock/monitoring/prometheus-stack
+        helm lint cluster/bedrock/monitoring/prometheus-stack -f cluster/bedrock/monitoring/prometheus-stack/values-colfax.yaml
+
+        echo "Checking storage/nfs-client"
+        helm dependency build cluster/bedrock/storage/nfs-client
+        helm lint cluster/bedrock/storage/nfs-client -f cluster/bedrock/storage/nfs-client/values-colfax.yaml
+
+        echo "Checking harbor"
+        helm dependency build cluster/sandbox/harbor
+        helm lint cluster/sandbox/harbor -f cluster/sandbox/harbor/values-colfax.yaml
 
     silent: true
