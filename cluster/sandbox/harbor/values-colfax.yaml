@@ -20,15 +20,11 @@ harbor:
           annotations:
             recurring-job-group.longhorn.io/daily: "enabled"
       redis:
-        existingClaim: harbor-redis-longhorn
         storageClass: longhorn
         size: 1Gi
-        annotations: {}
       trivy:
-        existingClaim: harbor-trivy-longhorn
         storageClass: longhorn
-        size: 1Gi
-        annotations: {}
+        size: 5Gi
   metrics:
     enabled: true
     core:
