@@ -88,6 +88,9 @@ kube-prometheus-stack:
       datasources:
         enabled: true
         skipReload: false
+      dashboards:
+        enabled: true
+        allowUiUpdates: false
     ingress:
       enabled: false
     # env:
