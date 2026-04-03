@@ -14,6 +14,27 @@ spec:
   destination:
     namespace: harbor
     name: in-cluster
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: harbor-core
+      jsonPointers:
+        - /data
+    - group: ""
+      kind: Secret
+      name: harbor-jobservice
+      jsonPointers:
+        - /data
+    - group: ""
+      kind: Secret
+      name: harbor-registry
+      jsonPointers:
+        - /data
+    - group: ""
+      kind: Secret
+      name: harbor-registry-htpasswd
+      jsonPointers:
+        - /data
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
