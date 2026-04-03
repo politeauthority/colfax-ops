@@ -11,19 +11,27 @@ harbor:
         existingClaim: harbor-registry-longhorn
         storageClass: longhorn
         size: 5Gi
+        annotations:
+          recurring-job-group.longhorn.io/daily: "enabled"
       jobservice:
         jobLog:
           existingClaim: harbor-jobservice-longhorn
           storageClass: longhorn
           size: 1Gi
+          annotations:
+            recurring-job-group.longhorn.io/daily: "enabled"
       redis:
         existingClaim: harbor-redis-longhorn
         storageClass: longhorn
         size: 1Gi
+        annotations:
+          recurring-job-group.longhorn.io/daily: "enabled"
       trivy:
         existingClaim: harbor-trivy-longhorn
         storageClass: longhorn
         size: 1Gi
+        annotations:
+          recurring-job-group.longhorn.io/daily: "enabled"
   metrics:
     enabled: true
     core:
