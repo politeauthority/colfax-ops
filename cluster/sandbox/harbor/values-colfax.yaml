@@ -10,7 +10,7 @@ harbor:
       registry:
         existingClaim: harbor-registry-longhorn
         storageClass: longhorn
-        size: 5Gi
+        size: 10Gi
         annotations: {}
       jobservice:
         jobLog:
