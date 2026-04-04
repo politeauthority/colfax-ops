@@ -14,6 +14,7 @@ spec:
     - "jellyfin.alix.lol"
     - "photos.alix.lol"
     - "linkwarden.alix.lol"
+    - "graylog.alix.lol"
     - "squid-ink.us"
     - "ha.squid-ink.us"
     - "harbor.squid-ink.us"
