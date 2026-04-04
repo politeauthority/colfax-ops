@@ -12,6 +12,16 @@ spec:
       labels:
         app: mosquitto
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - arm64
       containers:
       - name: mosquitto
         image: eclipse-mosquitto
