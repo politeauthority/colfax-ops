@@ -35,6 +35,16 @@ spec:
       name: harbor-registry-htpasswd
       jsonPointers:
         - /data
+    - group: apps
+      kind: StatefulSet
+      name: harbor-redis
+      jqPathExpressions:
+        - .spec.volumeClaimTemplates[]
+    - group: apps
+      kind: StatefulSet
+      name: harbor-trivy
+      jqPathExpressions:
+        - .spec.volumeClaimTemplates[]
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
