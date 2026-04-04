@@ -8,6 +8,7 @@ kube-prometheus-stack:
   alertmanager:
     enabled: true
     alertmanagerSpec:
+      externalUrl: https://alertmanager.colfax.int
       secrets:
         - grafana-alerting-creds
     config:
