@@ -1,0 +1,85 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: os-disk-alerts
+  namespace: monitoring
+  labels:
+    release: prometheusstack
+spec:
+  groups:
+    - name: os-disk
+      rules:
+        - alert: OSDiskSpaceWarning
+          expr: |
+            (
+              node_filesystem_avail_bytes{
+                job="node-exporter",
+                mountpoint="/",
+                fstype!~"tmpfs|overlay"
+              }
+              /
+              node_filesystem_size_bytes{
+                job="node-exporter",
+                mountpoint="/",
+                fstype!~"tmpfs|overlay"
+              }
+            ) * 100 < 25
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "OS disk space low on {{`{{ $labels.instance }}`}}"
+            description: >
+              Root filesystem on {{`{{ $labels.instance }}`}} is
+              {{`{{ printf "%.1f" $value }}`}}% free.
+              Less than 25% remaining.
+            dashboard_uid: "c3d8eb03-130a-482c-821b-7ac5886bbb0c"
+            panel_id: "16"
+
+        - alert: OSDiskSpaceCritical
+          expr: |
+            (
+              node_filesystem_avail_bytes{
+                job="node-exporter",
+                mountpoint="/",
+                fstype!~"tmpfs|overlay"
+              }
+              /
+              node_filesystem_size_bytes{
+                job="node-exporter",
+                mountpoint="/",
+                fstype!~"tmpfs|overlay"
+              }
+            ) * 100 < 10
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "OS disk space critically low on {{`{{ $labels.instance }}`}}"
+            description: >
+              Root filesystem on {{`{{ $labels.instance }}`}} is
+              {{`{{ printf "%.1f" $value }}`}}% free.
+              Less than 10% remaining — node may become unstable.
+            dashboard_uid: "c3d8eb03-130a-482c-821b-7ac5886bbb0c"
+            panel_id: "16"
+
+        - alert: OSDiskFillingFast
+          expr: |
+            predict_linear(
+              node_filesystem_avail_bytes{
+                job="node-exporter",
+                mountpoint="/",
+                fstype!~"tmpfs|overlay"
+              }[6h],
+              24 * 3600
+            ) < 0
+          for: 30m
+          labels:
+            severity: warning
+          annotations:
+            summary: "OS disk projected to fill within 24h on {{`{{ $labels.instance }}`}}"
+            description: >
+              Root filesystem on {{`{{ $labels.instance }}`}} is filling at a rate that
+              will exhaust available space within 24 hours based on the last 6h trend.
+            dashboard_uid: "c3d8eb03-130a-482c-821b-7ac5886bbb0c"
+            panel_id: "16"
