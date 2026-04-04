@@ -116,7 +116,7 @@ kube-prometheus-stack:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 25Gi
+                storage: 50Gi
 
       additionalScrapeConfigs:
         - job_name: "prox-node-hoyt"
