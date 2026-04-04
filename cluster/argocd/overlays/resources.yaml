@@ -7,6 +7,20 @@ metadata:
 data:
   server.insecure: "true"
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+data:
+  resource.exclusions: |
+    - apiGroups:
+      - actions.github.com
+      kinds:
+      - "*"
+      clusters:
+      - "*"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
