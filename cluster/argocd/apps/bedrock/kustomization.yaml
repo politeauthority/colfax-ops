@@ -9,6 +9,5 @@ resources:
 - gateway-api-crds.yaml
 - nginx-gateway-fabric-private.yaml
 - nginx-gateway-fabric-public.yaml
-- loki.yaml
 - prometheus-stack.yaml
 - sealed-secrets.yaml
