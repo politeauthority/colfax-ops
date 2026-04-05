@@ -39,8 +39,6 @@ spec:
         - /spec/template/metadata/annotations/checksum~1config
         - /spec/template/metadata/annotations/checksum~1secret
   syncPolicy:
-    automated:
-      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - RespectIgnoreDifferences=true
