@@ -59,10 +59,6 @@ tasks:
         helm dependency build cluster/bedrock/nginx-gateway-fabric/public
         helm lint cluster/bedrock/nginx-gateway-fabric/public -f cluster/bedrock/nginx-gateway-fabric/public/values-colfax.yaml
 
-        echo "Checking monitoring/loki"
-        helm dependency build cluster/bedrock/monitoring/loki
-        helm lint cluster/bedrock/monitoring/loki -f cluster/bedrock/monitoring/loki/values-colfax.yaml
-
         echo "Checking monitoring/prometheus-stack"
         helm dependency build cluster/bedrock/monitoring/prometheus-stack
         helm lint cluster/bedrock/monitoring/prometheus-stack -f cluster/bedrock/monitoring/prometheus-stack/values-colfax.yaml
