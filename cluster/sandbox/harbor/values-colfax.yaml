@@ -69,7 +69,7 @@ harbor:
   database:
     type: external
     external:
-      host: "q-post-gressive-postgresql.q-post-gressive.svc.cluster.local"
+      host: "q-postgres-rw.q-postgres.svc.cluster.local"
       port: "5432"
       username: "harbor_admin"
       coreDatabase: "harbor_registry"
