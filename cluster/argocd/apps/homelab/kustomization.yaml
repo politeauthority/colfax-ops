@@ -5,7 +5,6 @@ resources:
 - cloud-native-pg.yaml
 - home-assistant.yaml
 - q-media.yaml
-- q-post-gressive.yaml
 - q-redis.yaml
 - synapse.yaml
 - synapse-gateway.yaml
