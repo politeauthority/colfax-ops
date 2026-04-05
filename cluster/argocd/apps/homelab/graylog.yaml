@@ -25,11 +25,15 @@ spec:
       name: graylog
       jqPathExpressions:
         - .spec.volumeClaimTemplates[]
+      jsonPointers:
+        - /spec/updateStrategy/rollingUpdate
     - group: apps
       kind: StatefulSet
       name: graylog-datanode
       jqPathExpressions:
         - .spec.volumeClaimTemplates[]
+      jsonPointers:
+        - /spec/updateStrategy/rollingUpdate
   syncPolicy:
     automated:
       selfHeal: true
