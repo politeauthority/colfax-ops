@@ -14,5 +14,6 @@ resources:
 - immich.yaml
 - q-postgres.yaml
 - arc.yaml
+- arc-secret.yaml
 - ip-sentry.yaml
 - graylog.yaml
