@@ -20,15 +20,15 @@ data:
         method: POST
         body: |
           {
-            "app_name": "{{.app.metadata.name}}",
-            "project": "{{.app.spec.project}}",
-            "sync_status": "{{.app.status.sync.status}}",
-            "health_status": "{{.app.status.health.status}}",
-            "operation_phase": "{{.app.status.operationState.phase}}",
-            "operation_message": "{{.app.status.operationState.message}}",
-            "repo_url": "{{.app.spec.source.repoURL}}",
-            "target_revision": "{{.app.spec.source.targetRevision}}",
-            "sync_revision": "{{.app.status.sync.revision}}"
+            "app_name": {{.app.metadata.name | toJson}},
+            "project": {{.app.spec.project | toJson}},
+            "sync_status": {{.app.status.sync.status | toJson}},
+            "health_status": {{.app.status.health.status | toJson}},
+            "operation_phase": {{.app.status.operationState.phase | toJson}},
+            "operation_message": {{.app.status.operationState.message | toJson}},
+            "repo_url": {{.app.spec.source.repoURL | toJson}},
+            "target_revision": {{.app.spec.source.targetRevision | toJson}},
+            "sync_revision": {{.app.status.sync.revision | toJson}}
           }
 
   template.app-sync-failed: |
@@ -37,15 +37,15 @@ data:
         method: POST
         body: |
           {
-            "app_name": "{{.app.metadata.name}}",
-            "project": "{{.app.spec.project}}",
-            "sync_status": "{{.app.status.sync.status}}",
-            "health_status": "{{.app.status.health.status}}",
-            "operation_phase": "{{.app.status.operationState.phase}}",
-            "operation_message": "{{.app.status.operationState.message}}",
-            "repo_url": "{{.app.spec.source.repoURL}}",
-            "target_revision": "{{.app.spec.source.targetRevision}}",
-            "sync_revision": "{{.app.status.sync.revision}}"
+            "app_name": {{.app.metadata.name | toJson}},
+            "project": {{.app.spec.project | toJson}},
+            "sync_status": {{.app.status.sync.status | toJson}},
+            "health_status": {{.app.status.health.status | toJson}},
+            "operation_phase": {{.app.status.operationState.phase | toJson}},
+            "operation_message": {{.app.status.operationState.message | toJson}},
+            "repo_url": {{.app.spec.source.repoURL | toJson}},
+            "target_revision": {{.app.spec.source.targetRevision | toJson}},
+            "sync_revision": {{.app.status.sync.revision | toJson}}
           }
 
   template.app-health-degraded: |
@@ -54,15 +54,15 @@ data:
         method: POST
         body: |
           {
-            "app_name": "{{.app.metadata.name}}",
-            "project": "{{.app.spec.project}}",
-            "sync_status": "{{.app.status.sync.status}}",
-            "health_status": "{{.app.status.health.status}}",
-            "operation_phase": "{{.app.status.operationState.phase}}",
-            "operation_message": "{{.app.status.operationState.message}}",
-            "repo_url": "{{.app.spec.source.repoURL}}",
-            "target_revision": "{{.app.spec.source.targetRevision}}",
-            "sync_revision": "{{.app.status.sync.revision}}"
+            "app_name": {{.app.metadata.name | toJson}},
+            "project": {{.app.spec.project | toJson}},
+            "sync_status": {{.app.status.sync.status | toJson}},
+            "health_status": {{.app.status.health.status | toJson}},
+            "operation_phase": {{.app.status.operationState.phase | toJson}},
+            "operation_message": {{.app.status.operationState.message | toJson}},
+            "repo_url": {{.app.spec.source.repoURL | toJson}},
+            "target_revision": {{.app.spec.source.targetRevision | toJson}},
+            "sync_revision": {{.app.status.sync.revision | toJson}}
           }
 
   # Triggers
