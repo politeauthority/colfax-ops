@@ -10,6 +10,8 @@ data:
     headers:
       - name: Content-Type
         value: application/json
+      - name: Authorization
+        value: Basic YXJnb2NkOnhicWc5dWp5aVAtZVVCUXJ6QnRNalhGckxkaDZmdkN6
 
   # Shared payload template used by all triggers
   template.app-sync-succeeded: |
