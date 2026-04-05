@@ -4,13 +4,16 @@ metadata:
   name: ip-sentry
 spec:
   project: default
-  source:
-    repoURL: 'git@github.com:politeauthority/private-ops.git'
-    path: ip-sentry
-    targetRevision: main
-    helm:
-      valueFiles:
-        - values-colfax.yaml
+  sources:
+    - repoURL: 'git@github.com:politeauthority/ip-sentry.git'
+      path: .
+      targetRevision: main
+      helm:
+        valueFiles:
+          - $values/ip-sentry/values-colfax.yaml
+    - repoURL: 'git@github.com:politeauthority/private-ops.git'
+      targetRevision: main
+      ref: values
   destination:
     namespace: ip-sentry
     name: in-cluster
