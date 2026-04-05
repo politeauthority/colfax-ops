@@ -115,6 +115,7 @@ metadata:
   name: argocd-dex-server
   namespace: argocd
 spec:
+  replicas: 0
   template:
     spec:
       affinity:
