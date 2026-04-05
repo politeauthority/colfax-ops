@@ -14,8 +14,15 @@ spec:
   destination:
     namespace: synapse
     name: in-cluster
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      name: synapse-synapse-main
+      jsonPointers:
+        - /spec/updateStrategy/rollingUpdate
   syncPolicy:
     automated:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
