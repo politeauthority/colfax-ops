@@ -11,6 +11,11 @@ spec:
   destination:
     namespace: q-postgres
     name: in-cluster
+  ignoreDifferences:
+    - group: postgresql.cnpg.io
+      kind: Cluster
+      managedFieldsManagers:
+        - cloudnative-pg
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

@@ -16,7 +16,15 @@ spec:
   destination:
     namespace: argo-workflows
     name: in-cluster
+  ignoreDifferences:
+    - group: "*"
+      kind: "*"
+      jsonPointers:
+        - /metadata/labels
+        - /metadata/annotations
   syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true

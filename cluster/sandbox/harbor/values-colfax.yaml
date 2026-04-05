@@ -1,4 +1,30 @@
 harbor:
+  nginx:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  portal:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  core:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  jobservice:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  registry:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  trivy:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  exporter:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  redis:
+    internal:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+
   expose:
     type: clusterIP
     tls:

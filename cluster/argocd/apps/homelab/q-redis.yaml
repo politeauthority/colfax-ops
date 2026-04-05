@@ -12,5 +12,7 @@ spec:
     namespace: q-redis
     name: in-cluster
   syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
