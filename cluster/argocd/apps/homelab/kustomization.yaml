@@ -15,7 +15,6 @@ resources:
 - linkwarden.yaml
 - immich.yaml
 - q-postgres.yaml
-- n8n.yaml
 - arc.yaml
 - ip-sentry.yaml
 - graylog.yaml
