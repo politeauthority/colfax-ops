@@ -11,3 +11,4 @@ resources:
 - nginx-gateway-fabric-public.yaml
 - loki.yaml
 - prometheus-stack.yaml
+- sealed-secrets.yaml
