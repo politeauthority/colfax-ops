@@ -4,16 +4,13 @@ metadata:
   name: graylog
 spec:
   project: default
-  sources:
-    - repoURL: 'git@github.com:Graylog2/graylog-helm.git'
-      path: charts/graylog
-      targetRevision: main
-      helm:
-        valueFiles:
-          - $values/graylog/graylog-helm/values-colfax.yaml
-    - repoURL: 'git@github.com:politeauthority/private-ops.git'
-      targetRevision: main
-      ref: values
+  source:
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: graylog/graylog-helm
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values-colfax.yaml
   destination:
     namespace: graylog
     name: in-cluster
