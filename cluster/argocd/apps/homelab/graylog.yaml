@@ -14,6 +14,24 @@ spec:
   destination:
     namespace: graylog
     name: in-cluster
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: graylog-secret-datanode
+      jsonPointers:
+        - /data
+    - group: apps
+      kind: StatefulSet
+      name: graylog
+      jqPathExpressions:
+        - .spec.volumeClaimTemplates[]
+    - group: apps
+      kind: StatefulSet
+      name: graylog-datanode
+      jqPathExpressions:
+        - .spec.volumeClaimTemplates[]
   syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
