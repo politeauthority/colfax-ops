@@ -5,6 +5,7 @@ resources:
 - base/
 - apps/
 - overlays/ingress.yaml
+- overlays/notifications-cm.yaml
 
 patchesStrategicMerge:
 - overlays/resources.yaml
