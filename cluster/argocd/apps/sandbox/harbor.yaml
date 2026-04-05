@@ -45,7 +45,13 @@ spec:
       name: harbor-trivy
       jqPathExpressions:
         - .spec.volumeClaimTemplates[]
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /metadata/labels/app.kubernetes.io~1instance
   syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
