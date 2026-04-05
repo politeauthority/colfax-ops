@@ -4,8 +4,6 @@ metadata:
   name: mosquitto-mqtts
 spec:
   type: LoadBalancer
-  externalIPs:
-    - 192.168.50.82
   selector:
     app: mosquitto  
   ports:
