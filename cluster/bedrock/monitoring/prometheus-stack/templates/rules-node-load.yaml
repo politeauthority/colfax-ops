@@ -1,0 +1,44 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-load-alerts
+  namespace: monitoring
+  labels:
+    release: prometheusstack
+spec:
+  groups:
+    - name: node-load
+      rules:
+        - alert: NodeLoadHighWarning
+          expr: |
+            (
+              node_load15{job="node-exporter"}
+              /
+              count without(cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle"})
+            ) > 1.5
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High load average on {{`{{ $labels.instance }}`}}"
+            description: >
+              15-minute load average on {{`{{ $labels.instance }}`}} is
+              {{`{{ printf "%.2f" $value }}`}}x the number of CPUs.
+              Sustained high load for 15 minutes.
+
+        - alert: NodeLoadHighCritical
+          expr: |
+            (
+              node_load15{job="node-exporter"}
+              /
+              count without(cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle"})
+            ) > 2.5
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Critical load average on {{`{{ $labels.instance }}`}}"
+            description: >
+              15-minute load average on {{`{{ $labels.instance }}`}} is
+              {{`{{ printf "%.2f" $value }}`}}x the number of CPUs.
+              Node may be severely resource constrained.
