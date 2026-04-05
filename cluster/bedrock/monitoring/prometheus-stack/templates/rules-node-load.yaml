@@ -42,3 +42,37 @@ spec:
               15-minute load average on {{`{{ $labels.instance }}`}} is
               {{`{{ printf "%.2f" $value }}`}}x the number of CPUs.
               Node may be severely resource constrained.
+
+    - name: node-cpu
+      rules:
+        - alert: NodeCPUHighWarning
+          expr: |
+            (
+              1 - avg without(cpu, mode) (
+                rate(node_cpu_seconds_total{job="node-exporter", mode="idle"}[5m])
+              )
+            ) * 100 > 80
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High CPU utilization on {{`{{ $labels.instance }}`}}"
+            description: >
+              CPU utilization on {{`{{ $labels.instance }}`}} has been above
+              {{`{{ printf "%.1f" $value }}`}}% for 15 minutes.
+
+        - alert: NodeCPUHighCritical
+          expr: |
+            (
+              1 - avg without(cpu, mode) (
+                rate(node_cpu_seconds_total{job="node-exporter", mode="idle"}[5m])
+              )
+            ) * 100 > 95
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Critical CPU utilization on {{`{{ $labels.instance }}`}}"
+            description: >
+              CPU utilization on {{`{{ $labels.instance }}`}} has been above
+              {{`{{ printf "%.1f" $value }}`}}% for 10 minutes.
