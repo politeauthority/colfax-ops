@@ -17,8 +17,15 @@ spec:
   destination:
     namespace: nginx-gateway-fabric-private
     name: in-cluster
+  ignoreDifferences:
+    - group: "*"
+      kind: "*"
+      jsonPointers:
+        - /metadata/labels
+        - /metadata/annotations
   syncPolicy:
-    automated: {}
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
