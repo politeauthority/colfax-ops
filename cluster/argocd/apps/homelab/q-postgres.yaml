@@ -14,8 +14,20 @@ spec:
   ignoreDifferences:
     - group: postgresql.cnpg.io
       kind: Cluster
-      managedFieldsManagers:
-        - cloudnative-pg
+      jsonPointers:
+        - /spec/affinity
+        - /spec/bootstrap
+        - /spec/enablePDB
+        - /spec/enableSuperuserAccess
+        - /spec/failoverDelay
+        - /spec/imageName
+        - /spec/logLevel
+        - /spec/postgresGID
+        - /spec/postgresUID
+        - /spec/primaryUpdateMethod
+        - /spec/probes
+        - /spec/replicationSlots
+        - /spec/smartShutdownTimeout
   syncPolicy:
     automated:
       selfHeal: true
