@@ -1,0 +1,37 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: http-probes
+  namespace: monitoring
+  labels:
+    release: prometheusstack
+spec:
+  groups:
+    - name: http-probes
+      rules:
+        - alert: HttpEndpointDown
+          expr: probe_success == 0
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "{{ "{{" }} $labels.instance {{ "}}" }} is unreachable"
+            description: "HTTP probe for {{ "{{" }} $labels.instance {{ "}}" }} has been failing for more than 2 minutes."
+
+        - alert: HttpEndpointSlowResponse
+          expr: probe_duration_seconds > 5
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "{{ "{{" }} $labels.instance {{ "}}" }} is responding slowly"
+            description: "HTTP probe for {{ "{{" }} $labels.instance {{ "}}" }} is taking more than 5s to respond."
+
+        - alert: HttpEndpointCertExpiringSoon
+          expr: probe_ssl_earliest_cert_expiry{instance!~"https://.*\\.colfax\\.int"} - time() < 86400 * 14
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "TLS certificate for {{ "{{" }} $labels.instance {{ "}}" }} expires in less than 14 days"
+            description: "Certificate for {{ "{{" }} $labels.instance {{ "}}" }} expires at {{ "{{" }} $value | humanizeTimestamp {{ "}}" }}."

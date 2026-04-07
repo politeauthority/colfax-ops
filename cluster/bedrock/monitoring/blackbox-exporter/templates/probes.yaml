@@ -1,0 +1,47 @@
+---
+# Public endpoints - valid TLS certs
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: http-public
+  namespace: monitoring
+  labels:
+    release: prometheusstack
+spec:
+  prober:
+    url: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+  module: http_2xx
+  interval: 5m
+  targets:
+    staticConfig:
+      targets:
+        - https://jellyfin.alix.lol/health
+        - https://photos.alix.lol/api/server/ping
+        - https://harbor.squid-ink.us/api/v2.0/ping
+        - https://ha.squid-ink.us
+        - https://linkwarden.alix.lol
+        - https://api.alix.lol/healthz
+---
+# Private internal endpoints - plain HTTP via cluster DNS
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: http-private
+  namespace: monitoring
+  labels:
+    release: prometheusstack
+spec:
+  prober:
+    url: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+  module: http_2xx
+  interval: 5m
+  targets:
+    staticConfig:
+      targets:
+        - http://jellyfin.q-media.svc.cluster.local/health
+        - http://ersatztv.q-media.svc.cluster.local/health
+        - http://radarr.q-media.svc.cluster.local/ping
+        - http://sonarr.q-media.svc.cluster.local/ping
+        - http://sabnzbd-web.q-media.svc.cluster.local
+        - http://argocd-server.argocd.svc.cluster.local
+        - http://prometheusstack-grafana.monitoring.svc.cluster.local/api/health
