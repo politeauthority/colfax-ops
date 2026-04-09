@@ -12,8 +12,16 @@ spec:
       labels:
         app: mosquitto
     spec:
-      nodeSelector:
-        kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - galapago
       containers:
       - name: mosquitto
         image: eclipse-mosquitto
