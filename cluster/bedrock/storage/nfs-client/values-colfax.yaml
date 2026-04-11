@@ -11,3 +11,13 @@ nfs-subdir-external-provisioner:
 
   storageClass:
     defaultClass: true
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - galapago
