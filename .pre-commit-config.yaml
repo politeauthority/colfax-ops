@@ -1,0 +1,16 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-kustomize
+        name: Validate Kustomize builds
+        language: system
+        entry: task check-k
+        pass_filenames: false
+        always_run: true
+
+      - id: check-helm
+        name: Validate Helm charts
+        language: system
+        entry: task check-helm
+        pass_filenames: false
+        always_run: true
