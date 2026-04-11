@@ -125,15 +125,10 @@ kube-prometheus-stack:
         allowUiUpdates: false
     ingress:
       enabled: false
-    # env:
-    #   PUID: "1001"
-    #   PGID: "1002"
-    # persistence:
-    #   enabled: false
-    #   storageClassName: nfs-client
-    #   size: 2Gi
-    # initChownData:
-    #   enabled: false
+    persistence:
+      enabled: true
+      storageClassName: longhorn
+      size: 2Gi
 
   prometheus:
     ingress:
