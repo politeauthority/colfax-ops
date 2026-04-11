@@ -85,7 +85,7 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "up{namespace=\"q-postgres\",cnpg_io_cluster=\"q-postgres\",job=\"q-postgres\"}",
+          "expr": "up{namespace=\"q-postgres\",job=\"q-postgres/q-postgres\"}",
           "refId": "A"
         }
       ],
@@ -295,7 +295,7 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "sum(cnpg_backends_total{namespace=\"q-postgres\"})",
+          "expr": "sum(cnpg_backends{namespace=\"q-postgres\"})",
           "refId": "A"
         }
       ],
@@ -348,7 +348,7 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "count(up{namespace=\"q-postgres\",cnpg_io_cluster=\"q-postgres\"} == 1)",
+          "expr": "count(up{namespace=\"q-postgres\",job=\"q-postgres/q-postgres\"} == 1)",
           "refId": "A"
         }
       ],
@@ -427,7 +427,7 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "cnpg_backends_total{namespace=\"q-postgres\"}",
+          "expr": "cnpg_backends{namespace=\"q-postgres\"}",
           "legendFormat": "{{pod}} - {{datname}}",
           "refId": "A"
         }
@@ -507,12 +507,12 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "rate(cnpg_pg_stat_database_xact_commit_total{namespace=\"q-postgres\"}[5m])",
+          "expr": "rate(cnpg_pg_stat_database_xact_commit{namespace=\"q-postgres\"}[5m])",
           "legendFormat": "{{pod}} - {{datname}} Commits",
           "refId": "A"
         },
         {
-          "expr": "rate(cnpg_pg_stat_database_xact_rollback_total{namespace=\"q-postgres\"}[5m])",
+          "expr": "rate(cnpg_pg_stat_database_xact_rollback{namespace=\"q-postgres\"}[5m])",
           "legendFormat": "{{pod}} - {{datname}} Rollbacks",
           "refId": "B"
         }
@@ -671,12 +671,12 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "rate(cnpg_pg_stat_database_blks_read_total{namespace=\"q-postgres\"}[5m]) * 8192",
+          "expr": "rate(cnpg_pg_stat_database_blks_read{namespace=\"q-postgres\"}[5m]) * 8192",
           "legendFormat": "{{pod}} - {{datname}} Disk Reads",
           "refId": "A"
         },
         {
-          "expr": "rate(cnpg_pg_stat_database_blks_hit_total{namespace=\"q-postgres\"}[5m]) * 8192",
+          "expr": "rate(cnpg_pg_stat_database_blks_hit{namespace=\"q-postgres\"}[5m]) * 8192",
           "legendFormat": "{{pod}} - {{datname}} Cache Hits",
           "refId": "B"
         }
@@ -756,7 +756,7 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "rate(cnpg_pg_stat_database_blks_hit_total{namespace=\"q-postgres\"}[5m]) / (rate(cnpg_pg_stat_database_blks_hit_total{namespace=\"q-postgres\"}[5m]) + rate(cnpg_pg_stat_database_blks_read_total{namespace=\"q-postgres\"}[5m]))",
+          "expr": "rate(cnpg_pg_stat_database_blks_hit{namespace=\"q-postgres\"}[5m]) / (rate(cnpg_pg_stat_database_blks_hit{namespace=\"q-postgres\"}[5m]) + rate(cnpg_pg_stat_database_blks_read{namespace=\"q-postgres\"}[5m]))",
           "legendFormat": "{{pod}} - {{datname}} Cache Hit Ratio",
           "refId": "A"
         }
@@ -836,12 +836,12 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "cnpg_pg_stat_database_deadlocks_total{namespace=\"q-postgres\"}",
+          "expr": "cnpg_pg_stat_database_deadlocks{namespace=\"q-postgres\"}",
           "legendFormat": "{{pod}} - {{datname}} Deadlocks",
           "refId": "A"
         },
         {
-          "expr": "cnpg_pg_stat_database_conflicts_total{namespace=\"q-postgres\"}",
+          "expr": "cnpg_pg_stat_database_conflicts{namespace=\"q-postgres\"}",
           "legendFormat": "{{pod}} - {{datname}} Conflicts",
           "refId": "B"
         }
@@ -921,12 +921,12 @@
       "pluginVersion": "8.0.0",
       "targets": [
         {
-          "expr": "rate(cnpg_pg_stat_archiver_archived_count_total{namespace=\"q-postgres\"}[5m])",
+          "expr": "rate(cnpg_pg_stat_archiver_archived_count{namespace=\"q-postgres\"}[5m])",
           "legendFormat": "{{pod}} - WAL Archives/sec",
           "refId": "A"
         },
         {
-          "expr": "rate(cnpg_pg_stat_archiver_failed_count_total{namespace=\"q-postgres\"}[5m])",
+          "expr": "rate(cnpg_pg_stat_archiver_failed_count{namespace=\"q-postgres\"}[5m])",
           "legendFormat": "{{pod}} - WAL Archive Failures/sec",
           "refId": "B"
         }
@@ -1016,17 +1016,17 @@
             "excludeByName": {
               "__name__": true,
               "Time": true,
+              "container": true,
               "endpoint": true,
+              "instance": true,
               "job": true,
               "namespace": true,
-              "service": true,
-              "cnpg_io_cluster": true
+              "service": true
             },
             "indexByName": {},
             "renameByName": {
               "Value": "Uptime (s)",
-              "pod": "Pod",
-              "cnpg_io_podRole": "Role"
+              "pod": "Pod"
             }
           }
         }
@@ -1053,5 +1053,5 @@
   "timezone": "browser",
   "title": "CloudNativePG - q-postgres Cluster",
   "uid": "cloudnativepg-q-postgres",
-  "version": 1
+  "version": 2
 }
