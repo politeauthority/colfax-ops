@@ -6,6 +6,7 @@ metadata:
 spec:
   numberOfReplicas: 1
   size: "37580963840"  # 35Gi
+  frontend: blockdev
 ---
 apiVersion: v1
 kind: PersistentVolume
