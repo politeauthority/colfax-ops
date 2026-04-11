@@ -91,6 +91,26 @@ kube-prometheus-stack:
                   has restarted {{`{{ $value | humanize }}`}} times in the last hour. This may indicate
                   a crash loop that clears before the CrashLoopBackOff alert fires.
 
+  nodeExporter:
+    serviceMonitor:
+      metricRelabelings:
+        - sourceLabels: [instance]
+          regex: "192\\.168\\.50\\.77:9100"
+          targetLabel: instance
+          replacement: colfax-1
+        - sourceLabels: [instance]
+          regex: "192\\.168\\.50\\.79:9100"
+          targetLabel: instance
+          replacement: hoyt-1
+        - sourceLabels: [instance]
+          regex: "192\\.168\\.50\\.71:9100"
+          targetLabel: instance
+          replacement: galapago
+        - sourceLabels: [instance]
+          regex: "192\\.168\\.50\\.60:9100"
+          targetLabel: instance
+          replacement: control-plane
+
   grafana:
     enabled: true
     grafana.ini:
@@ -135,9 +155,15 @@ kube-prometheus-stack:
         - job_name: "prox-node-hoyt"
           static_configs:
             - targets: [192.168.50.52:9100]
+          relabel_configs:
+            - target_label: instance
+              replacement: hoyt
         - job_name: "prox-node-colfax"
           static_configs:
             - targets: [192.168.50.50:9100]
+          relabel_configs:
+            - target_label: instance
+              replacement: colfax
 
         # Harbor Metrics
         - job_name: "harbor-exporter"
