@@ -305,10 +305,151 @@
     {
       "collapsed": false,
       "gridPos": { "h": 1, "w": 24, "x": 0, "y": 13 },
+      "id": 42,
+      "panels": [],
+      "title": "Physical Nodes",
+      "type": "row"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 14 },
+      "id": 43,
+      "options": {
+        "legend": { "calcs": ["lastNotNull", "max"], "displayMode": "table", "placement": "right", "showLegend": true },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "editorMode": "code",
+          "expr": "node_load1{job=~\"prox-node-hoyt|prox-node-colfax\"}",
+          "legendFormat": "{{instance}} — 1m",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "editorMode": "code",
+          "expr": "node_load5{job=~\"prox-node-hoyt|prox-node-colfax\"}",
+          "legendFormat": "{{instance}} — 5m",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "editorMode": "code",
+          "expr": "node_load15{job=~\"prox-node-hoyt|prox-node-colfax\"}",
+          "legendFormat": "{{instance}} — 15m",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Load Average — Physical Nodes",
+      "type": "timeseries"
+    },
+
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 22 },
       "id": 10,
       "panels": [],
-      "title": "Node Health",
+      "title": "K8s Nodes",
       "type": "row"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 23 },
+      "id": 44,
+      "options": {
+        "legend": { "calcs": ["lastNotNull", "max"], "displayMode": "table", "placement": "right", "showLegend": true },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "editorMode": "code",
+          "expr": "node_load1{job=\"node-exporter\"}",
+          "legendFormat": "{{instance}} — 1m",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "editorMode": "code",
+          "expr": "node_load5{job=\"node-exporter\"}",
+          "legendFormat": "{{instance}} — 5m",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "editorMode": "code",
+          "expr": "node_load15{job=\"node-exporter\"}",
+          "legendFormat": "{{instance}} — 15m",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Load Average — K8s Nodes",
+      "type": "timeseries"
     },
 
     {
@@ -331,7 +472,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 14 },
+      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 31 },
       "id": 11,
       "options": {
         "displayMode": "gradient",
@@ -376,7 +517,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 14 },
+      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 31 },
       "id": 12,
       "options": {
         "displayMode": "gradient",
@@ -443,7 +584,7 @@
           }
         ]
       },
-      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 21 },
+      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 38 },
       "id": 13,
       "options": {
         "cellHeight": "sm",
@@ -498,15 +639,6 @@
     },
 
     {
-      "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 28 },
-      "id": 14,
-      "panels": [],
-      "title": "OS Disks",
-      "type": "row"
-    },
-
-    {
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": {
@@ -526,7 +658,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 6, "w": 24, "x": 0, "y": 29 },
+      "gridPos": { "h": 6, "w": 24, "x": 0, "y": 45 },
       "id": 15,
       "options": {
         "displayMode": "gradient",
@@ -589,7 +721,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 35 },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 51 },
       "id": 16,
       "options": {
         "legend": { "calcs": ["lastNotNull", "max"], "displayMode": "table", "placement": "right", "showLegend": true },
@@ -611,7 +743,7 @@
 
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 43 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 59 },
       "id": 17,
       "panels": [],
       "title": "Longhorn Storage",
@@ -629,7 +761,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 44 },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 60 },
       "id": 18,
       "options": {
         "colorMode": "value",
@@ -663,7 +795,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 44 },
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 60 },
       "id": 19,
       "options": {
         "colorMode": "value",
@@ -697,7 +829,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 44 },
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 60 },
       "id": 20,
       "options": {
         "colorMode": "value",
@@ -740,7 +872,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 44 },
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 60 },
       "id": 21,
       "options": {
         "minVizHeight": 75,
@@ -783,7 +915,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 48 },
+      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 64 },
       "id": 22,
       "options": {
         "displayMode": "gradient",
@@ -830,7 +962,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 48 },
+      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 64 },
       "id": 23,
       "options": {
         "displayMode": "gradient",
@@ -898,7 +1030,7 @@
           }
         ]
       },
-      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 55 },
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 71 },
       "id": 24,
       "options": {
         "cellHeight": "sm",
@@ -972,7 +1104,7 @@
 
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 65 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 81 },
       "id": 25,
       "panels": [],
       "title": "Pod Restarts",
@@ -1014,7 +1146,7 @@
           }
         ]
       },
-      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 66 },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 82 },
       "id": 26,
       "options": {
         "cellHeight": "sm",
@@ -1058,7 +1190,7 @@
 
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 75 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 91 },
       "id": 27,
       "panels": [],
       "title": "ArgoCD Application Status",
@@ -1080,7 +1212,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 76 },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 92 },
       "id": 28,
       "options": {
         "colorMode": "background",
@@ -1119,7 +1251,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 76 },
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 92 },
       "id": 29,
       "options": {
         "colorMode": "background",
@@ -1157,7 +1289,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 76 },
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 92 },
       "id": 30,
       "options": {
         "colorMode": "background",
@@ -1196,7 +1328,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 76 },
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 92 },
       "id": 31,
       "options": {
         "colorMode": "background",
@@ -1277,7 +1409,7 @@
           }
         ]
       },
-      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 80 },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 96 },
       "id": 32,
       "options": {
         "cellHeight": "sm",
@@ -1339,7 +1471,7 @@
 
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 89 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 105 },
       "id": 33,
       "panels": [],
       "title": "Node Network I/O",
@@ -1376,7 +1508,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 90 },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 106 },
       "id": 34,
       "options": {
         "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true },
@@ -1426,7 +1558,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 90 },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 106 },
       "id": 35,
       "options": {
         "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true },
@@ -1448,7 +1580,7 @@
 
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 98 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 114 },
       "id": 36,
       "panels": [],
       "title": "PVC Status",
@@ -1470,7 +1602,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 99 },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 115 },
       "id": 37,
       "options": {
         "colorMode": "value",
@@ -1509,7 +1641,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 99 },
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 115 },
       "id": 38,
       "options": {
         "colorMode": "background",
@@ -1548,7 +1680,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 99 },
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 115 },
       "id": 39,
       "options": {
         "colorMode": "background",
@@ -1581,7 +1713,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 99 },
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 115 },
       "id": 40,
       "options": {
         "colorMode": "value",
@@ -1644,7 +1776,7 @@
           }
         ]
       },
-      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 103 },
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 119 },
       "id": 41,
       "options": {
         "cellHeight": "sm",
@@ -1708,6 +1840,6 @@
   "timezone": "",
   "title": "Colfax Cluster",
   "uid": "c3d8eb03-130a-482c-821b-7ac5886bbb0c",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
