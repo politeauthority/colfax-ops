@@ -1,0 +1,38 @@
+apiVersion: longhorn.io/v1beta2
+kind: Volume
+metadata:
+  name: prometheus-db
+  namespace: longhorn-system
+spec:
+  numberOfReplicas: 1
+  size: "37580963840"  # 35Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-db
+spec:
+  capacity:
+    storage: 35Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: prometheus-db
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-prometheusstack-kube-prome-prometheus-db-prometheus-prometheusstack-kube-prome-prometheus-0
+  namespace: monitoring
+spec:
+  storageClassName: longhorn
+  volumeName: prometheus-db
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 35Gi

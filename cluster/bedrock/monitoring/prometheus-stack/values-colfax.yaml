@@ -121,7 +121,7 @@ kube-prometheus-stack:
 
     prometheusSpec:
       retention: 15d
-      retentionSize: 45GB
+      retentionSize: 30GB
       storageSpec:
         volumeClaimTemplate:
           spec:
@@ -129,7 +129,7 @@ kube-prometheus-stack:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 50Gi
+                storage: 35Gi
 
       additionalScrapeConfigs:
         - job_name: "prox-node-hoyt"
