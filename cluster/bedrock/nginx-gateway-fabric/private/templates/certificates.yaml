@@ -9,3 +9,4 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - "*.colfax.int"
+    - "*.stocky.colfax.int"
