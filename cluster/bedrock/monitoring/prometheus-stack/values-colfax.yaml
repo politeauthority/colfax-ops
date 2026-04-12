@@ -188,6 +188,15 @@ kube-prometheus-stack:
         #   static_configs:
         #     - targets: [a1.alix.lol]
 
+        - job_name: stocky-api
+          metrics_path: /metrics
+          scheme: http
+          static_configs:
+            - targets: [stocky-api.stocky.svc.cluster.local:8000]
+          relabel_configs:
+            - target_label: namespace
+              replacement: stocky
+
         - job_name: jellyfin
           metrics_path: /metrics
           scheme: http

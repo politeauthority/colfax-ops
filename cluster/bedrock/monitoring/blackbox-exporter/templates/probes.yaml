@@ -45,3 +45,4 @@ spec:
         - http://sabnzbd-web.q-media.svc.cluster.local
         - http://argocd-server.argocd.svc.cluster.local
         - http://prometheusstack-grafana.monitoring.svc.cluster.local/api/health
+        - http://stocky-api.stocky.svc.cluster.local:8000/_health

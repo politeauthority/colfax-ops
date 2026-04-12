@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-stocky
+data:
+  grafana-stocky.json: |-
+{{ .Files.Get "dashboards/stocky.json" | indent 4}}
