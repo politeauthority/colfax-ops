@@ -10,6 +10,8 @@ spec:
   dnsNames:
     - "alix.lol"
     - "api.alix.lol"
+    - "stocky.alix.lol"
+    - "api.stocky.alix.lol"
     - "api-dev.alix.lol"
     - "jellyfin.alix.lol"
     - "photos.alix.lol"
