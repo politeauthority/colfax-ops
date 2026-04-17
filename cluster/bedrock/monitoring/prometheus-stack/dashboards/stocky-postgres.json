@@ -1,0 +1,379 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": { "type": "datasource", "uid": "grafana" },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "CloudNativePG cluster health, replication, and per-database stats for stocky-postgres",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "panels": [
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 1, "title": "Cluster Overview", "type": "row" },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "green", "value": 2 }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 1 },
+      "id": 2,
+      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "targets": [{ "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "count(cnpg_collector_up{cluster=\"stocky-postgres\"})", "legendFormat": "Instances", "refId": "A" }],
+      "title": "Instances Up",
+      "type": "stat"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
+            ]
+          },
+          "mappings": [
+            { "options": { "0": { "color": "red", "text": "Replica" }, "1": { "color": "green", "text": "Primary" } }, "type": "value" }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 1 },
+      "id": 3,
+      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "targets": [{ "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "max(cnpg_pg_replication_in_recovery{cluster=\"stocky-postgres\"} == 0) or vector(0)", "legendFormat": "Primary", "refId": "A" }],
+      "title": "Primary Ready",
+      "type": "stat"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "unit": "s",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 10 },
+              { "color": "red", "value": 30 }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 1 },
+      "id": 4,
+      "options": { "colorMode": "background", "graphMode": "area", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "targets": [{ "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "max(cnpg_pg_replication_lag{cluster=\"stocky-postgres\"})", "legendFormat": "Replication Lag", "refId": "A" }],
+      "title": "Replication Lag",
+      "type": "stat"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 30 },
+              { "color": "red", "value": 80 }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 12, "y": 1 },
+      "id": 5,
+      "options": { "colorMode": "value", "graphMode": "area", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "value_and_name" },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "sum(cnpg_backends_total{cluster=\"stocky-postgres\",datname=\"stocky\"})", "legendFormat": "stocky", "refId": "A" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "sum(cnpg_backends_total{cluster=\"stocky-postgres\",datname=\"stocky_dev\"})", "legendFormat": "stocky_dev", "refId": "B" }
+      ],
+      "title": "Active Connections",
+      "type": "stat"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 1 },
+      "id": 6,
+      "options": { "colorMode": "background", "graphMode": "area", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "targets": [{ "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "cnpg_backends_waiting_total{cluster=\"stocky-postgres\"}", "legendFormat": "Waiting", "refId": "A" }],
+      "title": "Connections Waiting",
+      "type": "stat"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 0.90 },
+              { "color": "green", "value": 0.98 }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 1 },
+      "id": 7,
+      "options": { "colorMode": "background", "graphMode": "area", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "value_and_name" },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "cnpg_pg_stat_database_blks_hit{cluster=\"stocky-postgres\",datname=\"stocky\"} / (cnpg_pg_stat_database_blks_hit{cluster=\"stocky-postgres\",datname=\"stocky\"} + cnpg_pg_stat_database_blks_read{cluster=\"stocky-postgres\",datname=\"stocky\"} > 0)",
+          "legendFormat": "stocky",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "cnpg_pg_stat_database_blks_hit{cluster=\"stocky-postgres\",datname=\"stocky_dev\"} / (cnpg_pg_stat_database_blks_hit{cluster=\"stocky-postgres\",datname=\"stocky_dev\"} + cnpg_pg_stat_database_blks_read{cluster=\"stocky-postgres\",datname=\"stocky_dev\"} > 0)",
+          "legendFormat": "stocky_dev",
+          "refId": "B"
+        }
+      ],
+      "title": "Cache Hit Ratio",
+      "type": "stat"
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 5 }, "id": 10, "title": "Replication", "type": "row" },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "s", "custom": { "lineWidth": 1, "fillOpacity": 10 } },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 6 },
+      "id": 11,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "cnpg_pg_replication_lag{cluster=\"stocky-postgres\"}", "legendFormat": "{{ pod }}", "refId": "A" }
+      ],
+      "title": "Replication Lag by Pod",
+      "type": "timeseries"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "bytes", "custom": { "lineWidth": 1, "fillOpacity": 10 } },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 6 },
+      "id": 12,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "cnpg_pg_wal_files_total{cluster=\"stocky-postgres\"}", "legendFormat": "WAL Files {{ pod }}", "refId": "A" }
+      ],
+      "title": "WAL Files",
+      "type": "timeseries"
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 14 }, "id": 20, "title": "Database — stocky (production)", "type": "row" },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "ops", "custom": { "lineWidth": 1, "fillOpacity": 10 } },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "Commits" }, "properties": [{ "id": "color", "value": { "fixedColor": "green", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "Rollbacks" }, "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }] }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 15 },
+      "id": 21,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_xact_commit{cluster=\"stocky-postgres\",datname=\"stocky\"}[5m])", "legendFormat": "Commits", "refId": "A" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_xact_rollback{cluster=\"stocky-postgres\",datname=\"stocky\"}[5m])", "legendFormat": "Rollbacks", "refId": "B" }
+      ],
+      "title": "Transaction Rate — stocky",
+      "type": "timeseries"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "rps", "custom": { "lineWidth": 1, "fillOpacity": 10 } },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 15 },
+      "id": 22,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_tup_inserted{cluster=\"stocky-postgres\",datname=\"stocky\"}[5m])", "legendFormat": "Inserts", "refId": "A" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_tup_updated{cluster=\"stocky-postgres\",datname=\"stocky\"}[5m])", "legendFormat": "Updates", "refId": "B" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_tup_deleted{cluster=\"stocky-postgres\",datname=\"stocky\"}[5m])", "legendFormat": "Deletes", "refId": "C" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_tup_fetched{cluster=\"stocky-postgres\",datname=\"stocky\"}[5m])", "legendFormat": "Fetches", "refId": "D" }
+      ],
+      "title": "Tuple Operations — stocky",
+      "type": "timeseries"
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 23 }, "id": 30, "title": "Database — stocky_dev (development)", "type": "row" },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "ops", "custom": { "lineWidth": 1, "fillOpacity": 10 } },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "Commits" }, "properties": [{ "id": "color", "value": { "fixedColor": "green", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "Rollbacks" }, "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }] }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 },
+      "id": 31,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_xact_commit{cluster=\"stocky-postgres\",datname=\"stocky_dev\"}[5m])", "legendFormat": "Commits", "refId": "A" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_xact_rollback{cluster=\"stocky-postgres\",datname=\"stocky_dev\"}[5m])", "legendFormat": "Rollbacks", "refId": "B" }
+      ],
+      "title": "Transaction Rate — stocky_dev",
+      "type": "timeseries"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "rps", "custom": { "lineWidth": 1, "fillOpacity": 10 } },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 },
+      "id": 32,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_tup_inserted{cluster=\"stocky-postgres\",datname=\"stocky_dev\"}[5m])", "legendFormat": "Inserts", "refId": "A" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_tup_updated{cluster=\"stocky-postgres\",datname=\"stocky_dev\"}[5m])", "legendFormat": "Updates", "refId": "B" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_tup_deleted{cluster=\"stocky-postgres\",datname=\"stocky_dev\"}[5m])", "legendFormat": "Deletes", "refId": "C" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "rate(cnpg_pg_stat_database_tup_fetched{cluster=\"stocky-postgres\",datname=\"stocky_dev\"}[5m])", "legendFormat": "Fetches", "refId": "D" }
+      ],
+      "title": "Tuple Operations — stocky_dev",
+      "type": "timeseries"
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 32 }, "id": 40, "title": "Cluster Health", "type": "row" },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "short", "custom": { "lineWidth": 1, "fillOpacity": 10 } },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 33 },
+      "id": 41,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "sum(cnpg_backends_total{cluster=\"stocky-postgres\",datname=~\"stocky|stocky_dev\"}) by (datname)", "legendFormat": "{{ datname }}", "refId": "A" }
+      ],
+      "title": "Active Connections by Database",
+      "type": "timeseries"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "short", "custom": { "lineWidth": 1, "fillOpacity": 5 } },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "stocky deadlocks" }, "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "stocky_dev deadlocks" }, "properties": [{ "id": "color", "value": { "fixedColor": "orange", "mode": "fixed" } }] }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 33 },
+      "id": 42,
+      "options": { "legend": { "calcs": ["max", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "cnpg_pg_stat_database_deadlocks{cluster=\"stocky-postgres\",datname=\"stocky\"}", "legendFormat": "stocky deadlocks", "refId": "A" },
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "cnpg_pg_stat_database_deadlocks{cluster=\"stocky-postgres\",datname=\"stocky_dev\"}", "legendFormat": "stocky_dev deadlocks", "refId": "B" }
+      ],
+      "title": "Deadlocks",
+      "type": "timeseries"
+    },
+
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "unit": "bytes", "custom": { "lineWidth": 1, "fillOpacity": 10 } },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 33 },
+      "id": 43,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "datasource": { "type": "prometheus", "uid": "prometheus" }, "expr": "cnpg_pg_stat_database_temp_bytes{cluster=\"stocky-postgres\",datname=~\"stocky|stocky_dev\"}", "legendFormat": "{{ datname }}", "refId": "A" }
+      ],
+      "title": "Temp File Bytes",
+      "type": "timeseries"
+    }
+
+  ],
+  "refresh": "1m",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["stocky", "postgres", "cnpg"],
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Stocky PostgreSQL Cluster",
+  "version": 1
+}
