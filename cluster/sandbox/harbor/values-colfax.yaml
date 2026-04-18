@@ -5,15 +5,43 @@ harbor:
   nginx:
     nodeSelector:
       kubernetes.io/arch: amd64
+    resources:
+      requests:
+        cpu: 25m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 128Mi
   portal:
     nodeSelector:
       kubernetes.io/arch: amd64
+    resources:
+      requests:
+        cpu: 25m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 128Mi
   core:
     nodeSelector:
       kubernetes.io/arch: amd64
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
   jobservice:
     nodeSelector:
       kubernetes.io/arch: amd64
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
   registry:
     nodeSelector:
       kubernetes.io/arch: amd64
@@ -23,10 +51,24 @@ harbor:
   exporter:
     nodeSelector:
       kubernetes.io/arch: amd64
+    resources:
+      requests:
+        cpu: 25m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 128Mi
   redis:
     internal:
       nodeSelector:
         kubernetes.io/arch: amd64
+      resources:
+        requests:
+          cpu: 25m
+          memory: 32Mi
+        limits:
+          cpu: 200m
+          memory: 128Mi
 
   expose:
     type: clusterIP

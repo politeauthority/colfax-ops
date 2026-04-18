@@ -35,13 +35,13 @@ spec:
     spec:
       containers:
         - name: argocd-server
-          # resources:
-          #   requests:
-          #     cpu: 50m
-          #     memory: 128Mi
-          #   limits:
-          #     cpu: 500m
-          #     memory: 512Mi
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -53,13 +53,13 @@ spec:
     spec:
       containers:
         - name: argocd-repo-server
-          # resources:
-          #   requests:
-          #     cpu: 100m
-          #     memory: 512Mi
-          #   limits:
-          #     cpu: 1000m
-          #     memory: 2Gi
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 2Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -108,13 +108,13 @@ spec:
     spec:
       containers:
         - name: argocd-applicationset-controller
-          # resources:
-          #   requests:
-          #     cpu: 10m
-          #     memory: 64Mi
-          #   limits:
-          #     cpu: 200m
-          #     memory: 256Mi
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -126,13 +126,13 @@ spec:
     spec:
       containers:
         - name: argocd-notifications-controller
-          # resources:
-          #   requests:
-          #     cpu: 10m
-          #     memory: 64Mi
-          #   limits:
-          #     cpu: 100m
-          #     memory: 256Mi
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 256Mi
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -153,10 +153,10 @@ spec:
                       - galapago
       containers:
         - name: argocd-application-controller
-          # resources:
-          #   requests:
-          #     cpu: 250m
-          #     memory: 1Gi
-          #   limits:
-          #     cpu: 1000m
-          #     memory: 4Gi
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 2000m
+              memory: 4Gi
