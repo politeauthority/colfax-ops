@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: graylog-forwarder-1
 spec:
+  suspended: true
   project: default
   source:
     repoURL: 'https://github.com/politeauthority/private-ops.git'

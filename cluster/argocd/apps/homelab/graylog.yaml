@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: graylog
 spec:
+  suspended: true
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
