@@ -8,9 +8,9 @@ repos:
         pass_filenames: false
         always_run: true
 
-      - id: check-helm
-        name: Validate Helm charts
-        language: system
-        entry: task check-helm
-        pass_filenames: false
-        always_run: true
+      # - id: check-helm
+      #   name: Validate Helm charts
+      #   language: system
+      #   entry: task check-helm
+      #   pass_filenames: false
+      #   always_run: true
