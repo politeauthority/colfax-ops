@@ -2211,7 +2211,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "longhorn_volume_robustness",
+          "expr": "max by (volume) (longhorn_volume_robustness)",
           "instant": true,
           "legendFormat": "{{volume}}",
           "refId": "A"
@@ -2392,7 +2392,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "longhorn_volume_robustness",
+          "expr": "max by (volume) (longhorn_volume_robustness)",
           "format": "table",
           "instant": true,
           "refId": "A"
@@ -2403,7 +2403,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "longhorn_volume_capacity_bytes",
+          "expr": "max by (volume) (longhorn_volume_capacity_bytes)",
           "format": "table",
           "instant": true,
           "refId": "B"
@@ -2414,7 +2414,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "longhorn_volume_actual_size_bytes",
+          "expr": "max by (volume) (longhorn_volume_actual_size_bytes)",
           "format": "table",
           "instant": true,
           "refId": "C"
