@@ -191,6 +191,7 @@ kube-prometheus-stack:
         - job_name: stocky-api
           metrics_path: /metrics
           scheme: http
+          scrape_timeout: 20s
           static_configs:
             - targets: [stocky-api.stocky.svc.cluster.local:8000]
           relabel_configs:
