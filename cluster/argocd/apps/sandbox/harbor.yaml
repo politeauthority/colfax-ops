@@ -38,13 +38,13 @@ spec:
     - group: apps
       kind: StatefulSet
       name: harbor-redis
-      jqPathExpressions:
-        - .spec.volumeClaimTemplates[]
+      jsonPointers:
+        - /spec/volumeClaimTemplates
     - group: apps
       kind: StatefulSet
       name: harbor-trivy
-      jqPathExpressions:
-        - .spec.volumeClaimTemplates[]
+      jsonPointers:
+        - /spec/volumeClaimTemplates
     - group: apps
       kind: Deployment
       jsonPointers:
@@ -54,4 +54,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true
