@@ -12,6 +12,6 @@ spec:
   destination:
     namespace: linkwarden
     name: in-cluster
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
+  # syncPolicy:
+  #   syncOptions:
+  #     - CreateNamespace=true
