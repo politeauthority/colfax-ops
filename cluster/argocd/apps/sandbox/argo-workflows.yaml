@@ -22,6 +22,10 @@ spec:
       jsonPointers:
         - /metadata/labels
         - /metadata/annotations
+    - group: monitoring.coreos.com
+      kind: ServiceMonitor
+      jsonPointers:
+        - /spec/endpoints/0/tlsConfig
   syncPolicy:
     automated:
       selfHeal: true
