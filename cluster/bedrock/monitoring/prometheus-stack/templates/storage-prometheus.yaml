@@ -5,7 +5,7 @@ metadata:
   namespace: longhorn-system
 spec:
   numberOfReplicas: 1
-  size: "42949672960"  # 40Gi
+  size: "53687091200"  # 50Gi
   frontend: blockdev
 ---
 apiVersion: v1
@@ -14,7 +14,7 @@ metadata:
   name: prometheus-db
 spec:
   capacity:
-    storage: 40Gi
+    storage: 50Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -36,4 +36,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 40Gi
+      storage: 50Gi
