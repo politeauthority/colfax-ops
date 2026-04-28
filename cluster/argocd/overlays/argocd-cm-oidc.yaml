@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+data:
+  url: https://argocd.colfax.int
+  oidc.config: |
+    name: authentik
+    issuer: https://auth.alix.lol/application/o/argocd/
+    clientID: argocd
+    clientSecret: $argocd-authentik-oidc:oidc.authentik.clientSecret
+    requestedScopes:
+      - openid
+      - profile
+      - email

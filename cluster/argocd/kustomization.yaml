@@ -5,10 +5,12 @@ resources:
 - base/
 - apps/
 - overlays/ingress.yaml
+- overlays/secret-authentik-oidc.yaml
 
 patchesStrategicMerge:
 - overlays/resources.yaml
 - overlays/notifications-cm.yaml
+- overlays/argocd-cm-oidc.yaml
 # - base/repository.yaml
 # - base/ingress.yaml
 # - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.6
