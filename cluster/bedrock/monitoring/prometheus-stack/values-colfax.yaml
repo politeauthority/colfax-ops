@@ -115,6 +115,8 @@ kube-prometheus-stack:
     enabled: true
     envFromSecret: authentik-grafana-oauth
     grafana.ini:
+      server:
+        root_url: https://grafana.colfax.int
       feature_toggles:
         onCallAlerting: "false"
       auth.generic_oauth:
