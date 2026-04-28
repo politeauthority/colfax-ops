@@ -439,7 +439,9 @@
           "options": {
             "excludeByName": {
               "__name__": true, "Time": true, "Value": true,
-              "instance": true, "job": true, "country_code": true
+              "instance": true, "job": true, "country_code": true,
+              "container": true, "endpoint": true,
+              "namespace": true, "pod": true, "service": true
             },
             "indexByName": {"user": 0, "country": 1, "city": 2, "client": 3},
             "renameByName": {
