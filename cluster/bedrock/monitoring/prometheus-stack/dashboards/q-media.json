@@ -384,7 +384,9 @@
           "options": {
             "excludeByName": {
               "__name__": true, "Time": true, "Value": true,
-              "instance": true, "job": true
+              "instance": true, "job": true,
+              "container": true, "endpoint": true,
+              "namespace": true, "pod": true, "service": true
             },
             "indexByName": {
               "user": 0, "now_playing": 1, "play_method": 2,
