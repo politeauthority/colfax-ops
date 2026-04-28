@@ -83,3 +83,20 @@ spec:
               will exhaust available space within 24 hours based on the last 6h trend.
             dashboard_uid: "c3d8eb03-130a-482c-821b-7ac5886bbb0c"
             panel_id: "16"
+
+        - alert: MediaDiskSpaceLow
+          expr: |
+            node_filesystem_avail_bytes{
+              job="node-exporter",
+              mountpoint=~"/mnt/media.*",
+              fstype!~"tmpfs|overlay"
+            } < 100 * 1024 * 1024 * 1024
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Media disk space low on {{`{{ $labels.instance }}`}} ({{`{{ $labels.mountpoint }}`}})"
+            description: >
+              {{`{{ $labels.mountpoint }}`}} on {{`{{ $labels.instance }}`}} has
+              {{`{{ humanizeBytes $value }}`}} free.
+              Less than 100 GiB remaining.
