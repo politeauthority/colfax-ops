@@ -22,9 +22,11 @@ spec:
                     operator: In
                     values:
                       - galapago
+      imagePullSecrets:
+        - name: harbor-registry
       containers:
       - name: mosquitto
-        image: eclipse-mosquitto
+        image: harbor.squid-ink.us/docker-hub/eclipse-mosquitto
         resources:
           requests:
             cpu: 10m
