@@ -15,6 +15,8 @@ spec:
     namespace: metallb-system
     name: in-cluster
   syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
