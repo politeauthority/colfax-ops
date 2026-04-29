@@ -118,8 +118,6 @@ harbor:
       port: "5432"
       username: "harbor_admin"
       coreDatabase: "harbor_registry"
-      notaryServerDatabase: "harbor_notary_server"
-      notarySignerDatabase: "harbor_notary_signer"
       # if using existing secret, the key must be "password"
       existingSecret: "harbor-postgres"
       sslmode: "disable"
