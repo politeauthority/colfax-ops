@@ -1,0 +1,7 @@
+metallb:
+  crds:
+    enabled: true
+
+  speaker:
+    frr:
+      enabled: false

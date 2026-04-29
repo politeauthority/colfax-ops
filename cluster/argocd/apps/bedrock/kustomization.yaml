@@ -12,3 +12,4 @@ resources:
 - prometheus-stack.yaml
 - blackbox-exporter.yaml
 - sealed-secrets.yaml
+- metallb.yaml
