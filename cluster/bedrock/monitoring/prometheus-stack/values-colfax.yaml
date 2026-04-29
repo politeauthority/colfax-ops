@@ -145,6 +145,13 @@ kube-prometheus-stack:
         allowUiUpdates: false
     ingress:
       enabled: false
+    resources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+      limits:
+        cpu: 200m
+        memory: 512Mi
     persistence:
       enabled: true
       storageClassName: longhorn
@@ -156,6 +163,13 @@ kube-prometheus-stack:
 
     prometheusSpec:
       retention: 15d
+      resources:
+        requests:
+          cpu: 200m
+          memory: 1500Mi
+        limits:
+          cpu: 500m
+          memory: 2Gi
       retentionSize: 30GB
       storageSpec:
         volumeClaimTemplate:
