@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: harbor-configure-oidc
+  namespace: harbor
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: configure
+          image: curlimages/curl:8.11.1
+          command:
+            - sh
+            - -c
+            - |
+              curl -sf -u "admin:${HARBOR_ADMIN_PASSWORD}" \
+                -X PUT https://harbor.squid-ink.us/api/v2.0/configurations \
+                -H "Content-Type: application/json" \
+                -d "{
+                  \"auth_mode\": \"oidc_auth\",
+                  \"oidc_name\": \"authentik\",
+                  \"oidc_endpoint\": \"https://auth.alix.lol/application/o/harbor/\",
+                  \"oidc_client_id\": \"harbor\",
+                  \"oidc_client_secret\": \"${OIDC_CLIENT_SECRET}\",
+                  \"oidc_scope\": \"openid,email,profile,offline_access\",
+                  \"oidc_verify_cert\": true,
+                  \"oidc_auto_onboard\": true,
+                  \"oidc_user_claim\": \"email\"
+                }"
+              echo "Harbor OIDC configured"
+          env:
+            - name: HARBOR_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: harbor-core
+                  key: HARBOR_ADMIN_PASSWORD
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: harbor-oidc-secret
+                  key: oidc_client_secret
+      nodeSelector:
+        kubernetes.io/arch: amd64
