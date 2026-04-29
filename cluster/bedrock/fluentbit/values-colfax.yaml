@@ -85,6 +85,7 @@ fluent-bit:
           Mode                    tcp
           Gelf_Short_Message_Key  message
           Gelf_Host_Key           kubernetes_pod_name
+          Retry_Limit             1
 
     #   [OUTPUT]
     #       Name                    stdout
