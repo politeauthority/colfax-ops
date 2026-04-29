@@ -6,4 +6,4 @@ metadata:
 data:
   policy.default: role:readonly
   policy.csv: |
-    g, authentik Admins, role:admin
+    g, akadmin, role:admin
