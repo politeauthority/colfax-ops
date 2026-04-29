@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: nginx-gateway-fabric-public
+  namespace: nginx-gateway-fabric-public
+  labels:
+    release: prometheusstack
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nginx-gateway-fabric
+      app.kubernetes.io/instance: nginx-gateway-fabric-public
+  podMetricsEndpoints:
+    - port: metrics
+      path: /metrics
+      interval: 30s

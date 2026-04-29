@@ -10,5 +10,3 @@ nginx-gateway-fabric:
     metrics:
       enable: true
       port: 9113
-  serviceMonitor:
-    enable: true
