@@ -119,10 +119,14 @@ kube-prometheus-stack:
         root_url: https://grafana.colfax.int
       feature_toggles:
         onCallAlerting: "false"
+      auth:
+        login_maximum_inactive_lifetime_duration: 24h
+        login_maximum_lifetime_duration: 7d
       auth.generic_oauth:
         enabled: true
         name: authentik
         allow_sign_up: true
+        auto_login: true
         client_id: grafana
         scopes: openid email profile
         auth_url: https://auth.alix.lol/application/o/authorize/
