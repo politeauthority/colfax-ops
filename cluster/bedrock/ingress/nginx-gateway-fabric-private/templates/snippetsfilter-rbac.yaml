@@ -1,0 +1,34 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nginx-gateway-fabric-private-snippets
+rules:
+  - apiGroups:
+      - gateway.nginx.org
+    resources:
+      - snippetsfilters
+      - snippetspolicies
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - gateway.nginx.org
+    resources:
+      - snippetsfilters/status
+      - snippetspolicies/status
+    verbs:
+      - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: nginx-gateway-fabric-private-snippets
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: nginx-gateway-fabric-private-snippets
+subjects:
+  - kind: ServiceAccount
+    name: nginx-gateway-fabric-private
+    namespace: nginx-gateway-fabric-private
