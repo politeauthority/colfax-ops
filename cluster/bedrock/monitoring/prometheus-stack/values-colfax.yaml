@@ -114,11 +114,19 @@ kube-prometheus-stack:
   grafana:
     enabled: true
     envFromSecret: authentik-grafana-oauth
+    extraEnvFrom:
+      - secretRef:
+          name: grafana-postgres-secret
     grafana.ini:
       server:
         root_url: https://grafana.colfax.int
       database:
-        wal: true
+        type: postgres
+        host: q-postgres-rw.q-postgres.svc.cluster.local:5432
+        name: grafana
+        user: grafana
+        password: ${GF_DATABASE_PASSWORD}
+        ssl_mode: require
       feature_toggles:
         onCallAlerting: "false"
       auth:
