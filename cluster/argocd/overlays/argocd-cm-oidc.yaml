@@ -14,6 +14,7 @@ data:
       - openid
       - profile
       - email
+      - offline_access
   resource.customizations.health.networking.k8s.io_Ingress: |
     hs = {}
     if obj.status ~= nil and obj.status.loadBalancer ~= nil and obj.status.loadBalancer.ingress ~= nil then
