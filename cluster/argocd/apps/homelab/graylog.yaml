@@ -3,7 +3,6 @@ kind: Application
 metadata:
   name: graylog
 spec:
-  suspended: true
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
@@ -40,6 +39,9 @@ spec:
         - /spec/template/metadata/annotations/checksum~1config
         - /spec/template/metadata/annotations/checksum~1secret
   syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - RespectIgnoreDifferences=true
+      - ServerSideApply=true
