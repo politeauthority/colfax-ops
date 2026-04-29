@@ -7,3 +7,8 @@ nginx-gateway-fabric:
       externalTrafficPolicy: Local
   nginxGateway:
     gatewayClassName: nginx-public
+    metrics:
+      enable: true
+      port: 9113
+  serviceMonitor:
+    enable: true

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-nginx-gateway-fabric
+data:
+  nginx-gateway-fabric.json: |-
+{{ .Files.Get "dashboards/nginx-gateway-fabric.json" | indent 4}}
