@@ -5,5 +5,5 @@ metadata:
     grafana_dashboard: "1"
   name: grafana-infrastructure-overview
 data:
-  grafana-home-assistant.json: |-
+  grafana-infrastructure-overview.json: |-
 {{ .Files.Get "dashboards/infrastructure-overview.json" | indent 4}}
