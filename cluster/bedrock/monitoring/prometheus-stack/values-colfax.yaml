@@ -117,6 +117,8 @@ kube-prometheus-stack:
     grafana.ini:
       server:
         root_url: https://grafana.colfax.int
+      database:
+        wal: true
       feature_toggles:
         onCallAlerting: "false"
       auth:
