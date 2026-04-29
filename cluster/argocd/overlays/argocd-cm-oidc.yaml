@@ -14,3 +14,19 @@ data:
       - openid
       - profile
       - email
+  resource.customizations.health.networking.k8s.io_Ingress: |
+    hs = {}
+    if obj.status ~= nil and obj.status.loadBalancer ~= nil and obj.status.loadBalancer.ingress ~= nil then
+      hs.status = "Healthy"
+      hs.message = "Ingress has address"
+      return hs
+    end
+    if (obj.spec.ingressClassName == nil or obj.spec.ingressClassName == "") and
+       (obj.metadata.annotations == nil or obj.metadata.annotations["kubernetes.io/ingress.class"] == nil) then
+      hs.status = "Healthy"
+      hs.message = "No IngressClass - unmanaged, treated as Healthy"
+      return hs
+    end
+    hs.status = "Progressing"
+    hs.message = "Waiting for Ingress controller to assign address"
+    return hs
