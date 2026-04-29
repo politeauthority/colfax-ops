@@ -3,9 +3,9 @@ name: nginx-gateway-fabric-private
 description: NGINX Gateway Fabric - private internal gateway
 type: application
 version: 0.0.1
-appVersion: 2.4.2
+appVersion: 2.5.1
 
 dependencies:
 - name: nginx-gateway-fabric
   repository: oci://ghcr.io/nginx/charts
-  version: 2.4.2
+  version: 2.5.1
