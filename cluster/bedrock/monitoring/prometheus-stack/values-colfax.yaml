@@ -113,10 +113,9 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
-    envFromSecret: authentik-grafana-oauth
-    extraEnvFrom:
-      - secretRef:
-          name: grafana-postgres-secret
+    envFromSecrets:
+      - name: authentik-grafana-oauth
+      - name: grafana-postgres-secret
     grafana.ini:
       server:
         root_url: https://grafana.colfax.int
