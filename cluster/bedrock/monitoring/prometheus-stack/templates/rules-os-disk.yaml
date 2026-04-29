@@ -98,5 +98,5 @@ spec:
             summary: "Media disk space low on {{`{{ $labels.instance }}`}} ({{`{{ $labels.mountpoint }}`}})"
             description: >
               {{`{{ $labels.mountpoint }}`}} on {{`{{ $labels.instance }}`}} has
-              {{`{{ humanizeBytes $value }}`}} free.
+              {{`{{ humanize1024 $value }}`}}B free.
               Less than 100 GiB remaining.
