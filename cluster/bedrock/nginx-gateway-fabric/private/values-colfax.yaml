@@ -7,3 +7,4 @@ nginx-gateway-fabric:
       externalTrafficPolicy: Local
   nginxGateway:
     gatewayClassName: nginx-private
+    gatewayControllerName: gateway.nginx.org/nginx-gateway-controller-private
