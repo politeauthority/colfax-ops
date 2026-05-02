@@ -90,6 +90,20 @@ kube-prometheus-stack:
                   Container {{`{{ $labels.container }}`}} in pod {{`{{ $labels.namespace }}`}}/{{`{{ $labels.pod }}`}}
                   has restarted {{`{{ $value | humanize }}`}} times in the last hour. This may indicate
                   a crash loop that clears before the CrashLoopBackOff alert fires.
+            - alert: KubeContainerOOMKilled
+              expr: |
+                kube_pod_container_status_last_terminated_reason{reason="OOMKilled", job="kube-state-metrics"} == 1
+                and
+                increase(kube_pod_container_status_restarts_total{job="kube-state-metrics"}[15m]) > 0
+              for: 0m
+              labels:
+                severity: warning
+              annotations:
+                summary: 'Container OOMKilled in {{ $labels.namespace }}/{{ $labels.pod }}'
+                description: >
+                  Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }}
+                  was OOM killed and has restarted. The container hit its memory limit.
+                  Consider increasing the memory limit or investigating a memory leak.
 
   nodeExporter:
     serviceMonitor:

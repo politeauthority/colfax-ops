@@ -12,9 +12,23 @@ nginx-gateway-fabric:
         trustedAddresses:
           - type: CIDR
             value: 192.168.50.0/24
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "256Mi"
   nginxGateway:
     gatewayClassName: nginx-public
     gatewayControllerName: gateway.nginx.org/nginx-gateway-controller-public
     metrics:
       enable: true
       port: 9113
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "64Mi"
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
