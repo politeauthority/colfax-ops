@@ -8,12 +8,12 @@ resources:
 - q-redis.yaml
 - synapse.yaml
 - synapse-gateway.yaml
-- devpi.yaml
-- linkwarden.yaml
-- immich.yaml
+# - devpi.yaml
+# - linkwarden.yaml
+# - immich.yaml
 - q-postgres.yaml
-- arc.yaml
-- arc-secret.yaml
-- ip-sentry.yaml
+# - arc.yaml
+# - arc-secret.yaml
+# - ip-sentry.yaml
 - graylog.yaml
 - authentik.yaml
