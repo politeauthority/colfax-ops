@@ -9,7 +9,7 @@ resources:
 - synapse.yaml
 - synapse-gateway.yaml
 # - devpi.yaml
-# - linkwarden.yaml
+- linkwarden.yaml
 # - immich.yaml
 - q-postgres.yaml
 # - arc.yaml
