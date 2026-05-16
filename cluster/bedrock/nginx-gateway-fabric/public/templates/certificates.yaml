@@ -15,6 +15,7 @@ spec:
     - "api-dev.alix.lol"
     - "jellyfin.alix.lol"
     - "photos.alix.lol"
+    - "bookmarx.alix.lol"
     - "linkwarden.alix.lol"
     - "graylog.alix.lol"
     - "auth.alix.lol"
