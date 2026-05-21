@@ -16,7 +16,7 @@ spec:
     staticConfig:
       static:
         - https://jellyfin.alix.lol/health
-        - https://photos.alix.lol/api/server/ping
+        # - https://photos.alix.lol/api/server/ping  # immich suspended
         - https://harbor.squid-ink.us/api/v2.0/ping
         - https://ha.squid-ink.us
         - https://linkwarden.alix.lol
@@ -39,7 +39,7 @@ spec:
     staticConfig:
       static:
         - http://jellyfin.q-media.svc.cluster.local/health
-        - http://ersatztv.q-media.svc.cluster.local/health
+        # - http://ersatztv.q-media.svc.cluster.local/health  # ersatztv suspended
         - http://radarr.q-media.svc.cluster.local/ping
         - http://sonarr.q-media.svc.cluster.local/ping
         - http://sabnzbd-web.q-media.svc.cluster.local
