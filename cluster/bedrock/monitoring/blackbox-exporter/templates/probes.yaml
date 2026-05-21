@@ -14,7 +14,7 @@ spec:
   interval: 5m
   targets:
     staticConfig:
-      targets:
+      static:
         - https://jellyfin.alix.lol/health
         - https://photos.alix.lol/api/server/ping
         - https://harbor.squid-ink.us/api/v2.0/ping
@@ -37,7 +37,7 @@ spec:
   interval: 5m
   targets:
     staticConfig:
-      targets:
+      static:
         - http://jellyfin.q-media.svc.cluster.local/health
         - http://ersatztv.q-media.svc.cluster.local/health
         - http://radarr.q-media.svc.cluster.local/ping
