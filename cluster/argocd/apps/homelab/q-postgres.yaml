@@ -28,6 +28,8 @@ spec:
         - /spec/probes
         - /spec/replicationSlots
         - /spec/smartShutdownTimeout
+        - /spec/plugins/0/enabled
+        - /spec/postgresql/syncReplicaElectionConstraint
   syncPolicy:
     automated:
       selfHeal: true
