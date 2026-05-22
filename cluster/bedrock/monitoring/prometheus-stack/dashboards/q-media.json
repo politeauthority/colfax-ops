@@ -457,6 +457,105 @@
       "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
+          "color": {"mode": "thresholds"},
+          "custom": {"align": "auto", "cellOptions": {"type": "auto"}, "inspect": false},
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "yellow", "value": null}]}
+        },
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "Video"},
+            "properties": [{"id": "custom.width", "value": 100}]
+          },
+          {
+            "matcher": {"id": "byName", "options": "Audio"},
+            "properties": [{"id": "custom.width", "value": 100}]
+          },
+          {
+            "matcher": {"id": "byName", "options": "Container"},
+            "properties": [{"id": "custom.width", "value": 80}]
+          },
+          {
+            "matcher": {"id": "byName", "options": "Resolution"},
+            "properties": [{"id": "custom.width", "value": 100}]
+          }
+        ]
+      },
+      "gridPos": {"h": 6, "w": 24, "x": 0, "y": 13},
+      "id": 32,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {"countRows": false, "fields": "", "reducer": ["sum"], "show": false},
+        "showHeader": true
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [{
+        "datasource": {"type": "prometheus", "uid": "prometheus"},
+        "editorMode": "code",
+        "exemplar": false,
+        "expr": "jellyfin_transcoding_detail_info",
+        "format": "table",
+        "instant": true,
+        "legendFormat": "__auto",
+        "range": false,
+        "refId": "A"
+      }],
+      "title": "Transcoding Detail",
+      "transformations": [
+        {"id": "labelsToFields", "options": {"mode": "columns"}},
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [{"config": {"id": "greater", "options": {"value": 0}}, "fieldName": "Value"}],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "__name__": true, "Time": true, "Value": true,
+              "instance": true, "job": true,
+              "container": true, "endpoint": true,
+              "namespace": true, "pod": true, "service": true
+            },
+            "indexByName": {
+              "user": 0, "client": 1, "video_codec": 2,
+              "audio_codec": 3, "container": 4, "width": 5, "height": 6
+            },
+            "renameByName": {
+              "user": "User", "client": "Client",
+              "video_codec": "Video", "audio_codec": "Audio",
+              "container": "Container", "width": "Width", "height": "Height"
+            }
+          }
+        },
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Resolution",
+            "binary": {
+              "left": "Width",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "Height"
+            },
+            "mode": "reduceRow",
+            "reduce": {"reducer": "sum"}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "fieldConfig": {
+        "defaults": {
           "color": {"mode": "palette-classic"},
           "custom": {
             "axisCenteredZero": false,
@@ -484,7 +583,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 9, "w": 8, "x": 0, "y": 13},
+      "gridPos": {"h": 9, "w": 8, "x": 0, "y": 19},
       "id": 12,
       "options": {
         "legend": {"calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true},
@@ -543,7 +642,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 9, "w": 8, "x": 8, "y": 13},
+      "gridPos": {"h": 9, "w": 8, "x": 8, "y": 19},
       "id": 13,
       "options": {
         "displayMode": "gradient",
@@ -581,7 +680,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 9, "w": 8, "x": 16, "y": 13},
+      "gridPos": {"h": 9, "w": 8, "x": 16, "y": 19},
       "id": 14,
       "options": {
         "displayMode": "lcd",
@@ -607,7 +706,7 @@
     },
     {
       "collapsed": false,
-      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 22},
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 28},
       "id": 15,
       "panels": [],
       "title": "Media Storage",
@@ -633,7 +732,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 5, "w": 6, "x": 0, "y": 23},
+      "gridPos": {"h": 5, "w": 6, "x": 0, "y": 29},
       "id": 16,
       "options": {
         "orientation": "auto",
@@ -672,7 +771,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 5, "w": 7, "x": 6, "y": 23},
+      "gridPos": {"h": 5, "w": 7, "x": 6, "y": 29},
       "id": 17,
       "options": {
         "colorMode": "value",
@@ -730,7 +829,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 28},
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 34},
       "id": 18,
       "options": {
         "legend": {"calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true},
@@ -769,7 +868,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 35},
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 41},
       "id": 19,
       "options": {
         "orientation": "auto",
@@ -807,7 +906,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 35},
+      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 41},
       "id": 20,
       "options": {
         "colorMode": "value",
@@ -850,7 +949,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 35},
+      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 41},
       "id": 21,
       "options": {
         "orientation": "auto",
@@ -888,7 +987,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 35},
+      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 41},
       "id": 22,
       "options": {
         "colorMode": "value",
@@ -931,7 +1030,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 41},
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 47},
       "id": 23,
       "options": {
         "orientation": "auto",
@@ -969,7 +1068,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 41},
+      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 47},
       "id": 24,
       "options": {
         "colorMode": "value",
@@ -1012,7 +1111,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 41},
+      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 47},
       "id": 25,
       "options": {
         "orientation": "auto",
@@ -1050,7 +1149,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 41},
+      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 47},
       "id": 26,
       "options": {
         "colorMode": "value",
@@ -1093,7 +1192,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 12, "x": 0, "y": 47},
+      "gridPos": {"h": 6, "w": 12, "x": 0, "y": 53},
       "id": 27,
       "options": {
         "orientation": "auto",
@@ -1131,7 +1230,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 12, "x": 12, "y": 47},
+      "gridPos": {"h": 6, "w": 12, "x": 12, "y": 53},
       "id": 28,
       "options": {
         "colorMode": "value",
@@ -1155,7 +1254,7 @@
     },
     {
       "collapsed": false,
-      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 53},
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 59},
       "id": 29,
       "panels": [],
       "title": "Kubernetes",
@@ -1211,7 +1310,7 @@
           }
         ]
       },
-      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 54},
+      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 60},
       "id": 30,
       "interval": "1m",
       "options": {
@@ -1303,7 +1402,7 @@
           }
         ]
       },
-      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 63},
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 69},
       "id": 31,
       "interval": "1m",
       "options": {
@@ -1355,6 +1454,6 @@
   "timezone": "",
   "title": "Q-Media",
   "uid": "fec85230-3c85-42b5-bd00-b6b037ccd6c3",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
