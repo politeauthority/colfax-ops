@@ -105,6 +105,44 @@ kube-prometheus-stack:
                   was OOM killed and has restarted. The container hit its memory limit.
                   Consider increasing the memory limit or investigating a memory leak.
 
+  kubelet:
+    serviceMonitor:
+      metricRelabelings: &nodeIpRelabelings
+        - sourceLabels: [node]
+          regex: "192\\.168\\.50\\.77(:\\d+)?"
+          targetLabel: node
+          replacement: colfax-1
+        - sourceLabels: [node]
+          regex: "192\\.168\\.50\\.79(:\\d+)?"
+          targetLabel: node
+          replacement: hoyt-1
+        - sourceLabels: [node]
+          regex: "192\\.168\\.50\\.71(:\\d+)?"
+          targetLabel: node
+          replacement: galapago
+        - sourceLabels: [node]
+          regex: "192\\.168\\.50\\.60(:\\d+)?"
+          targetLabel: node
+          replacement: control-plane
+        - sourceLabels: [instance]
+          regex: "192\\.168\\.50\\.77:.*"
+          targetLabel: instance
+          replacement: colfax-1
+        - sourceLabels: [instance]
+          regex: "192\\.168\\.50\\.79:.*"
+          targetLabel: instance
+          replacement: hoyt-1
+        - sourceLabels: [instance]
+          regex: "192\\.168\\.50\\.71:.*"
+          targetLabel: instance
+          replacement: galapago
+        - sourceLabels: [instance]
+          regex: "192\\.168\\.50\\.60:.*"
+          targetLabel: instance
+          replacement: control-plane
+      cAdvisorMetricRelabelings: *nodeIpRelabelings
+      probesMetricRelabelings: *nodeIpRelabelings
+
   nodeExporter:
     serviceMonitor:
       metricRelabelings:
