@@ -1275,7 +1275,8 @@
                   }
                 ]
               },
-              "unit": "short"
+              "unit": "short",
+              "max": 12
             },
             "overrides": []
           },
@@ -1799,7 +1800,8 @@
                   }
                 ]
               },
-              "unit": "short"
+              "unit": "short",
+              "max": 16
             },
             "overrides": []
           },
@@ -2323,7 +2325,8 @@
                   }
                 ]
               },
-              "unit": "short"
+              "unit": "short",
+              "max": 4
             },
             "overrides": []
           },
