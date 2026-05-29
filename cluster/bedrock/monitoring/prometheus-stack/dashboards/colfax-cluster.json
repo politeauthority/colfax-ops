@@ -1281,7 +1281,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 12,
             "x": 0,
             "y": 32
@@ -1407,7 +1407,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 6,
             "x": 12,
             "y": 32
@@ -1511,7 +1511,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 6,
             "x": 18,
             "y": 32
@@ -1541,7 +1541,7 @@
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "100 * (1 - node_memory_MemAvailable_bytes{job=\"prox-node-hoyt\"} / node_memory_MemTotal_bytes{job=\"prox-node-hoyt\"})",
+              "expr": "100 * (1 - max by (instance) (node_memory_MemAvailable_bytes{job=\"prox-node-hoyt\"}) / max by (instance) (node_memory_MemTotal_bytes{job=\"prox-node-hoyt\"}))",
               "legendFormat": "hoyt",
               "range": true,
               "refId": "A"
@@ -1609,10 +1609,10 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 12,
             "x": 0,
-            "y": 40
+            "y": 42
           },
           "id": 203,
           "options": {
@@ -1707,10 +1707,10 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 12,
             "x": 12,
-            "y": 40
+            "y": 42
           },
           "id": 204,
           "options": {
@@ -1806,7 +1806,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 12,
             "x": 0,
             "y": 48
@@ -1932,7 +1932,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 6,
             "x": 12,
             "y": 48
@@ -2036,7 +2036,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 6,
             "x": 18,
             "y": 48
@@ -2066,7 +2066,7 @@
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "100 * (1 - node_memory_MemAvailable_bytes{job=\"prox-node-colfax\"} / node_memory_MemTotal_bytes{job=\"prox-node-colfax\"})",
+              "expr": "100 * (1 - max by (instance) (node_memory_MemAvailable_bytes{job=\"prox-node-colfax\"}) / max by (instance) (node_memory_MemTotal_bytes{job=\"prox-node-colfax\"}))",
               "legendFormat": "colfax",
               "range": true,
               "refId": "A"
@@ -2134,10 +2134,10 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 12,
             "x": 0,
-            "y": 56
+            "y": 58
           },
           "id": 208,
           "options": {
@@ -2232,10 +2232,10 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 12,
             "x": 12,
-            "y": 56
+            "y": 58
           },
           "id": 209,
           "options": {
@@ -2331,7 +2331,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 12,
             "x": 0,
             "y": 64
@@ -2457,7 +2457,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 6,
             "x": 12,
             "y": 64
@@ -2561,7 +2561,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 10,
             "w": 6,
             "x": 18,
             "y": 64
@@ -2591,7 +2591,7 @@
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "100 * (1 - node_memory_MemAvailable_bytes{job=\"node-exporter\",instance=\"192.168.50.71:9100\"} / node_memory_MemTotal_bytes{job=\"node-exporter\",instance=\"192.168.50.71:9100\"})",
+              "expr": "100 * (1 - max by (instance) (node_memory_MemAvailable_bytes{job=\"node-exporter\",instance=\"192.168.50.71:9100\"}) / max by (instance) (node_memory_MemTotal_bytes{job=\"node-exporter\",instance=\"192.168.50.71:9100\"}))",
               "legendFormat": "galapago",
               "range": true,
               "refId": "A"
@@ -2659,10 +2659,10 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 12,
             "x": 0,
-            "y": 72
+            "y": 74
           },
           "id": 213,
           "options": {
@@ -2757,10 +2757,10 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 12,
             "x": 12,
-            "y": 72
+            "y": 74
           },
           "id": 214,
           "options": {
