@@ -13,3 +13,6 @@ resources:
 - blackbox-exporter.yaml
 - sealed-secrets.yaml
 - metallb.yaml
+- traefik-crds.yaml
+- traefik.yaml
+- traefik-config.yaml
