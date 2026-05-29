@@ -15,12 +15,13 @@ spec:
   targets:
     staticConfig:
       static:
-        - https://jellyfin.alix.lol/health
+        # - https://jellyfin.alix.lol/health
         # - https://photos.alix.lol/api/server/ping  # immich suspended
         - https://harbor.squid-ink.us/api/v2.0/ping
         - https://ha.squid-ink.us
         - https://linkwarden.alix.lol
         - https://api.alix.lol/healthz
+        - https://graylog.alix.lol
 ---
 # Private internal endpoints - plain HTTP via cluster DNS
 apiVersion: monitoring.coreos.com/v1
