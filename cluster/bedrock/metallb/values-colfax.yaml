@@ -5,3 +5,12 @@ metallb:
   speaker:
     frr:
       enabled: false
+    tolerations:
+      - key: arm
+        operator: Equal
+        value: "true"
+        effect: NoSchedule
+      - key: pi
+        operator: Equal
+        value: "true"
+        effect: NoSchedule
