@@ -9,7 +9,7 @@ spec:
   routes:
     - match: "Host(`harbor.squid-ink.us`) && (PathPrefix(`/api/`) || PathPrefix(`/service/`) || PathPrefix(`/v2/`) || PathPrefix(`/chartrepo/`) || PathPrefix(`/c/`))"
       kind: Rule
-      priority: 10
+      priority: 100
       services:
         - name: harbor-core
           port: 80
