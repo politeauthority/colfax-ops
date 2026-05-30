@@ -16,3 +16,4 @@ resources:
 - traefik-crds.yaml
 - traefik.yaml
 - traefik-config.yaml
+- crowdsec.yaml
