@@ -21,6 +21,7 @@ spec:
     - "graylog.alix.lol"
     - "auth.alix.lol"
     - "maps.alix.lol"
+    - "tiles.alix.lol"
     - "squid-ink.us"
     - "ha.squid-ink.us"
     - "harbor.squid-ink.us"

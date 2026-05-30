@@ -1,0 +1,21 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: harbor
+  namespace: harbor
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`harbor.squid-ink.us`) && (PathPrefix(`/api/`) || PathPrefix(`/service/`) || PathPrefix(`/v2/`) || PathPrefix(`/chartrepo/`) || PathPrefix(`/c/`))"
+      kind: Rule
+      priority: 10
+      services:
+        - name: harbor-core
+          port: 80
+    - match: Host(`harbor.squid-ink.us`)
+      kind: Rule
+      services:
+        - name: harbor-portal
+          port: 80
+  tls: {}
