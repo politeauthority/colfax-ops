@@ -14,7 +14,7 @@ spec:
       - http01:
           gatewayHTTPRoute:
             parentRefs:
-              - name: nginx-public
-                namespace: nginx-gateway-fabric-public
+              - name: traefik-gateway
+                namespace: traefik
                 kind: Gateway
                 group: gateway.networking.k8s.io
