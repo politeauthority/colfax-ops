@@ -33,7 +33,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 5, "x": 0, "y": 0},
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 0},
       "id": 1,
       "options": {
         "colorMode": "background",
@@ -41,7 +41,7 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "text": {"titleSize": 18, "valueSize": 80},
+        "text": {"titleSize": 20, "valueSize": 72},
         "textMode": "auto"
       },
       "pluginVersion": "9.5.3",
@@ -50,7 +50,6 @@
         "editorMode": "code",
         "expr": "jellyfin_active_sessions_total",
         "instant": true,
-        "legendFormat": "__auto",
         "range": false,
         "refId": "A"
       }],
@@ -73,7 +72,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 4, "x": 5, "y": 0},
+      "gridPos": {"h": 6, "w": 4, "x": 6, "y": 0},
       "id": 2,
       "options": {
         "colorMode": "background",
@@ -81,7 +80,7 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "text": {"titleSize": 16, "valueSize": 56},
+        "text": {"titleSize": 18, "valueSize": 56},
         "textMode": "auto"
       },
       "pluginVersion": "9.5.3",
@@ -90,7 +89,6 @@
         "editorMode": "code",
         "expr": "jellyfin_transcoding_sessions_total",
         "instant": true,
-        "legendFormat": "__auto",
         "range": false,
         "refId": "A"
       }],
@@ -110,7 +108,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 4, "x": 9, "y": 0},
+      "gridPos": {"h": 6, "w": 4, "x": 10, "y": 0},
       "id": 3,
       "options": {
         "colorMode": "background",
@@ -118,7 +116,7 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "text": {"titleSize": 16, "valueSize": 56},
+        "text": {"titleSize": 18, "valueSize": 56},
         "textMode": "auto"
       },
       "pluginVersion": "9.5.3",
@@ -127,7 +125,6 @@
         "editorMode": "code",
         "expr": "jellyfin_direct_play_sessions_total",
         "instant": true,
-        "legendFormat": "__auto",
         "range": false,
         "refId": "A"
       }],
@@ -154,24 +151,23 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 4, "x": 13, "y": 0},
+      "gridPos": {"h": 6, "w": 5, "x": 14, "y": 0},
       "id": 4,
       "options": {
         "colorMode": "background",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "text": {"titleSize": 16, "valueSize": 56},
+        "text": {"titleSize": 18, "valueSize": 56},
         "textMode": "auto"
       },
       "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
-        "expr": "100 - (avg(irate(node_cpu_seconds_total{mode=\"idle\",instance=\"hoyt-1\"}[5m])) * 100)",
+        "expr": "100 - (avg(irate(node_cpu_seconds_total{mode=\"idle\",instance=\"192.168.50.79:9100\"}[5m])) * 100)",
         "instant": true,
-        "legendFormat": "__auto",
         "range": false,
         "refId": "A"
       }],
@@ -198,24 +194,23 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 4, "x": 17, "y": 0},
+      "gridPos": {"h": 6, "w": 5, "x": 19, "y": 0},
       "id": 5,
       "options": {
         "colorMode": "background",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "text": {"titleSize": 16, "valueSize": 56},
+        "text": {"titleSize": 18, "valueSize": 56},
         "textMode": "auto"
       },
       "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
-        "expr": "(1 - node_memory_MemAvailable_bytes{instance=\"hoyt-1\"} / node_memory_MemTotal_bytes{instance=\"hoyt-1\"}) * 100",
+        "expr": "(1 - node_memory_MemAvailable_bytes{instance=\"192.168.50.79:9100\"} / node_memory_MemTotal_bytes{instance=\"192.168.50.79:9100\"}) * 100",
         "instant": true,
-        "legendFormat": "__auto",
         "range": false,
         "refId": "A"
       }],
@@ -227,59 +222,10 @@
       "fieldConfig": {
         "defaults": {
           "color": {"mode": "thresholds"},
-          "mappings": [
-            {
-              "type": "value",
-              "options": {
-                "0": {"color": "red", "text": "DOWN", "index": 0},
-                "1": {"color": "green", "text": "UP", "index": 1}
-              }
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {"color": "red", "value": null},
-              {"color": "green", "value": 1}
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {"h": 6, "w": 3, "x": 21, "y": 0},
-      "id": 6,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "text": {"titleSize": 16, "valueSize": 40},
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.3",
-      "targets": [{
-        "datasource": {"type": "prometheus", "uid": "prometheus"},
-        "editorMode": "code",
-        "expr": "jellyfin_up",
-        "instant": true,
-        "legendFormat": "__auto",
-        "range": false,
-        "refId": "A"
-      }],
-      "title": "Jellyfin",
-      "type": "stat"
-    },
-    {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "color": {"mode": "thresholds"},
           "custom": {
-            "align": "auto",
+            "align": "left",
             "cellOptions": {"type": "auto"},
-            "inspect": false,
-            "minWidth": 50
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]}
@@ -287,7 +233,7 @@
         "overrides": [
           {
             "matcher": {"id": "byName", "options": "Now Playing"},
-            "properties": [{"id": "custom.width", "value": 320}]
+            "properties": [{"id": "custom.width", "value": 400}]
           },
           {
             "matcher": {"id": "byName", "options": "Method"},
@@ -311,11 +257,11 @@
           },
           {
             "matcher": {"id": "byName", "options": "User"},
-            "properties": [{"id": "custom.width", "value": 140}]
+            "properties": [{"id": "custom.width", "value": 160}]
           },
           {
             "matcher": {"id": "byName", "options": "Client"},
-            "properties": [{"id": "custom.width", "value": 120}]
+            "properties": [{"id": "custom.width", "value": 150}]
           },
           {
             "matcher": {"id": "byName", "options": "Type"},
@@ -323,8 +269,8 @@
           }
         ]
       },
-      "gridPos": {"h": 18, "w": 15, "x": 0, "y": 6},
-      "id": 7,
+      "gridPos": {"h": 20, "w": 16, "x": 0, "y": 6},
+      "id": 6,
       "options": {
         "cellHeight": "lg",
         "footer": {"countRows": false, "fields": "", "reducer": ["sum"], "show": false},
@@ -338,7 +284,6 @@
         "expr": "jellyfin_session_info",
         "format": "table",
         "instant": true,
-        "legendFormat": "__auto",
         "range": false,
         "refId": "A"
       }],
@@ -371,26 +316,7 @@
       "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
-          "color": {"mode": "palette-classic"},
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 25,
-            "gradientMode": "opacity",
-            "hideFrom": {"legend": false, "tooltip": false, "viz": false},
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {"type": "linear"},
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {"group": "A", "mode": "none"},
-            "thresholdsStyle": {"mode": "line"}
-          },
+          "color": {"mode": "thresholds"},
           "mappings": [],
           "max": 100,
           "min": 0,
@@ -406,47 +332,32 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 9, "w": 9, "x": 15, "y": 6},
-      "id": 8,
+      "gridPos": {"h": 10, "w": 8, "x": 16, "y": 6},
+      "id": 7,
       "options": {
-        "legend": {"calcs": ["lastNotNull", "max"], "displayMode": "list", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "none"}
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {"titleSize": 16, "valueSize": 36}
       },
+      "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
-        "expr": "100 - (avg(irate(node_cpu_seconds_total{mode=\"idle\",instance=\"hoyt-1\"}[5m])) * 100)",
-        "legendFormat": "CPU %",
-        "range": true,
+        "expr": "100 - (avg(irate(node_cpu_seconds_total{mode=\"idle\",instance=\"192.168.50.79:9100\"}[5m])) * 100)",
+        "instant": true,
+        "range": false,
         "refId": "A"
       }],
-      "title": "hoyt-1 CPU Usage",
-      "type": "timeseries"
+      "title": "hoyt-1 CPU",
+      "type": "gauge"
     },
     {
       "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
-          "color": {"mode": "palette-classic"},
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 25,
-            "gradientMode": "opacity",
-            "hideFrom": {"legend": false, "tooltip": false, "viz": false},
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {"type": "linear"},
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {"group": "A", "mode": "none"},
-            "thresholdsStyle": {"mode": "line"}
-          },
+          "color": {"mode": "thresholds"},
           "mappings": [],
           "max": 100,
           "min": 0,
@@ -462,22 +373,26 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 9, "w": 9, "x": 15, "y": 15},
-      "id": 9,
+      "gridPos": {"h": 10, "w": 8, "x": 16, "y": 16},
+      "id": 8,
       "options": {
-        "legend": {"calcs": ["lastNotNull", "max"], "displayMode": "list", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "none"}
+        "orientation": "auto",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {"titleSize": 16, "valueSize": 36}
       },
+      "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
-        "expr": "(1 - node_memory_MemAvailable_bytes{instance=\"hoyt-1\"} / node_memory_MemTotal_bytes{instance=\"hoyt-1\"}) * 100",
-        "legendFormat": "Memory %",
-        "range": true,
+        "expr": "(1 - node_memory_MemAvailable_bytes{instance=\"192.168.50.79:9100\"} / node_memory_MemTotal_bytes{instance=\"192.168.50.79:9100\"}) * 100",
+        "instant": true,
+        "range": false,
         "refId": "A"
       }],
-      "title": "hoyt-1 Memory Usage",
-      "type": "timeseries"
+      "title": "hoyt-1 Memory",
+      "type": "gauge"
     },
     {
       "datasource": {"type": "prometheus", "uid": "prometheus"},
@@ -491,8 +406,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 15,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {"legend": false, "tooltip": false, "viz": false},
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -517,17 +432,17 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 8, "w": 14, "x": 0, "y": 24},
-      "id": 10,
+      "gridPos": {"h": 6, "w": 24, "x": 0, "y": 26},
+      "id": 9,
       "options": {
-        "legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true},
+        "legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "right", "showLegend": true},
         "tooltip": {"mode": "multi", "sort": "none"}
       },
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "prometheus"},
           "editorMode": "code",
-          "expr": "node_load1{instance=\"hoyt-1\"}",
+          "expr": "node_load1{instance=\"192.168.50.79:9100\"}",
           "legendFormat": "1m",
           "range": true,
           "refId": "A"
@@ -535,7 +450,7 @@
         {
           "datasource": {"type": "prometheus", "uid": "prometheus"},
           "editorMode": "code",
-          "expr": "node_load5{instance=\"hoyt-1\"}",
+          "expr": "node_load5{instance=\"192.168.50.79:9100\"}",
           "legendFormat": "5m",
           "range": true,
           "refId": "B"
@@ -543,7 +458,7 @@
         {
           "datasource": {"type": "prometheus", "uid": "prometheus"},
           "editorMode": "code",
-          "expr": "node_load15{instance=\"hoyt-1\"}",
+          "expr": "node_load15{instance=\"192.168.50.79:9100\"}",
           "legendFormat": "15m",
           "range": true,
           "refId": "C"
@@ -551,45 +466,6 @@
       ],
       "title": "hoyt-1 Load Average",
       "type": "timeseries"
-    },
-    {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "color": {"mode": "palette-classic"},
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [{"color": "green", "value": null}]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {"h": 8, "w": 10, "x": 14, "y": 24},
-      "id": 11,
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "showUnfilled": true,
-        "text": {}
-      },
-      "pluginVersion": "9.5.3",
-      "targets": [{
-        "datasource": {"type": "prometheus", "uid": "prometheus"},
-        "editorMode": "code",
-        "expr": "jellyfin_stream_bitrate_bps",
-        "instant": true,
-        "legendFormat": "{{user}} ({{client}})",
-        "range": false,
-        "refId": "A"
-      }],
-      "title": "Stream Bitrate",
-      "type": "bargauge"
     }
   ],
   "refresh": "1m",
@@ -602,6 +478,6 @@
   "timezone": "",
   "title": "Q-media Kiosk",
   "uid": "q-media-kiosk-01",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
