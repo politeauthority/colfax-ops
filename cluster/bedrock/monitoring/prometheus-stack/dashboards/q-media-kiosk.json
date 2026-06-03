@@ -269,7 +269,7 @@
           }
         ]
       },
-      "gridPos": {"h": 20, "w": 16, "x": 0, "y": 6},
+      "gridPos": {"h": 14, "w": 16, "x": 0, "y": 6},
       "id": 6,
       "options": {
         "cellHeight": "lg",
@@ -432,7 +432,7 @@
         },
         "overrides": []
       },
-      "gridPos": {"h": 6, "w": 24, "x": 0, "y": 26},
+      "gridPos": {"h": 6, "w": 16, "x": 0, "y": 20},
       "id": 9,
       "options": {
         "legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "right", "showLegend": true},
@@ -478,6 +478,6 @@
   "timezone": "",
   "title": "Q-media Kiosk",
   "uid": "q-media-kiosk-01",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
