@@ -8,7 +8,6 @@ resources:
 - fluentbit.yaml
 - gateway-api-crds.yaml
 - nginx-gateway-fabric-private.yaml
-- nginx-gateway-fabric-public.yaml
 - prometheus-stack.yaml
 - blackbox-exporter.yaml
 - sealed-secrets.yaml
