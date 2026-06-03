@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-colfax-cluster-public
+data:
+  grafana-colfax-cluster-public.json: |-
+{{ .Files.Get "dashboards/colfax-cluster-public.json" | indent 4}}
