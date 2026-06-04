@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-sabnzbd
+data:
+  grafana-sabnzbd.json: |-
+{{ .Files.Get "dashboards/sabnzbd.json" | indent 4}}
