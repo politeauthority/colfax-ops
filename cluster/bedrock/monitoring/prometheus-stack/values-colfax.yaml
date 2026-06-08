@@ -207,6 +207,20 @@ kube-prometheus-stack:
         use_refresh_token: true
         login_attribute_path: preferred_username
         oauth_allow_insecure_email_lookup: true
+    livenessProbe:
+      httpGet:
+        path: /api/health
+        port: 3000
+      initialDelaySeconds: 60
+      timeoutSeconds: 30
+      failureThreshold: 10
+    readinessProbe:
+      httpGet:
+        path: /api/health
+        port: 3000
+      initialDelaySeconds: 60
+      timeoutSeconds: 30
+      failureThreshold: 30
     sidecar:
       datasources:
         enabled: true
@@ -214,6 +228,7 @@ kube-prometheus-stack:
       dashboards:
         enabled: true
         allowUiUpdates: false
+        skipReload: true
     ingress:
       enabled: false
     resources:
