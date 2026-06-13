@@ -256,6 +256,25 @@
             ]
           },
           {
+            "matcher": {"id": "byName", "options": "State"},
+            "properties": [
+              {"id": "custom.width", "value": 90},
+              {"id": "custom.cellOptions", "value": {"type": "color-text"}},
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "Playing": {"color": "green", "index": 0},
+                      "Paused": {"color": "orange", "index": 1}
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "matcher": {"id": "byName", "options": "User"},
             "properties": [{"id": "custom.width", "value": 160}]
           },
@@ -300,12 +319,13 @@
               "namespace": true, "pod": true, "service": true
             },
             "indexByName": {
-              "user": 0, "now_playing": 1, "play_method": 2,
-              "client": 3, "device": 4, "media_type": 5
+              "user": 0, "now_playing": 1, "state": 2, "play_method": 3,
+              "client": 4, "device": 5, "media_type": 6
             },
             "renameByName": {
               "user": "User", "client": "Client", "device": "Device",
-              "media_type": "Type", "now_playing": "Now Playing", "play_method": "Method"
+              "media_type": "Type", "now_playing": "Now Playing", "play_method": "Method",
+              "state": "State"
             }
           }
         }
