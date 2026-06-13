@@ -22,3 +22,38 @@ spec:
               has been unable to start for more than 5 minutes (CreateContainerError).
               This can indicate a stale containerd container name reservation — check
               `crictl ps -a` on the node and remove any exited containers for this pod.
+
+        - alert: KubePodImagePullFailing
+          expr: |
+            (
+              kube_pod_container_status_waiting_reason{reason=~"ImagePullBackOff|ErrImagePull|InvalidImageName|ImageInspectError|RegistryUnavailable"}
+              or
+              kube_pod_init_container_status_waiting_reason{reason=~"ImagePullBackOff|ErrImagePull|InvalidImageName|ImageInspectError|RegistryUnavailable"}
+            ) == 1
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{`{{ $labels.namespace }}`}}/{{`{{ $labels.pod }}`}} can't pull image ({{`{{ $labels.reason }}`}})"
+            description: >
+              Container {{`{{ $labels.container }}`}} in pod {{`{{ $labels.namespace }}`}}/{{`{{ $labels.pod }}`}}
+              has been stuck in {{`{{ $labels.reason }}`}} for more than 10 minutes. Likely the image or tag is
+              missing from the registry (e.g. deleted by a Harbor GC) or the pull credentials are invalid.
+
+        - alert: KubePodImagePullFailingCritical
+          expr: |
+            (
+              kube_pod_container_status_waiting_reason{reason=~"ImagePullBackOff|ErrImagePull|InvalidImageName|ImageInspectError|RegistryUnavailable"}
+              or
+              kube_pod_init_container_status_waiting_reason{reason=~"ImagePullBackOff|ErrImagePull|InvalidImageName|ImageInspectError|RegistryUnavailable"}
+            ) == 1
+          for: 1h
+          labels:
+            severity: critical
+          annotations:
+            summary: "Pod {{`{{ $labels.namespace }}`}}/{{`{{ $labels.pod }}`}} still can't pull image after 1h ({{`{{ $labels.reason }}`}})"
+            description: >
+              Container {{`{{ $labels.container }}`}} in pod {{`{{ $labels.namespace }}`}}/{{`{{ $labels.pod }}`}}
+              has been stuck in {{`{{ $labels.reason }}`}} for over an hour and has not recovered. The image is
+              almost certainly gone from the registry or otherwise unpullable — rebuild and push the image, or fix
+              the tag/pull credentials.
