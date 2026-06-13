@@ -7,7 +7,6 @@ resources:
 - nfs-client.yaml
 - fluentbit.yaml
 - gateway-api-crds.yaml
-- nginx-gateway-fabric-private.yaml
 - prometheus-stack.yaml
 - blackbox-exporter.yaml
 - sealed-secrets.yaml
@@ -15,4 +14,6 @@ resources:
 - traefik-crds.yaml
 - traefik.yaml
 - traefik-config.yaml
+- traefik-private.yaml
+- traefik-private-config.yaml
 - crowdsec.yaml

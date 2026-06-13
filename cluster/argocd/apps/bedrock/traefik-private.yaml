@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-private
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: traefik-private
+    targetRevision: main
+    helm:
+      skipCrds: true
+      valueFiles:
+        - values-colfax.yaml
+  destination:
+    namespace: traefik-private
+    name: in-cluster
+  ignoreDifferences:
+    - group: "*"
+      kind: "*"
+      jsonPointers:
+        - /metadata/labels
+        - /metadata/annotations
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
