@@ -424,6 +424,7 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 16,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
