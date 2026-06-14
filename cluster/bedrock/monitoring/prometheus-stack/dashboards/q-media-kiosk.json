@@ -256,22 +256,27 @@
             ]
           },
           {
-            "matcher": {"id": "byName", "options": "State"},
+            "matcher": {"id": "byName", "options": "Playing"},
             "properties": [
-              {"id": "custom.width", "value": 90},
-              {"id": "custom.cellOptions", "value": {"type": "color-text"}},
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "type": "value",
-                    "options": {
-                      "Playing": {"color": "green", "index": 0},
-                      "Paused": {"color": "orange", "index": 1}
-                    }
-                  }
-                ]
-              }
+              {"id": "custom.width", "value": 170},
+              {"id": "unit", "value": "percent"},
+              {"id": "min", "value": 0},
+              {"id": "max", "value": 100},
+              {"id": "decimals", "value": 0},
+              {"id": "custom.cellOptions", "value": {"type": "gauge", "mode": "basic"}},
+              {"id": "thresholds", "value": {"mode": "absolute", "steps": [{"color": "green", "value": null}]}}
+            ]
+          },
+          {
+            "matcher": {"id": "byName", "options": "Paused"},
+            "properties": [
+              {"id": "custom.width", "value": 170},
+              {"id": "unit", "value": "percent"},
+              {"id": "min", "value": 0},
+              {"id": "max", "value": 100},
+              {"id": "decimals", "value": 0},
+              {"id": "custom.cellOptions", "value": {"type": "gauge", "mode": "basic"}},
+              {"id": "thresholds", "value": {"mode": "absolute", "steps": [{"color": "orange", "value": null}]}}
             ]
           },
           {
@@ -296,36 +301,31 @@
         "showHeader": true
       },
       "pluginVersion": "9.5.3",
-      "targets": [{
-        "datasource": {"type": "prometheus", "uid": "prometheus"},
-        "editorMode": "code",
-        "exemplar": false,
-        "expr": "jellyfin_session_info",
-        "format": "table",
-        "instant": true,
-        "range": false,
-        "refId": "A"
-      }],
+      "targets": [
+        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "exemplar": false, "expr": "jellyfin_stream_progress_percent{state=\"Playing\"}", "format": "table", "instant": true, "range": false, "refId": "A"},
+        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "exemplar": false, "expr": "jellyfin_stream_progress_percent{state=\"Paused\"}", "format": "table", "instant": true, "range": false, "refId": "B"}
+      ],
       "title": "Active Sessions",
       "transformations": [
-        {"id": "labelsToFields", "options": {"mode": "columns"}},
+        {"id": "merge", "options": {}},
         {
           "id": "organize",
           "options": {
             "excludeByName": {
-              "__name__": true, "Time": true, "Value": true,
+              "__name__": true, "Time": true,
               "instance": true, "job": true,
               "container": true, "endpoint": true,
-              "namespace": true, "pod": true, "service": true
+              "namespace": true, "pod": true, "service": true,
+              "state": true
             },
             "indexByName": {
-              "user": 0, "now_playing": 1, "state": 2, "play_method": 3,
-              "client": 4, "device": 5, "media_type": 6
+              "user": 0, "now_playing": 1, "Value #A": 2, "Value #B": 3,
+              "play_method": 4, "client": 5, "device": 6, "media_type": 7
             },
             "renameByName": {
               "user": "User", "client": "Client", "device": "Device",
               "media_type": "Type", "now_playing": "Now Playing", "play_method": "Method",
-              "state": "State"
+              "Value #A": "Playing", "Value #B": "Paused"
             }
           }
         }
