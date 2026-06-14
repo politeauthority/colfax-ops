@@ -2,132 +2,101 @@
   "annotations": {"list": []},
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "links": [],
   "liveNow": false,
   "refresh": "30s",
   "schemaVersion": 39,
   "tags": ["kiosk", "kubernetes", "nodes"],
   "templating": {"list": []},
-  "time": {"from": "now-1h", "to": "now"},
+  "time": {"from": "now-3h", "to": "now"},
   "timepicker": {},
   "timezone": "",
   "title": "Colfax Nodes - Kiosk",
   "uid": "colfax-nodes-kiosk",
-  "version": 1,
+  "version": 2,
   "panels": [
     {
-      "id": 1,
-      "type": "bargauge",
-      "title": "CPU Usage",
+      "id": 1, "type": "stat", "title": "Nodes Up",
       "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "gridPos": {"h": 24, "w": 8, "x": 0, "y": 0},
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent",
-          "min": 0,
-          "max": 100,
-          "decimals": 0,
-          "color": {"mode": "thresholds"},
-          "thresholds": {"mode": "absolute", "steps": [
-            {"color": "green", "value": null},
-            {"color": "yellow", "value": 70},
-            {"color": "red", "value": 90}
-          ]}
-        },
-        "overrides": []
-      },
-      "options": {
-        "displayMode": "gradient",
-        "orientation": "horizontal",
-        "showUnfilled": true,
-        "valueMode": "color",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}
-      },
-      "targets": [{
-        "datasource": {"type": "prometheus", "uid": "prometheus"},
-        "editorMode": "code",
-        "expr": "(100 - (avg by(instance)(rate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\"}[5m])) * 100)) * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}",
-        "legendFormat": "{{nodename}}",
-        "instant": true,
-        "range": false,
-        "refId": "A"
-      }]
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "none", "color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "yellow", "value": 4}, {"color": "green", "value": 4}]}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "colorMode": "background", "graphMode": "none", "textMode": "value", "justifyMode": "center"},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "count(up{job=\"node-exporter\"} == 1)", "instant": false, "range": true, "refId": "A"}]
     },
     {
-      "id": 2,
-      "type": "bargauge",
-      "title": "Memory Usage",
+      "id": 2, "type": "stat", "title": "Avg CPU",
       "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "gridPos": {"h": 24, "w": 8, "x": 8, "y": 0},
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent",
-          "min": 0,
-          "max": 100,
-          "decimals": 0,
-          "color": {"mode": "thresholds"},
-          "thresholds": {"mode": "absolute", "steps": [
-            {"color": "green", "value": null},
-            {"color": "yellow", "value": 80},
-            {"color": "red", "value": 90}
-          ]}
-        },
-        "overrides": []
-      },
-      "options": {
-        "displayMode": "gradient",
-        "orientation": "horizontal",
-        "showUnfilled": true,
-        "valueMode": "color",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}
-      },
-      "targets": [{
-        "datasource": {"type": "prometheus", "uid": "prometheus"},
-        "editorMode": "code",
-        "expr": "((1 - node_memory_MemAvailable_bytes{job=\"node-exporter\"} / node_memory_MemTotal_bytes{job=\"node-exporter\"}) * 100) * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}",
-        "legendFormat": "{{nodename}}",
-        "instant": true,
-        "range": false,
-        "refId": "A"
-      }]
+      "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "percent", "min": 0, "max": 100, "decimals": 0, "color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 70}, {"color": "red", "value": 90}]}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center"},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "avg(100 - (avg by(instance)(rate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\"}[5m])) * 100))", "instant": false, "range": true, "refId": "A"}]
     },
     {
-      "id": 3,
-      "type": "bargauge",
-      "title": "Load Average (1m)",
+      "id": 3, "type": "stat", "title": "Avg Memory",
       "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "gridPos": {"h": 24, "w": 8, "x": 16, "y": 0},
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short",
-          "min": 0,
-          "decimals": 2,
-          "color": {"mode": "thresholds"},
-          "thresholds": {"mode": "absolute", "steps": [
-            {"color": "green", "value": null},
-            {"color": "yellow", "value": 8},
-            {"color": "red", "value": 16}
-          ]}
-        },
-        "overrides": []
-      },
-      "options": {
-        "displayMode": "gradient",
-        "orientation": "horizontal",
-        "showUnfilled": true,
-        "valueMode": "color",
-        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}
-      },
-      "targets": [{
-        "datasource": {"type": "prometheus", "uid": "prometheus"},
-        "editorMode": "code",
-        "expr": "node_load1{job=\"node-exporter\"} * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}",
-        "legendFormat": "{{nodename}}",
-        "instant": true,
-        "range": false,
-        "refId": "A"
-      }]
+      "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "percent", "min": 0, "max": 100, "decimals": 0, "color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 80}, {"color": "red", "value": 90}]}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center"},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "avg((1 - node_memory_MemAvailable_bytes{job=\"node-exporter\"} / node_memory_MemTotal_bytes{job=\"node-exporter\"}) * 100)", "instant": false, "range": true, "refId": "A"}]
+    },
+    {
+      "id": 4, "type": "stat", "title": "Peak Load (1m)",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "short", "decimals": 2, "color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 8}, {"color": "red", "value": 16}]}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center"},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "max(node_load1{job=\"node-exporter\"})", "instant": false, "range": true, "refId": "A"}]
+    },
+
+    {
+      "id": 10, "type": "timeseries", "title": "CPU Usage — over time",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 9, "w": 8, "x": 0, "y": 4},
+      "fieldConfig": {"defaults": {"unit": "percent", "min": 0, "max": 100, "color": {"mode": "palette-classic"}, "custom": {"drawStyle": "line", "fillOpacity": 18, "gradientMode": "opacity", "lineInterpolation": "smooth", "lineWidth": 2, "showPoints": "never", "stacking": {"mode": "none"}}}, "overrides": []},
+      "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "(100 - (avg by(instance)(rate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\"}[5m])) * 100)) * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}", "legendFormat": "{{nodename}}", "range": true, "refId": "A"}]
+    },
+    {
+      "id": 11, "type": "timeseries", "title": "Memory Usage — over time",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 9, "w": 8, "x": 8, "y": 4},
+      "fieldConfig": {"defaults": {"unit": "percent", "min": 0, "max": 100, "color": {"mode": "palette-classic"}, "custom": {"drawStyle": "line", "fillOpacity": 18, "gradientMode": "opacity", "lineInterpolation": "smooth", "lineWidth": 2, "showPoints": "never", "stacking": {"mode": "none"}}}, "overrides": []},
+      "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "((1 - node_memory_MemAvailable_bytes{job=\"node-exporter\"} / node_memory_MemTotal_bytes{job=\"node-exporter\"}) * 100) * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}", "legendFormat": "{{nodename}}", "range": true, "refId": "A"}]
+    },
+    {
+      "id": 12, "type": "timeseries", "title": "Load Average (1m) — over time",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 9, "w": 8, "x": 16, "y": 4},
+      "fieldConfig": {"defaults": {"unit": "short", "min": 0, "decimals": 2, "color": {"mode": "palette-classic"}, "custom": {"drawStyle": "line", "fillOpacity": 18, "gradientMode": "opacity", "lineInterpolation": "smooth", "lineWidth": 2, "showPoints": "never", "stacking": {"mode": "none"}}}, "overrides": []},
+      "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "node_load1{job=\"node-exporter\"} * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}", "legendFormat": "{{nodename}}", "range": true, "refId": "A"}]
+    },
+
+    {
+      "id": 20, "type": "bargauge", "title": "CPU now",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 13},
+      "fieldConfig": {"defaults": {"unit": "percent", "min": 0, "max": 100, "decimals": 0, "color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 70}, {"color": "red", "value": 90}]}}, "overrides": []},
+      "options": {"displayMode": "lcd", "orientation": "horizontal", "showUnfilled": true, "valueMode": "color", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "(100 - (avg by(instance)(rate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\"}[5m])) * 100)) * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}", "legendFormat": "{{nodename}}", "instant": true, "range": false, "refId": "A"}]
+    },
+    {
+      "id": 21, "type": "bargauge", "title": "Memory now",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 13},
+      "fieldConfig": {"defaults": {"unit": "percent", "min": 0, "max": 100, "decimals": 0, "color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 80}, {"color": "red", "value": 90}]}}, "overrides": []},
+      "options": {"displayMode": "lcd", "orientation": "horizontal", "showUnfilled": true, "valueMode": "color", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "((1 - node_memory_MemAvailable_bytes{job=\"node-exporter\"} / node_memory_MemTotal_bytes{job=\"node-exporter\"}) * 100) * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}", "legendFormat": "{{nodename}}", "instant": true, "range": false, "refId": "A"}]
+    },
+    {
+      "id": 22, "type": "bargauge", "title": "Load now (1m)",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 13},
+      "fieldConfig": {"defaults": {"unit": "short", "min": 0, "decimals": 2, "color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 8}, {"color": "red", "value": 16}]}}, "overrides": []},
+      "options": {"displayMode": "lcd", "orientation": "horizontal", "showUnfilled": true, "valueMode": "color", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "node_load1{job=\"node-exporter\"} * on(instance) group_left(nodename) node_uname_info{job=\"node-exporter\"}", "legendFormat": "{{nodename}}", "instant": true, "range": false, "refId": "A"}]
     }
   ]
 }
