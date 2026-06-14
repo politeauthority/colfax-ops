@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-raspberry-pis
+data:
+  grafana-raspberry-pis.json: |-
+{{ .Files.Get "dashboards/raspberry-pis.json" | indent 4}}
