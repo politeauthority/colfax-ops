@@ -44,9 +44,9 @@
       "id": 2, "type": "stat", "title": "Max Temp",
       "datasource": {"type": "prometheus", "uid": "prometheus"},
       "gridPos": {"h": 4, "w": 4, "x": 4, "y": 0},
-      "fieldConfig": {"defaults": {"unit": "celsius", "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 65}, {"color": "red", "value": 80}]}}, "overrides": []},
+      "fieldConfig": {"defaults": {"unit": "fahrenheit", "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 150}, {"color": "red", "value": 175}]}}, "overrides": []},
       "options": {"reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "colorMode": "background", "graphMode": "area", "textMode": "value"},
-      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "max(node_thermal_zone_temp{job=\"kiosk-nodes\", instance=~\"$instance\"})", "refId": "A"}]
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "max(node_thermal_zone_temp{job=\"kiosk-nodes\", instance=~\"$instance\"}) * 9 / 5 + 32", "refId": "A"}]
     },
     {
       "id": 3, "type": "stat", "title": "Max CPU",
@@ -92,9 +92,9 @@
       "id": 11, "type": "timeseries", "title": "CPU Temperature",
       "datasource": {"type": "prometheus", "uid": "prometheus"},
       "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
-      "fieldConfig": {"defaults": {"unit": "celsius", "min": 0, "custom": {"drawStyle": "line", "fillOpacity": 15, "lineWidth": 2, "showPoints": "never", "thresholdsStyle": {"mode": "line"}}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 65}, {"color": "red", "value": 80}]}}, "overrides": []},
+      "fieldConfig": {"defaults": {"unit": "fahrenheit", "min": 0, "custom": {"drawStyle": "line", "fillOpacity": 15, "lineWidth": 2, "showPoints": "never", "thresholdsStyle": {"mode": "line"}}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 150}, {"color": "red", "value": 175}]}}, "overrides": []},
       "options": {"legend": {"calcs": ["lastNotNull", "max"], "displayMode": "table", "placement": "right", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
-      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "node_thermal_zone_temp{job=\"kiosk-nodes\", instance=~\"$instance\"}", "legendFormat": "{{instance}}", "refId": "A"}]
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "node_thermal_zone_temp{job=\"kiosk-nodes\", instance=~\"$instance\"} * 9 / 5 + 32", "legendFormat": "{{instance}}", "refId": "A"}]
     },
     {
       "id": 12, "type": "timeseries", "title": "Memory Used",
