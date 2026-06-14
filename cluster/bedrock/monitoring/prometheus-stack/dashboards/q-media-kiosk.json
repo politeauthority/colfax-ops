@@ -256,27 +256,34 @@
             ]
           },
           {
-            "matcher": {"id": "byName", "options": "Playing"},
+            "matcher": {"id": "byName", "options": "Progress"},
             "properties": [
-              {"id": "custom.width", "value": 170},
+              {"id": "custom.width", "value": 220},
               {"id": "unit", "value": "percent"},
               {"id": "min", "value": 0},
               {"id": "max", "value": 100},
               {"id": "decimals", "value": 0},
-              {"id": "custom.cellOptions", "value": {"type": "gauge", "mode": "basic"}},
-              {"id": "thresholds", "value": {"mode": "absolute", "steps": [{"color": "green", "value": null}]}}
+              {"id": "custom.cellOptions", "value": {"type": "gauge", "mode": "gradient"}},
+              {"id": "thresholds", "value": {"mode": "absolute", "steps": [{"color": "blue", "value": null}]}}
             ]
           },
           {
-            "matcher": {"id": "byName", "options": "Paused"},
+            "matcher": {"id": "byName", "options": "State"},
             "properties": [
-              {"id": "custom.width", "value": 170},
-              {"id": "unit", "value": "percent"},
-              {"id": "min", "value": 0},
-              {"id": "max", "value": 100},
-              {"id": "decimals", "value": 0},
-              {"id": "custom.cellOptions", "value": {"type": "gauge", "mode": "basic"}},
-              {"id": "thresholds", "value": {"mode": "absolute", "steps": [{"color": "orange", "value": null}]}}
+              {"id": "custom.width", "value": 90},
+              {"id": "custom.cellOptions", "value": {"type": "color-text"}},
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "Playing": {"color": "green", "index": 0},
+                      "Paused": {"color": "orange", "index": 1}
+                    }
+                  }
+                ]
+              }
             ]
           },
           {
@@ -301,13 +308,19 @@
         "showHeader": true
       },
       "pluginVersion": "9.5.3",
-      "targets": [
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "exemplar": false, "expr": "jellyfin_stream_progress_percent{state=\"Playing\"}", "format": "table", "instant": true, "range": false, "refId": "A"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "exemplar": false, "expr": "jellyfin_stream_progress_percent{state=\"Paused\"}", "format": "table", "instant": true, "range": false, "refId": "B"}
-      ],
+      "targets": [{
+        "datasource": {"type": "prometheus", "uid": "prometheus"},
+        "editorMode": "code",
+        "exemplar": false,
+        "expr": "jellyfin_stream_progress_percent",
+        "format": "table",
+        "instant": true,
+        "range": false,
+        "refId": "A"
+      }],
       "title": "Active Sessions",
       "transformations": [
-        {"id": "merge", "options": {}},
+        {"id": "labelsToFields", "options": {"mode": "columns"}},
         {
           "id": "organize",
           "options": {
@@ -315,17 +328,16 @@
               "__name__": true, "Time": true,
               "instance": true, "job": true,
               "container": true, "endpoint": true,
-              "namespace": true, "pod": true, "service": true,
-              "state": true
+              "namespace": true, "pod": true, "service": true
             },
             "indexByName": {
-              "user": 0, "now_playing": 1, "Value #A": 2, "Value #B": 3,
+              "user": 0, "now_playing": 1, "Value": 2, "state": 3,
               "play_method": 4, "client": 5, "device": 6, "media_type": 7
             },
             "renameByName": {
               "user": "User", "client": "Client", "device": "Device",
               "media_type": "Type", "now_playing": "Now Playing", "play_method": "Method",
-              "Value #A": "Playing", "Value #B": "Paused"
+              "state": "State", "Value": "Progress"
             }
           }
         }
