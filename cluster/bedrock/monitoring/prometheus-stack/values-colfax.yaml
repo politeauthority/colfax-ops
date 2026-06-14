@@ -282,6 +282,19 @@ kube-prometheus-stack:
             - target_label: instance
               replacement: colfax
 
+        # Kiosk Pis (node_exporter via apt prometheus-node-exporter)
+        - job_name: "kiosk-nodes"
+          static_configs:
+            - targets: [192.168.50.8:9100]
+              labels:
+                instance: pi-hole
+            - targets: [192.168.50.107:9100]
+              labels:
+                instance: kio-2
+            - targets: [192.168.50.161:9100]
+              labels:
+                instance: kio-3
+
         # Harbor Metrics
         - job_name: "harbor-exporter"
           scrape_interval: 20s
