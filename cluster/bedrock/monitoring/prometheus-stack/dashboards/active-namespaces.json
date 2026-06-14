@@ -1,0 +1,127 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "liveNow": false,
+  "refresh": "30s",
+  "schemaVersion": 39,
+  "tags": ["namespaces", "resources"],
+  "templating": {"list": []},
+  "time": {"from": "now-3h", "to": "now"},
+  "timepicker": {},
+  "timezone": "",
+  "title": "Active Namespaces",
+  "uid": "active-namespaces",
+  "version": 1,
+  "panels": [
+    {
+      "id": 1, "type": "stat", "title": "CPU Used (cores)",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "short", "decimals": 2, "color": {"mode": "fixed", "fixedColor": "blue"}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center"},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "sum(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m]))", "range": true, "refId": "A"}]
+    },
+    {
+      "id": 2, "type": "stat", "title": "Memory Used",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "bytes", "color": {"mode": "fixed", "fixedColor": "green"}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center"},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "sum(container_memory_working_set_bytes{container!=\"\"})", "range": true, "refId": "A"}]
+    },
+    {
+      "id": 3, "type": "stat", "title": "Network I/O",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "Bps", "color": {"mode": "fixed", "fixedColor": "purple"}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center"},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "sum(rate(container_network_receive_bytes_total[5m]) + rate(container_network_transmit_bytes_total[5m]))", "range": true, "refId": "A"}]
+    },
+    {
+      "id": 4, "type": "stat", "title": "PVC Storage Used",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "bytes", "color": {"mode": "fixed", "fixedColor": "orange"}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center"},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "sum(longhorn_volume_actual_size_bytes)", "range": true, "refId": "A"}]
+    },
+
+    {
+      "id": 10, "type": "bargauge", "title": "Top CPU by namespace (cores)",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 9, "w": 6, "x": 0, "y": 4},
+      "fieldConfig": {"defaults": {"unit": "short", "decimals": 2, "min": 0, "color": {"mode": "palette-classic"}}, "overrides": []},
+      "options": {"displayMode": "gradient", "orientation": "horizontal", "showUnfilled": true, "valueMode": "text", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "topk(10, sum by(namespace)(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])))", "legendFormat": "{{namespace}}", "instant": true, "range": false, "refId": "A"}]
+    },
+    {
+      "id": 11, "type": "bargauge", "title": "Top Memory by namespace",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 9, "w": 6, "x": 6, "y": 4},
+      "fieldConfig": {"defaults": {"unit": "bytes", "min": 0, "color": {"mode": "palette-classic"}}, "overrides": []},
+      "options": {"displayMode": "gradient", "orientation": "horizontal", "showUnfilled": true, "valueMode": "text", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "topk(10, sum by(namespace)(container_memory_working_set_bytes{container!=\"\"}))", "legendFormat": "{{namespace}}", "instant": true, "range": false, "refId": "A"}]
+    },
+    {
+      "id": 12, "type": "bargauge", "title": "Top Network by namespace",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 9, "w": 6, "x": 12, "y": 4},
+      "fieldConfig": {"defaults": {"unit": "Bps", "min": 0, "color": {"mode": "palette-classic"}}, "overrides": []},
+      "options": {"displayMode": "gradient", "orientation": "horizontal", "showUnfilled": true, "valueMode": "text", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "topk(10, sum by(namespace)(rate(container_network_receive_bytes_total[5m]) + rate(container_network_transmit_bytes_total[5m])))", "legendFormat": "{{namespace}}", "instant": true, "range": false, "refId": "A"}]
+    },
+    {
+      "id": 13, "type": "bargauge", "title": "Top PVC storage by namespace",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 9, "w": 6, "x": 18, "y": 4},
+      "fieldConfig": {"defaults": {"unit": "bytes", "min": 0, "color": {"mode": "palette-classic"}}, "overrides": []},
+      "options": {"displayMode": "gradient", "orientation": "horizontal", "showUnfilled": true, "valueMode": "text", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "topk(10, sum by(pvc_namespace)(longhorn_volume_actual_size_bytes))", "legendFormat": "{{pvc_namespace}}", "instant": true, "range": false, "refId": "A"}]
+    },
+
+    {
+      "id": 20, "type": "timeseries", "title": "CPU by namespace — over time",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 13},
+      "fieldConfig": {"defaults": {"unit": "short", "min": 0, "color": {"mode": "palette-classic"}, "custom": {"drawStyle": "line", "fillOpacity": 18, "gradientMode": "opacity", "lineInterpolation": "smooth", "lineWidth": 2, "showPoints": "never", "stacking": {"mode": "normal"}}}, "overrides": []},
+      "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "topk(8, sum by(namespace)(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])))", "legendFormat": "{{namespace}}", "range": true, "refId": "A"}]
+    },
+    {
+      "id": 21, "type": "timeseries", "title": "Memory by namespace — over time",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 13},
+      "fieldConfig": {"defaults": {"unit": "bytes", "min": 0, "color": {"mode": "palette-classic"}, "custom": {"drawStyle": "line", "fillOpacity": 18, "gradientMode": "opacity", "lineInterpolation": "smooth", "lineWidth": 2, "showPoints": "never", "stacking": {"mode": "normal"}}}, "overrides": []},
+      "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "topk(8, sum by(namespace)(container_memory_working_set_bytes{container!=\"\"}))", "legendFormat": "{{namespace}}", "range": true, "refId": "A"}]
+    },
+    {
+      "id": 22, "type": "timeseries", "title": "Network by namespace — over time",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 13},
+      "fieldConfig": {"defaults": {"unit": "Bps", "min": 0, "color": {"mode": "palette-classic"}, "custom": {"drawStyle": "line", "fillOpacity": 18, "gradientMode": "opacity", "lineInterpolation": "smooth", "lineWidth": 2, "showPoints": "never", "stacking": {"mode": "none"}}}, "overrides": []},
+      "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "topk(8, sum by(namespace)(rate(container_network_receive_bytes_total[5m]) + rate(container_network_transmit_bytes_total[5m])))", "legendFormat": "{{namespace}}", "range": true, "refId": "A"}]
+    },
+
+    {
+      "id": 30, "type": "timeseries", "title": "Disk I/O by namespace — over time",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 21},
+      "fieldConfig": {"defaults": {"unit": "Bps", "min": 0, "color": {"mode": "palette-classic"}, "custom": {"drawStyle": "line", "fillOpacity": 18, "gradientMode": "opacity", "lineInterpolation": "smooth", "lineWidth": 2, "showPoints": "never", "stacking": {"mode": "none"}}}, "overrides": []},
+      "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "topk(8, sum by(namespace)(rate(container_fs_reads_bytes_total{container!=\"\"}[5m]) + rate(container_fs_writes_bytes_total{container!=\"\"}[5m])))", "legendFormat": "{{namespace}}", "range": true, "refId": "A"}]
+    },
+    {
+      "id": 31, "type": "timeseries", "title": "PVC storage by namespace — over time",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 21},
+      "fieldConfig": {"defaults": {"unit": "bytes", "min": 0, "color": {"mode": "palette-classic"}, "custom": {"drawStyle": "line", "fillOpacity": 18, "gradientMode": "opacity", "lineInterpolation": "smooth", "lineWidth": 2, "showPoints": "never", "stacking": {"mode": "none"}}}, "overrides": []},
+      "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "editorMode": "code", "expr": "sum by(pvc_namespace)(longhorn_volume_actual_size_bytes)", "legendFormat": "{{pvc_namespace}}", "range": true, "refId": "A"}]
+    }
+  ]
+}
