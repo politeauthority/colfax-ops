@@ -5,5 +5,11 @@ metadata:
   namespace: argocd
 data:
   policy.default: role:readonly
+  # Match RBAC subjects against preferred_username in addition to groups.
+  # Authentik only includes the groups claim in the login ID token, not in
+  # the tokens presented on subsequent API calls, so group-based bindings
+  # silently fail (everyone drops to policy.default=readonly). preferred_username
+  # ("akadmin") is present on every call, so the akadmin binding below resolves.
+  scopes: '[groups, preferred_username]'
   policy.csv: |
     g, akadmin, role:admin
