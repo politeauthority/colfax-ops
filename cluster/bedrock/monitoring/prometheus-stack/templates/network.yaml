@@ -1,56 +1,80 @@
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+# Private Traefik routes for the monitoring stack (replaces the NGF HTTPRoutes).
+# Served by traefik-private via the websecure-private entrypoint.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: private-tls
+  namespace: monitoring
+spec:
+  secretName: private-tls
+  issuerRef:
+    name: private-ca
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.colfax.int"
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
   name: grafana
+  namespace: monitoring
 spec:
-  parentRefs:
-    - name: nginx-private
-      namespace: nginx-gateway-fabric-private
-  hostnames:
-    - grafana.colfax.int
-  rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
+  entryPoints:
+    - websecure-private
+  routes:
+    - match: Host(`grafana.colfax.int`)
+      kind: Rule
+      middlewares:
+        - name: lan-only
+          namespace: traefik-private
+        - name: secure-headers
+          namespace: traefik-private
+      services:
         - name: prometheusstack-grafana
           port: 80
+  tls:
+    secretName: private-tls
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: alertmanager
-spec:
-  parentRefs:
-    - name: nginx-private
-      namespace: nginx-gateway-fabric-private
-  hostnames:
-    - alertmanager.colfax.int
-  rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
-        - name: prometheusstack-kube-prome-alertmanager
-          port: 9093
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
   name: prometheus
+  namespace: monitoring
 spec:
-  parentRefs:
-    - name: nginx-private
-      namespace: nginx-gateway-fabric-private
-  hostnames:
-    - prometheus.colfax.int
-  rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
+  entryPoints:
+    - websecure-private
+  routes:
+    - match: Host(`prometheus.colfax.int`)
+      kind: Rule
+      middlewares:
+        - name: lan-only
+          namespace: traefik-private
+        - name: secure-headers
+          namespace: traefik-private
+      services:
         - name: prometheusstack-kube-prome-prometheus
           port: 9090
+  tls:
+    secretName: private-tls
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alertmanager
+  namespace: monitoring
+spec:
+  entryPoints:
+    - websecure-private
+  routes:
+    - match: Host(`alertmanager.colfax.int`)
+      kind: Rule
+      middlewares:
+        - name: lan-only
+          namespace: traefik-private
+        - name: secure-headers
+          namespace: traefik-private
+      services:
+        - name: prometheusstack-kube-prome-alertmanager
+          port: 9093
+  tls:
+    secretName: private-tls
