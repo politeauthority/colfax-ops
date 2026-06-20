@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
-    path: traefik/crds
+    path: traefik-public/crds
     targetRevision: main
   destination:
     namespace: traefik

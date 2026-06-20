@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:politeauthority/private-ops.git'
-    path: traefik/base
+    path: traefik-public/base
     targetRevision: main
   destination:
     namespace: traefik
