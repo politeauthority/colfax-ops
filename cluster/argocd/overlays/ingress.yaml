@@ -1,19 +1,36 @@
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+# Private Traefik route for the ArgoCD UI (replaces the NGF HTTPRoute).
+# Served by traefik-private via the websecure-private entrypoint at 192.168.50.85.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: private-tls
+  namespace: argocd
+spec:
+  secretName: private-tls
+  issuerRef:
+    name: private-ca
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.colfax.int"
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
   name: argocd-server
   namespace: argocd
 spec:
-  parentRefs:
-    - name: nginx-private
-      namespace: nginx-gateway-fabric-private
-  hostnames:
-    - argocd.colfax.int
-  rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
+  entryPoints:
+    - websecure-private
+  routes:
+    - match: Host(`argocd.colfax.int`)
+      kind: Rule
+      middlewares:
+        - name: lan-only
+          namespace: traefik-private
+        - name: secure-headers
+          namespace: traefik-private
+      services:
         - name: argocd-server
           port: 80
+  tls:
+    secretName: private-tls
