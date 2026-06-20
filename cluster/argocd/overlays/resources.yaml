@@ -21,7 +21,9 @@ data:
     - apiGroups:
       - actions.github.com
       kinds:
-      - "*"
+      - AutoscalingListener
+      - EphemeralRunner
+      - EphemeralRunnerSet
       clusters:
       - "*"
 ---
