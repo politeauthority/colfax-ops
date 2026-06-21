@@ -50,7 +50,9 @@ spec:
       jsonPointers:
         - /metadata/labels/app.kubernetes.io~1instance
   syncPolicy:
-    automated:
-      selfHeal: true
+    # TEMPORARILY DISABLED for Longhorn volume rename maintenance window (2026-06-21).
+    # Re-enable after the harbor volume migrations complete.
+    # automated:
+    #   selfHeal: true
     syncOptions:
       - CreateNamespace=true
