@@ -24,6 +24,16 @@ kube-prometheus-stack:
           - receiver: 'null'
             matchers:
               - alertname = "Watchdog"
+          # Critical alerts re-notify quigley at least every 2h while firing
+          - receiver: quigley-matrix
+            matchers:
+              - severity = "critical"
+            repeat_interval: 2h
+          # Warning alerts re-notify quigley at least every 6h while firing
+          - receiver: quigley-matrix
+            matchers:
+              - severity = "warning"
+            repeat_interval: 6h
       receivers:
         - name: 'null'
         - name: quigley-matrix
