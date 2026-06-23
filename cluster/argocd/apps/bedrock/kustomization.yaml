@@ -16,4 +16,3 @@ resources:
 - traefik-config.yaml
 - traefik-private.yaml
 - traefik-private-config.yaml
-- crowdsec.yaml
