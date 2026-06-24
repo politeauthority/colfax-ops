@@ -183,6 +183,31 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
+    # Run HA: state lives in Postgres (see grafana.ini database below), so a
+    # single pod OOM/restart no longer trips HttpEndpointDown. Requires
+    # persistence disabled (RWO PVC blocks a 2nd replica) - see persistence.
+    replicas: 2
+    # Surge a 3rd pod before retiring an old one so we never drop below 2 ready
+    # during a rollout.
+    deploymentStrategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 0
+        maxSurge: 1
+    podDisruptionBudget:
+      minAvailable: 1
+    # Soft anti-affinity: prefer spreading the two replicas across nodes, but
+    # don't make it a hard requirement (hoyt-1 is memory-tight; colfax-1 has
+    # headroom). Process-level HA holds even if both land on one node.
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: grafana
+              topologyKey: kubernetes.io/hostname
     envFromSecrets:
       - name: authentik-grafana-oauth
       - name: grafana-postgres-secret
@@ -256,10 +281,13 @@ kube-prometheus-stack:
       limits:
         cpu: 200m
         memory: 1Gi
+    # Persistence disabled: all Grafana state (dashboards, users, sessions,
+    # datasources) is in Postgres, and dashboards/datasources are re-provisioned
+    # by the sidecars on start. The old RWO Longhorn PVC only held plugin/png
+    # cache and would block a 2nd replica. (The orphaned grafana PVC can be
+    # deleted manually - ArgoCD won't prune it.)
     persistence:
-      enabled: true
-      storageClassName: longhorn
-      size: 2Gi
+      enabled: false
     nodeSelector:
       kubernetes.io/arch: amd64
 
