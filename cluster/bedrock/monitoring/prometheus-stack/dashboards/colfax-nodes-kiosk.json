@@ -5,7 +5,7 @@
   "graphTooltip": 1,
   "links": [],
   "liveNow": false,
-  "refresh": "30s",
+  "refresh": "1m",
   "schemaVersion": 39,
   "tags": ["kiosk", "kubernetes", "nodes"],
   "templating": {"list": []},

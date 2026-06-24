@@ -189,6 +189,12 @@ kube-prometheus-stack:
     grafana.ini:
       server:
         root_url: https://grafana.colfax.int
+        # Don't emit a log line for every HTTP request (kiosks + live/ws
+        # generate ~50k access logs/day, swamping Fluent Bit -> Graylog).
+        router_logging: false
+      log:
+        # Drop info-level request noise; keep warnings and errors.
+        level: warn
       database:
         type: postgres
         host: q-postgres-rw.q-postgres.svc.cluster.local:5432
