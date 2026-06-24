@@ -189,6 +189,14 @@ kube-prometheus-stack:
     grafana.ini:
       server:
         root_url: https://grafana.colfax.int
+        # Don't emit a log line for every HTTP request (kiosks + live/ws
+        # generate ~50k "Request Completed" access logs/day, swamping
+        # Fluent Bit -> Graylog). This alone removes the bulk of the spam.
+        router_logging: false
+      # NOTE: deliberately staying at the default info level for now. The
+      # OAuth-refresh failures and live/ws 401s we still need to verify during
+      # the Tier 2 hairpin fix are logged at info; dropping to warn would hide
+      # them. Tighten to warn once that work is confirmed.
       database:
         type: postgres
         host: q-postgres-rw.q-postgres.svc.cluster.local:5432
