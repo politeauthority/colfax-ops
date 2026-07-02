@@ -1,0 +1,138 @@
+{
+  "annotations": { "list": [ { "builtIn": 1, "datasource": "-- Grafana --", "enable": true, "hide": true, "iconColor": "rgba(0, 211, 255, 1)", "name": "Annotations & Alerts", "type": "dashboard" } ] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 100, "title": "Single Points of Failure — health at a glance", "type": "row" },
+    {
+      "datasource": "Prometheus", "id": 1,
+      "gridPos": { "h": 4, "w": 5, "x": 0, "y": 1 },
+      "type": "stat",
+      "title": "CNPG primaries (min across clusters)",
+      "description": "Number of in-service primaries in the least-healthy CNPG cluster. Must be >= 1. 0 = failover in progress/stuck.",
+      "fieldConfig": { "defaults": { "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "green", "value": 1 } ] }, "mappings": [] }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none", "textMode": "value" },
+      "targets": [ { "datasource": "Prometheus", "expr": "min(count by (cluster) (cnpg_pg_replication_in_recovery == 0))", "refId": "A" } ]
+    },
+    {
+      "datasource": "Prometheus", "id": 2,
+      "gridPos": { "h": 4, "w": 5, "x": 5, "y": 1 },
+      "type": "stat",
+      "title": "Grafana mem % of limit",
+      "description": "Grafana working set as a fraction of its memory limit. The known OOM SPOF; warn zone at 85%.",
+      "fieldConfig": { "defaults": { "unit": "percent", "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 85 }, { "color": "red", "value": 95 } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none" },
+      "targets": [ { "datasource": "Prometheus", "expr": "max(container_memory_working_set_bytes{namespace=\"monitoring\", container=\"grafana\"}) / max(kube_pod_container_resource_limits{namespace=\"monitoring\", container=\"grafana\", resource=\"memory\"}) * 100", "refId": "A" } ]
+    },
+    {
+      "datasource": "Prometheus", "id": 3,
+      "gridPos": { "h": 4, "w": 5, "x": 10, "y": 1 },
+      "type": "stat",
+      "title": "Longhorn volumes not healthy",
+      "description": "Count of Longhorn volumes with robustness != healthy (degraded/faulted/unknown).",
+      "fieldConfig": { "defaults": { "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 2 } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none" },
+      "targets": [ { "datasource": "Prometheus", "expr": "count(longhorn_volume_robustness != 1) or vector(0)", "refId": "A" } ]
+    },
+    {
+      "datasource": "Prometheus", "id": 4,
+      "gridPos": { "h": 4, "w": 5, "x": 15, "y": 1 },
+      "type": "stat",
+      "title": "Max node memory %",
+      "description": "Highest per-node memory utilization. hoyt-1 runs chronically hot.",
+      "fieldConfig": { "defaults": { "unit": "percent", "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 88 }, { "color": "red", "value": 95 } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none" },
+      "targets": [ { "datasource": "Prometheus", "expr": "max((1 - (node_memory_MemAvailable_bytes{job=\"node-exporter\"} / node_memory_MemTotal_bytes{job=\"node-exporter\"})) * 100)", "refId": "A" } ]
+    },
+    {
+      "datasource": "Prometheus", "id": 5,
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 1 },
+      "type": "stat",
+      "title": "Max CNPG repl lag",
+      "description": "Worst streaming replication lag across CNPG clusters.",
+      "fieldConfig": { "defaults": { "unit": "s", "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 30 }, { "color": "red", "value": 120 } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none" },
+      "targets": [ { "datasource": "Prometheus", "expr": "max(cnpg_pg_replication_lag)", "refId": "A" } ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 5 }, "id": 101, "title": "Trends", "type": "row" },
+    {
+      "datasource": "Prometheus", "id": 6,
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 6 },
+      "type": "timeseries",
+      "title": "Node memory utilization (per node)",
+      "fieldConfig": { "defaults": { "unit": "percent", "custom": { "drawStyle": "line", "fillOpacity": 10 }, "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "red", "value": 88 } ] } }, "overrides": [] },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": [ "lastNotNull", "max" ] }, "tooltip": { "mode": "multi" } },
+      "targets": [ { "datasource": "Prometheus", "expr": "(1 - (node_memory_MemAvailable_bytes{job=\"node-exporter\"} / node_memory_MemTotal_bytes{job=\"node-exporter\"})) * 100", "legendFormat": "{{instance}}", "refId": "A" } ]
+    },
+    {
+      "datasource": "Prometheus", "id": 7,
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 6 },
+      "type": "timeseries",
+      "title": "Grafana memory vs limit",
+      "fieldConfig": { "defaults": { "unit": "bytes", "custom": { "drawStyle": "line", "fillOpacity": 10 } }, "overrides": [ { "matcher": { "id": "byName", "options": "limit" }, "properties": [ { "id": "custom.drawStyle", "value": "line" }, { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } } ] } ] },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": [ "lastNotNull", "max" ] }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "datasource": "Prometheus", "expr": "max(container_memory_working_set_bytes{namespace=\"monitoring\", container=\"grafana\"})", "legendFormat": "working set", "refId": "A" },
+        { "datasource": "Prometheus", "expr": "max(kube_pod_container_resource_limits{namespace=\"monitoring\", container=\"grafana\", resource=\"memory\"})", "legendFormat": "limit", "refId": "B" }
+      ]
+    },
+    {
+      "datasource": "Prometheus", "id": 8,
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 14 },
+      "type": "timeseries",
+      "title": "CNPG replication lag (per cluster)",
+      "fieldConfig": { "defaults": { "unit": "s", "custom": { "drawStyle": "line", "fillOpacity": 10 }, "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "red", "value": 30 } ] } }, "overrides": [] },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": [ "lastNotNull", "max" ] }, "tooltip": { "mode": "multi" } },
+      "targets": [ { "datasource": "Prometheus", "expr": "max by (cluster) (cnpg_pg_replication_lag)", "legendFormat": "{{cluster}}", "refId": "A" } ]
+    },
+    {
+      "datasource": "Prometheus", "id": 9,
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 14 },
+      "type": "table",
+      "title": "Longhorn volumes — robustness",
+      "description": "1 = healthy, 2 = degraded, 3 = faulted, 0 = unknown.",
+      "fieldConfig": { "defaults": { "mappings": [ { "type": "value", "options": { "0": { "text": "unknown", "color": "yellow" }, "1": { "text": "healthy", "color": "green" }, "2": { "text": "degraded", "color": "orange" }, "3": { "text": "faulted", "color": "red" } } } ], "custom": { "cellOptions": { "type": "color-background" }, "filterable": true } }, "overrides": [] },
+      "options": { "showHeader": true, "sortBy": [ { "displayName": "Value", "desc": true } ] },
+      "targets": [ { "datasource": "Prometheus", "expr": "longhorn_volume_robustness", "format": "table", "instant": true, "refId": "A" } ],
+      "transformations": [ { "id": "organize", "options": { "excludeByName": { "Time": true, "__name__": true, "job": true, "endpoint": true, "instance": true, "namespace": true, "service": true, "container": true, "pod": true }, "renameByName": { "Value": "robustness", "volume": "Volume", "node": "Node" } } } ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 22 }, "id": 102, "title": "Recovery posture", "type": "row" },
+    {
+      "datasource": "Prometheus", "id": 10,
+      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 23 },
+      "type": "table",
+      "title": "CNPG — age of newest backup",
+      "description": "Hours since the most recent available base backup, per cluster. Alert fires at 36h.",
+      "fieldConfig": { "defaults": { "unit": "h", "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 36 }, { "color": "red", "value": 72 } ] }, "custom": { "cellOptions": { "type": "color-background" } } }, "overrides": [] },
+      "options": { "showHeader": true, "sortBy": [ { "displayName": "backup age (h)", "desc": true } ] },
+      "targets": [ { "datasource": "Prometheus", "expr": "(time() - cnpg_collector_last_available_backup_timestamp) / 3600 and cnpg_collector_last_available_backup_timestamp > 0", "format": "table", "instant": true, "refId": "A" } ],
+      "transformations": [ { "id": "organize", "options": { "excludeByName": { "Time": true, "__name__": true, "job": true, "endpoint": true, "instance": true, "namespace": true, "service": true, "container": true, "pod": true, "exported_cluster": true }, "renameByName": { "Value": "backup age (h)", "cluster": "Cluster" } } } ]
+    },
+    {
+      "datasource": "Prometheus", "id": 11,
+      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 23 },
+      "type": "table",
+      "title": "Longhorn node storage usage",
+      "description": "Per-node Longhorn storage utilization. Watch for the space-phantom case (stale backup snapshots).",
+      "fieldConfig": { "defaults": { "unit": "percent", "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 85 }, { "color": "red", "value": 92 } ] }, "custom": { "cellOptions": { "type": "color-background" } } }, "overrides": [] },
+      "options": { "showHeader": true, "sortBy": [ { "displayName": "usage %", "desc": true } ] },
+      "targets": [ { "datasource": "Prometheus", "expr": "(longhorn_node_storage_usage_bytes / longhorn_node_storage_capacity_bytes) * 100", "format": "table", "instant": true, "refId": "A" } ],
+      "transformations": [ { "id": "organize", "options": { "excludeByName": { "Time": true, "__name__": true, "job": true, "endpoint": true, "instance": true, "namespace": true, "service": true, "container": true, "pod": true }, "renameByName": { "Value": "usage %", "node": "Node" } } } ]
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": [ "resilience", "spof", "operations" ],
+  "templating": { "list": [] },
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Operational Resilience — SPOF Overview",
+  "uid": "operational-resilience",
+  "version": 1,
+  "weekStart": ""
+}

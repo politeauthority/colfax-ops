@@ -1,0 +1,260 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: resilience-alerts
+  namespace: monitoring
+  labels:
+    release: prometheusstack
+spec:
+  groups:
+    # ---------------------------------------------------------------------
+    # Grafana — the known OOM SPOF. Alerting itself runs through Alertmanager
+    # -> quigley-matrix (independent of Grafana), so these fire even if the
+    # Grafana pod is dead. Goal: warn BEFORE the OOM-kill, not after.
+    # ---------------------------------------------------------------------
+    - name: grafana-resilience
+      rules:
+        - alert: GrafanaMemoryNearLimit
+          expr: |
+            max by (pod) (
+              container_memory_working_set_bytes{namespace="monitoring", container="grafana"}
+            )
+            /
+            max by (pod) (
+              kube_pod_container_resource_limits{namespace="monitoring", container="grafana", resource="memory"}
+            ) > 0.85
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Grafana memory at {{`{{ printf \"%.0f\" $value }}`}}% of limit"
+            description: >
+              Grafana working set has been above 85% of its memory limit for
+              10m on {{`{{ $labels.pod }}`}}. This precedes the known OOM-kill
+              feedback loop — check load/dashboards before it restarts.
+
+        - alert: GrafanaRestartingRepeatedly
+          expr: |
+            increase(kube_pod_container_status_restarts_total{namespace="monitoring", container="grafana"}[1h]) >= 3
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Grafana restarting repeatedly ({{`{{ $value }}`}} in 1h)"
+            description: >
+              Grafana on {{`{{ $labels.pod }}`}} has restarted 3+ times in the
+              last hour — likely the OOM->timeout->restart loop. Dashboards may
+              be intermittently unavailable; alerting is unaffected.
+
+        - alert: GrafanaDown
+          expr: |
+            absent(up{namespace="monitoring", service=~".*grafana.*"} == 1)
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Grafana is not being scraped / is down"
+            description: >
+              No healthy Grafana scrape target for 10m. Visualisation is down;
+              alerting continues via Alertmanager. Investigate the monitoring ns.
+
+    # ---------------------------------------------------------------------
+    # CloudNativePG — q-postgres backs Grafana, quigley, HA recorder, etc.
+    # A failover blip permanently kills the HA recorder (needs a manual HA
+    # core restart), so surfacing switchover/primary-loss fast matters.
+    # cnpg_pg_replication_in_recovery == 0 marks the primary.
+    # ---------------------------------------------------------------------
+    - name: cnpg-resilience
+      rules:
+        - alert: CNPGNoPrimary
+          expr: |
+            count by (cluster) (cnpg_pg_replication_in_recovery == 0) == 0
+            and on (cluster) (count by (cluster) (cnpg_collector_up) > 0)
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "CNPG cluster {{`{{ $labels.cluster }}`}} has no primary"
+            description: >
+              No in-service primary in CNPG cluster {{`{{ $labels.cluster }}`}}
+              for 2m — a failover/switchover is in progress or stuck. Downstream
+              (Grafana, quigley, HA recorder) will see write errors; the HA
+              recorder needs a core restart if it tripped.
+
+        - alert: CNPGCollectorDown
+          expr: cnpg_collector_up == 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "CNPG collector down on {{`{{ $labels.pod }}`}}"
+            description: >
+              CNPG metrics collector for cluster {{`{{ $labels.cluster }}`}} has
+              been unreachable for 5m — instance may be unhealthy.
+
+        - alert: CNPGReplicationLagHigh
+          expr: cnpg_pg_replication_lag > 30
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "CNPG replication lag {{`{{ printf \"%.0f\" $value }}`}}s on {{`{{ $labels.cluster }}`}}"
+            description: >
+              Streaming replication lag on cluster {{`{{ $labels.cluster }}`}}
+              has exceeded 30s for 10m — a failover now would lose recent writes.
+
+        - alert: CNPGNoStreamingReplica
+          expr: |
+            max by (cluster) (cnpg_pg_replication_streaming_replicas) < 1
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "CNPG cluster {{`{{ $labels.cluster }}`}} has no streaming replica"
+            description: >
+              No streaming standby for 15m — the cluster is a single point of
+              failure until a replica rejoins. Failover would be impossible.
+
+        - alert: CNPGBackupStale
+          expr: |
+            (time() - cnpg_collector_last_available_backup_timestamp) > 129600
+            and cnpg_collector_last_available_backup_timestamp > 0
+          for: 30m
+          labels:
+            severity: warning
+          annotations:
+            summary: "CNPG {{`{{ $labels.cluster }}`}} last backup >36h old"
+            description: >
+              Newest available base backup for cluster
+              {{`{{ $labels.cluster }}`}} is over 36h old. Barman/S3 backups may
+              be failing — recovery point is degrading.
+
+        - alert: CNPGManualSwitchoverRequired
+          expr: cnpg_collector_manual_switchover_required > 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "CNPG {{`{{ $labels.cluster }}`}} needs a manual switchover"
+            description: >
+              CNPG reports a manual switchover is required for cluster
+              {{`{{ $labels.cluster }}`}} (e.g. pending a primary change to apply
+              config). Operator action needed.
+
+    # ---------------------------------------------------------------------
+    # Longhorn — robustness (2=degraded, 3=faulted), node schedulability,
+    # storage pressure, and backup staleness (the daily-backup lock issue
+    # can silently stop backups while spiking node load).
+    # ---------------------------------------------------------------------
+    - name: longhorn-resilience
+      rules:
+        - alert: LonghornVolumeDegraded
+          expr: longhorn_volume_robustness == 2
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Longhorn volume {{`{{ $labels.volume }}`}} degraded"
+            description: >
+              Volume {{`{{ $labels.volume }}`}} has been Degraded (missing a
+              healthy replica) for 15m. Rebuild may be stuck; redundancy is lost.
+
+        - alert: LonghornVolumeFaulted
+          expr: longhorn_volume_robustness == 3
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Longhorn volume {{`{{ $labels.volume }}`}} FAULTED"
+            description: >
+              Volume {{`{{ $labels.volume }}`}} is Faulted — no usable replica.
+              The consuming workload is likely down and data is at risk.
+
+        - alert: LonghornNodeStorageHigh
+          expr: |
+            (
+              longhorn_node_storage_usage_bytes
+              /
+              longhorn_node_storage_capacity_bytes
+            ) * 100 > 85
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Longhorn storage {{`{{ printf \"%.0f\" $value }}`}}% on {{`{{ $labels.node }}`}}"
+            description: >
+              Longhorn storage usage on node {{`{{ $labels.node }}`}} is above
+              85% for 15m. New/expanding volumes may fail to schedule. Note the
+              space-phantom case: stale daily-backup snapshots inflate usage —
+              check snapshots before expanding.
+
+        - alert: LonghornNodeDown
+          expr: longhorn_node_status{condition="ready"} == 0
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Longhorn node {{`{{ $labels.node }}`}} not ready"
+            description: >
+              Longhorn node {{`{{ $labels.node }}`}} has been not-ready for 10m.
+              Replica scheduling/HA for volumes on it is impaired. (mac-worker
+              coming/going is expected noise.)
+
+        - alert: LonghornVolumeBackupStale
+          expr: |
+            (time() - longhorn_volume_last_backup_at) > 172800
+            and longhorn_volume_last_backup_at > 0
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "Longhorn volume {{`{{ $labels.volume }}`}} backup >48h old"
+            description: >
+              Last backup for volume {{`{{ $labels.volume }}`}} is over 48h old.
+              The daily backup may be stuck on a stale S3 lock — check the
+              backup job and node load. (jellyfin-config is intentionally
+              excluded from backup — silence if it appears.)
+
+    # ---------------------------------------------------------------------
+    # Node memory headroom — hoyt-1 is chronically memory-saturated; prefer
+    # scheduling on colfax-1. Warn before memory pressure forces evictions/OOM.
+    # (CPU/load are covered by rules-node-load.yaml; this fills the memory gap.)
+    # ---------------------------------------------------------------------
+    - name: node-memory
+      rules:
+        - alert: NodeMemoryHighWarning
+          expr: |
+            (
+              1 - (
+                node_memory_MemAvailable_bytes{job="node-exporter"}
+                /
+                node_memory_MemTotal_bytes{job="node-exporter"}
+              )
+            ) * 100 > 88
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Node memory {{`{{ printf \"%.0f\" $value }}`}}% on {{`{{ $labels.instance }}`}}"
+            description: >
+              Memory usage on {{`{{ $labels.instance }}`}} has been above 88%
+              for 15m. Approaching eviction/OOM pressure — prefer scheduling
+              new workloads on the node with headroom.
+
+        - alert: NodeMemoryHighCritical
+          expr: |
+            (
+              1 - (
+                node_memory_MemAvailable_bytes{job="node-exporter"}
+                /
+                node_memory_MemTotal_bytes{job="node-exporter"}
+              )
+            ) * 100 > 95
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Node memory critical ({{`{{ printf \"%.0f\" $value }}`}}%) on {{`{{ $labels.instance }}`}}"
+            description: >
+              Memory on {{`{{ $labels.instance }}`}} above 95% for 5m. OOM kills
+              and pod evictions are imminent.
