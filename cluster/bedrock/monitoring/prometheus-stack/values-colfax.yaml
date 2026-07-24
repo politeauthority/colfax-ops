@@ -269,11 +269,11 @@ kube-prometheus-stack:
       retention: 15d
       resources:
         requests:
-          cpu: 200m
+          cpu: 500m
           memory: 1500Mi
         limits:
-          cpu: 500m
-          memory: 2Gi
+          cpu: 2000m
+          memory: 3Gi
       retentionSize: 30GB
       storageSpec:
         volumeClaimTemplate:
