@@ -249,10 +249,13 @@ kube-prometheus-stack:
       enabled: false
     resources:
       requests:
-        cpu: 50m
+        cpu: 100m
         memory: 512Mi
       limits:
-        cpu: 200m
+        # Grafana 13 startup (migrations + unified storage index) needs ~30-60
+        # CPU-seconds; at 200m it can't finish inside the liveness window and
+        # kill-loops forever.
+        cpu: "1"
         memory: 1Gi
     persistence:
       enabled: true
