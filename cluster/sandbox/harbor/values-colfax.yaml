@@ -46,6 +46,8 @@ harbor:
     nodeSelector:
       kubernetes.io/arch: amd64
   trivy:
+    # Vulnerability scanning unused — disabled to free the statefulset + 5Gi PVC
+    enabled: false
     nodeSelector:
       kubernetes.io/arch: amd64
   exporter:

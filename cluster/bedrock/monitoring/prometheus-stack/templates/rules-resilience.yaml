@@ -201,9 +201,12 @@ spec:
               coming/going is expected noise.)
 
         - alert: LonghornVolumeBackupStale
+          # jellyfin-config is intentionally excluded from backup — matched by
+          # both its current UUID volume name and its future human name in case
+          # it goes through the pvc-rename migration.
           expr: |
-            (time() - longhorn_volume_last_backup_at) > 172800
-            and longhorn_volume_last_backup_at > 0
+            (time() - longhorn_volume_last_backup_at{volume!~"pvc-a588e2ee.*|jellyfin-config.*"}) > 172800
+            and longhorn_volume_last_backup_at{volume!~"pvc-a588e2ee.*|jellyfin-config.*"} > 0
           for: 1h
           labels:
             severity: warning
@@ -212,8 +215,7 @@ spec:
             description: >
               Last backup for volume {{`{{ $labels.volume }}`}} is over 48h old.
               The daily backup may be stuck on a stale S3 lock — check the
-              backup job and node load. (jellyfin-config is intentionally
-              excluded from backup — silence if it appears.)
+              backup job and node load.
 
     # ---------------------------------------------------------------------
     # Node memory headroom — hoyt-1 is chronically memory-saturated; prefer
