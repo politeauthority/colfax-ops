@@ -19,7 +19,7 @@ spec:
         # - https://photos.alix.lol/api/server/ping  # immich suspended
         - https://harbor.squid-ink.us/api/v2.0/ping
         - https://ha.squid-ink.us
-        - https://linkwarden.alix.lol
+        # - https://linkwarden.alix.lol  # linkwarden suspended
         - https://api.alix.lol/healthz
         - https://graylog.alix.lol
 ---
