@@ -9,6 +9,7 @@ resources:
 
 patchesStrategicMerge:
 - overlays/resources.yaml
+- overlays/delete-dex.yaml
 - overlays/notifications-cm.yaml
 - overlays/argocd-cm-oidc.yaml
 - overlays/argocd-rbac-cm.yaml
