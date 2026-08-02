@@ -84,25 +84,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argocd-dex-server
-  namespace: argocd
-spec:
-  replicas: 0
-  template:
-    spec:
-      containers:
-        - name: dex
-          # resources:
-          #   requests:
-          #     cpu: 10m
-          #     memory: 32Mi
-          #   limits:
-          #     cpu: 100m
-          #     memory: 128Mi
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: argocd-applicationset-controller
   namespace: argocd
 spec:
