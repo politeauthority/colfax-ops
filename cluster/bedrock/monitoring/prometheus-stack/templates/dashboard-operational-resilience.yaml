@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-dashboard-operational-resilience
+data:
+  operational-resilience.json: |-
+{{ .Files.Get "dashboards/operational-resilience.json" | indent 4}}
