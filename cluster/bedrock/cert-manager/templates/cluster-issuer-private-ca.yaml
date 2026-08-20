@@ -18,6 +18,10 @@ spec:
   isCA: true
   commonName: colfax-private-ca
   secretName: private-ca
+  # Long-lived CA: without an explicit duration cert-manager defaults to 90d
+  # and rotates the CA every ~60d, breaking every device that trusts it.
+  duration: 87600h # 10 years
+  renewBefore: 720h # 30 days
   privateKey:
     algorithm: ECDSA
     size: 256
