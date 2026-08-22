@@ -1040,7 +1040,10 @@
           },
           "unit": "decgbytes"
         },
-        "overrides": []
+        "overrides": [{
+          "matcher": {"id": "byName", "options": "Total"},
+          "properties": [{"id": "color", "value": {"fixedColor": "#6e7079", "mode": "fixed"}}]
+        }]
       },
       "gridPos": {"h": 6, "w": 6, "x": 6, "y": 41},
       "id": 20,
@@ -1050,16 +1053,23 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
       "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
         "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-1\"} / 1073741824",
-        "legendFormat": "__auto",
+        "legendFormat": "Free",
         "range": true,
         "refId": "A"
+      }, {
+        "datasource": {"type": "prometheus", "uid": "prometheus"},
+        "editorMode": "code",
+        "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-1\"} / 1073741824",
+        "legendFormat": "Total",
+        "range": true,
+        "refId": "B"
       }],
       "title": "Disk 1 Free",
       "type": "stat"
@@ -1121,7 +1131,10 @@
           },
           "unit": "decgbytes"
         },
-        "overrides": []
+        "overrides": [{
+          "matcher": {"id": "byName", "options": "Total"},
+          "properties": [{"id": "color", "value": {"fixedColor": "#6e7079", "mode": "fixed"}}]
+        }]
       },
       "gridPos": {"h": 6, "w": 6, "x": 18, "y": 41},
       "id": 22,
@@ -1131,16 +1144,23 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
       "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
         "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-2\"} / 1073741824",
-        "legendFormat": "__auto",
+        "legendFormat": "Free",
         "range": true,
         "refId": "A"
+      }, {
+        "datasource": {"type": "prometheus", "uid": "prometheus"},
+        "editorMode": "code",
+        "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-2\"} / 1073741824",
+        "legendFormat": "Total",
+        "range": true,
+        "refId": "B"
       }],
       "title": "Disk 2 Free",
       "type": "stat"
@@ -1202,7 +1222,10 @@
           },
           "unit": "decgbytes"
         },
-        "overrides": []
+        "overrides": [{
+          "matcher": {"id": "byName", "options": "Total"},
+          "properties": [{"id": "color", "value": {"fixedColor": "#6e7079", "mode": "fixed"}}]
+        }]
       },
       "gridPos": {"h": 6, "w": 6, "x": 6, "y": 47},
       "id": 24,
@@ -1212,16 +1235,23 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
       "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
         "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-3\"} / 1073741824",
-        "legendFormat": "__auto",
+        "legendFormat": "Free",
         "range": true,
         "refId": "A"
+      }, {
+        "datasource": {"type": "prometheus", "uid": "prometheus"},
+        "editorMode": "code",
+        "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-3\"} / 1073741824",
+        "legendFormat": "Total",
+        "range": true,
+        "refId": "B"
       }],
       "title": "Disk 3 Free",
       "type": "stat"
@@ -1283,7 +1313,10 @@
           },
           "unit": "decgbytes"
         },
-        "overrides": []
+        "overrides": [{
+          "matcher": {"id": "byName", "options": "Total"},
+          "properties": [{"id": "color", "value": {"fixedColor": "#6e7079", "mode": "fixed"}}]
+        }]
       },
       "gridPos": {"h": 6, "w": 6, "x": 18, "y": 47},
       "id": 26,
@@ -1293,16 +1326,23 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
       "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
         "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-4\"} / 1073741824",
-        "legendFormat": "__auto",
+        "legendFormat": "Free",
         "range": true,
         "refId": "A"
+      }, {
+        "datasource": {"type": "prometheus", "uid": "prometheus"},
+        "editorMode": "code",
+        "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-4\"} / 1073741824",
+        "legendFormat": "Total",
+        "range": true,
+        "refId": "B"
       }],
       "title": "Disk 4 Free",
       "type": "stat"
@@ -1364,7 +1404,10 @@
           },
           "unit": "decgbytes"
         },
-        "overrides": []
+        "overrides": [{
+          "matcher": {"id": "byName", "options": "Total"},
+          "properties": [{"id": "color", "value": {"fixedColor": "#6e7079", "mode": "fixed"}}]
+        }]
       },
       "gridPos": {"h": 6, "w": 12, "x": 12, "y": 53},
       "id": 28,
@@ -1374,16 +1417,23 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
       "pluginVersion": "9.5.3",
       "targets": [{
         "datasource": {"type": "prometheus", "uid": "prometheus"},
         "editorMode": "code",
         "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-5\"} / 1073741824",
-        "legendFormat": "__auto",
+        "legendFormat": "Free",
         "range": true,
         "refId": "A"
+      }, {
+        "datasource": {"type": "prometheus", "uid": "prometheus"},
+        "editorMode": "code",
+        "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-5\"} / 1073741824",
+        "legendFormat": "Total",
+        "range": true,
+        "refId": "B"
       }],
       "title": "Disk 5 Free",
       "type": "stat"
