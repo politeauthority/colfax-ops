@@ -116,9 +116,12 @@ spec:
               failure until a replica rejoins. Failover would be impossible.
 
         - alert: CNPGBackupStale
+          # cnpg_collector_last_available_backup_timestamp is only maintained for
+          # barman-cloud backups; clusters using plugin-method backups (stocky)
+          # leave it frozen at the last barman backup, so exclude them here.
           expr: |
-            (time() - cnpg_collector_last_available_backup_timestamp) > 129600
-            and cnpg_collector_last_available_backup_timestamp > 0
+            (time() - cnpg_collector_last_available_backup_timestamp{namespace!="stocky"}) > 129600
+            and cnpg_collector_last_available_backup_timestamp{namespace!="stocky"} > 0
           for: 30m
           labels:
             severity: warning
