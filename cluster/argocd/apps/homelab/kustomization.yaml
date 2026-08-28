@@ -16,3 +16,4 @@ resources:
 # - ip-sentry.yaml
 - graylog.yaml
 - authentik.yaml
+- kio.yaml
