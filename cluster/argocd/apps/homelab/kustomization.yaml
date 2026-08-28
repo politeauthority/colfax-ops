@@ -17,3 +17,4 @@ resources:
 - graylog.yaml
 - authentik.yaml
 - kio.yaml
+- kio-stg.yaml
