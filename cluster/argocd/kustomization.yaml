@@ -6,6 +6,7 @@ resources:
 - apps/
 - overlays/ingress.yaml
 - overlays/secret-authentik-oidc.yaml
+- overlays/kio-ci-rbac.yaml
 
 patchesStrategicMerge:
 - overlays/resources.yaml

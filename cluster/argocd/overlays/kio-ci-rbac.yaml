@@ -1,0 +1,45 @@
+# Identity the kio repo's release workflow uses to nudge ArgoCD right after it
+# stamps private-ops, instead of waiting out ArgoCD's poll + revision cache
+# (~3–6 min). It may only get/patch the `kio` Application (to set the
+# argocd.argoproj.io/refresh annotation and read sync/health status) — nothing else.
+# The kubeconfig for GitHub (secret ARGOCD_KUBECONFIG) is built from the token
+# Secret below: kio repo, scripts/argocd-kubeconfig.sh.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kio-ci
+  namespace: argocd
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kio-ci-token
+  namespace: argocd
+  annotations:
+    kubernetes.io/service-account.name: kio-ci
+type: kubernetes.io/service-account-token
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kio-ci-refresh
+  namespace: argocd
+rules:
+  - apiGroups: [argoproj.io]
+    resources: [applications]
+    resourceNames: [kio]
+    verbs: [get, patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kio-ci-refresh
+  namespace: argocd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: kio-ci-refresh
+subjects:
+  - kind: ServiceAccount
+    name: kio-ci
+    namespace: argocd
