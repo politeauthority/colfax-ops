@@ -1,0 +1,1979 @@
+{
+  "uid": "cluster-stats",
+  "title": "Cluster Stats (long-horizon)",
+  "tags": [
+    "cluster-stats",
+    "long-horizon"
+  ],
+  "description": "Twice-daily cluster telemetry persisted by the private-ops cluster-stats CronJob (12h windows). Source: cluster_stats DB on q-postgres.",
+  "editable": true,
+  "graphTooltip": 1,
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "1h",
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timezone": "browser",
+  "timepicker": {},
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": []
+  },
+  "links": [
+    {
+      "title": "quigley-web Cluster Stats",
+      "type": "link",
+      "url": "https://web.alix.lol/cluster-stats",
+      "targetBlank": true
+    }
+  ],
+  "panels": [
+    {
+      "id": 1,
+      "type": "row",
+      "title": "Latest run",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Nodes ready",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'ready' AS metric, value FROM stat WHERE metric = 'nodes.ready' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'total' AS metric, value FROM stat WHERE metric = 'nodes.total' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "value_and_name"
+      }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Pods",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'pods' AS metric, value FROM stat WHERE metric = 'pods.total' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "value_and_name"
+      }
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Alerts firing",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 8,
+        "y": 1
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'firing' AS metric, value FROM stat WHERE metric = 'firing' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "value_and_name"
+      }
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "Media disk free",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 12,
+        "y": 1
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'free' AS metric, value FROM stat WHERE metric = 'disk.media.free_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "value_and_name"
+      }
+    },
+    {
+      "id": 6,
+      "type": "stat",
+      "title": "Error logs / 12h",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'errors' AS metric, value FROM stat WHERE metric = 'errors' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "value_and_name"
+      }
+    },
+    {
+      "id": 7,
+      "type": "stat",
+      "title": "HTTP 5xx / 12h",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, '5xx' AS metric, value FROM stat WHERE metric = 'traefik.requests.by_class' AND labels = '{\"status_class\": \"5xx\"}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "value_and_name"
+      }
+    },
+    {
+      "id": 8,
+      "type": "row",
+      "title": "Kubernetes",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      }
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "Node CPU (avg over window)",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'node' AS metric, value FROM stat WHERE metric = 'node.cpu.avg_pct'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "Node memory used",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'node' AS metric, value FROM stat WHERE metric = 'node.memory.used_pct'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "Node root disk used",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'node' AS metric, value FROM stat WHERE metric = 'node.disk.root.used_pct'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "type": "timeseries",
+      "title": "Pods by node",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 15
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'node' AS metric, value FROM stat WHERE metric = 'node.pods'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "type": "timeseries",
+      "title": "Restarts / OOMKilled per window",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 15
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'restarts' AS metric, value FROM stat WHERE metric = 'pods.restarts' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'oomkilled' AS metric, value FROM stat WHERE metric = 'pods.oomkilled' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 14,
+      "type": "timeseries",
+      "title": "Objects",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 15
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'namespaces' AS metric, value FROM stat WHERE metric = 'objects.namespaces' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'deployments' AS metric, value FROM stat WHERE metric = 'workloads.deployments' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "C",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'pvcs' AS metric, value FROM stat WHERE metric = 'objects.pvcs' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "D",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'services' AS metric, value FROM stat WHERE metric = 'objects.services' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 15,
+      "type": "timeseries",
+      "title": "Resource commitment (requests / allocatable)",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'node' AS metric, value FROM stat WHERE metric = 'node.cpu.commit_pct'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'mem ' || (labels->>'node') AS metric, value FROM stat WHERE metric = 'node.memory.commit_pct' AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 16,
+      "type": "timeseries",
+      "title": "Control plane",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 23
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'apiserver p99 (s)' AS metric, value FROM stat WHERE metric = 'apiserver.latency_p99_seconds' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'req/s' AS metric, value FROM stat WHERE metric = 'apiserver.requests_per_second' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 17,
+      "type": "timeseries",
+      "title": "etcd DB size",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 23
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'etcd' AS metric, value FROM stat WHERE metric = 'etcd.db_size_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 18,
+      "type": "row",
+      "title": "Storage",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      }
+    },
+    {
+      "id": 19,
+      "type": "timeseries",
+      "title": "Media disks used",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 32
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'mount' AS metric, value FROM stat WHERE metric = 'disk.used_pct' AND labels->>'host' = 'hoyt' AND labels->>'mount' LIKE '/mnt/media%' AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 20,
+      "type": "timeseries",
+      "title": "Media free (total)",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 32
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'free' AS metric, value FROM stat WHERE metric = 'disk.media.free_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 21,
+      "type": "timeseries",
+      "title": "Media fill rate (used delta per 12h)",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 32
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'mount' AS metric, value FROM stat WHERE metric = 'disk.used_delta_bytes' AND labels->>'host' = 'hoyt' AND labels->>'mount' LIKE '/mnt/media%' AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 22,
+      "type": "timeseries",
+      "title": "Longhorn",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 40
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'provisioned' AS metric, value FROM stat WHERE metric = 'longhorn.volumes.provisioned_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'actual' AS metric, value FROM stat WHERE metric = 'longhorn.volumes.actual_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "C",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'snapshots' AS metric, value FROM stat WHERE metric = 'longhorn.volumes.snapshot_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "D",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'backups (B2)' AS metric, value FROM stat WHERE metric = 'longhorn.backups.bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 23,
+      "type": "timeseries",
+      "title": "Longhorn node disk used",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 40
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'node' AS metric, value FROM stat WHERE metric = 'longhorn.node.used_pct'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 24,
+      "type": "timeseries",
+      "title": "Longhorn volume health",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 40
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'robustness' AS metric, value FROM stat WHERE metric = 'longhorn.volumes.by_robustness'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'backups in error' AS metric, value FROM stat WHERE metric = 'longhorn.backups.by_state' AND labels = '{\"state\": \"error\"}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 25,
+      "type": "timeseries",
+      "title": "Postgres size (CNPG)",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 48
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'cluster' AS metric, value FROM stat WHERE metric = 'cnpg.size_bytes'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 26,
+      "type": "timeseries",
+      "title": "Postgres activity / window",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 48
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'txns ' || (labels->>'cluster') AS metric, value FROM stat WHERE metric = 'cnpg.transactions' AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'wal archived ' || (labels->>'cluster') AS metric, value FROM stat WHERE metric = 'cnpg.wal.archived' AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 27,
+      "type": "timeseries",
+      "title": "Harbor",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 48
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'storage' AS metric, value FROM stat WHERE metric = 'harbor.storage_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 28,
+      "type": "row",
+      "title": "Logs & traffic (Graylog)",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 56
+      }
+    },
+    {
+      "id": 29,
+      "type": "timeseries",
+      "title": "Log volume / window",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 57
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'messages' AS metric, value FROM stat WHERE metric = 'messages' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'errors' AS metric, value FROM stat WHERE metric = 'errors' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "C",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'warnings' AS metric, value FROM stat WHERE metric = 'warnings' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 30,
+      "type": "timeseries",
+      "title": "Messages by namespace (top)",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 57
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'namespace' AS metric, value FROM stat WHERE metric = 'messages.by_namespace'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 31,
+      "type": "timeseries",
+      "title": "Errors by namespace",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 57
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'namespace' AS metric, value FROM stat WHERE metric = 'errors.by_namespace'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 32,
+      "type": "timeseries",
+      "title": "HTTP requests by class / window",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 65
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'status_class' AS metric, value FROM stat WHERE metric = 'traefik.requests.by_class'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 33,
+      "type": "timeseries",
+      "title": "HTTP requests by host",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 65
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'host' AS metric, value FROM stat WHERE metric = 'traefik.host.requests'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 34,
+      "type": "timeseries",
+      "title": "Traffic",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 65
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'unique clients' AS metric, value FROM stat WHERE metric = 'traefik.unique_clients' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'authentik logins' AS metric, value FROM stat WHERE metric = 'authentik.logins' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "C",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'authentik failures' AS metric, value FROM stat WHERE metric = 'authentik.login_failures' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "D",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, '429s' AS metric, value FROM stat WHERE metric = 'traefik.requests.429' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 35,
+      "type": "timeseries",
+      "title": "Bytes served / window",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 73
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'bytes' AS metric, value FROM stat WHERE metric = 'traefik.bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'host' AS metric, value FROM stat WHERE metric = 'traefik.host.bytes' AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 36,
+      "type": "timeseries",
+      "title": "Graylog health",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 73
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'index bytes' AS metric, value FROM stat WHERE metric = 'indices.size_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'journal bytes' AS metric, value FROM stat WHERE metric = 'journal.size_bytes' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 37,
+      "type": "row",
+      "title": "Alerts",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 81
+      }
+    },
+    {
+      "id": 38,
+      "type": "timeseries",
+      "title": "Firing / suppressed now",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 82
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'firing' AS metric, value FROM stat WHERE metric = 'firing' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "B",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'suppressed' AS metric, value FROM stat WHERE metric = 'suppressed' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "C",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, 'distinct fired in window' AS metric, value FROM stat WHERE metric = 'fired.distinct' AND labels = '{}'::jsonb AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 39,
+      "type": "timeseries",
+      "title": "Alert-instance seconds by alert / window",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 82
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT ts AS time, labels->>'alertname' AS metric, value FROM stat WHERE metric = 'fired.instance_seconds'  AND $__timeFilter(ts) ORDER BY ts",
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 40,
+      "type": "row",
+      "title": "Collector runs",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 90
+      }
+    },
+    {
+      "id": 41,
+      "type": "table",
+      "title": "Recent runs",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "cluster-stats"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 91
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cluster-stats"
+          },
+          "refId": "A",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code",
+          "rawSql": "SELECT r.id, r.started_at, r.ok, EXTRACT(EPOCH FROM (r.finished_at - r.started_at)) AS seconds, (SELECT count(*) FROM stat s WHERE s.run_id = r.id) AS stats, r.notes->'collectors' AS collectors FROM run r WHERE $__timeFilter(r.started_at) ORDER BY r.id DESC LIMIT 50"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "seconds"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true
+      }
+    }
+  ]
+}
