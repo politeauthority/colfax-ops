@@ -14,7 +14,7 @@ spec:
     path: kio/companion
     targetRevision: main
   destination:
-    namespace: kio-companion-prod
+    namespace: kio
     name: in-cluster
   syncPolicy:
     automated:
