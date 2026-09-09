@@ -1129,7 +1129,7 @@
         "uid": "prometheus"
       },
       "gridPos": {
-        "h": 5,
+        "h": 7,
         "w": 24,
         "x": 0,
         "y": 48
@@ -1137,7 +1137,7 @@
       "id": 18,
       "options": {
         "mode": "markdown",
-        "content": "**Host processes, from process-exporter.** This is the layer cAdvisor cannot reach: `kubelet`, `containerd`, `iscsid`, Longhorn engines, and kernel threads such as `nfsd` and `kswapd`. Processes are grouped by executable name (`comm`), so all `containerd-shim` instances aggregate into one row \u2014 usually what you want when asking what the node is spending itself on.\n\nTwo caveats. Disk figures come from `/proc/<pid>/io`, so **kernel threads report CPU honestly but near-zero IO bytes** \u2014 `nfsd` serving a heavy read shows up as CPU, not bytes. And a container's processes appear here *as well as* in the pod row below, under their program name rather than their pod name; the two rows are different cuts of the same node, not separate workloads."
+        "content": "**Host processes, from process-exporter.** This is the layer cAdvisor cannot reach: `kubelet`, `containerd`, `iscsid`, `ffmpeg`, Longhorn engines, and kernel threads such as `kswapd0`, `jbd2/*` and `kcompactd0`. Processes are grouped by executable name (`comm`), so all `containerd-shim` instances aggregate into one row \u2014 usually what you want when asking what the node is spending itself on.\n\n**This does not show `nfsd`.** process-exporter runs only on the Kubernetes nodes, and the NFS *server* threads live on the physical hoyt box (192.168.50.52), which is not one. What you see here is the client side \u2014 `rpciod`, `nfsiod`, `kworker/*-nfsiod`. For server-side NFS load, use the NFS panels in row 4.\n\nTwo more caveats. Disk figures come from `/proc/<pid>/io`, so **kernel threads report CPU honestly but near-zero IO bytes**. And a container's processes appear here *as well as* in the pod row below, under their program name rather than their pod name; the two rows are different cuts of the same node, not separate workloads."
       }
     },
     {
@@ -1151,7 +1151,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 53
+        "y": 55
       },
       "id": 19,
       "fieldConfig": {
@@ -1213,7 +1213,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 53
+        "y": 55
       },
       "id": 20,
       "fieldConfig": {
@@ -1275,7 +1275,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 65
+        "y": 67
       },
       "id": 21,
       "fieldConfig": {
@@ -1337,7 +1337,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 65
+        "y": 67
       },
       "id": 22,
       "fieldConfig": {
@@ -1399,7 +1399,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 77
+        "y": 79
       },
       "id": 23,
       "fieldConfig": {
@@ -1461,7 +1461,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 77
+        "y": 79
       },
       "id": 24,
       "fieldConfig": {
@@ -1533,7 +1533,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 87
+        "y": 89
       },
       "id": 25,
       "description": "One row per process group on this node. Click a column header to rank by that resource.",
@@ -1778,7 +1778,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 102
       },
       "id": 26
     },
@@ -1793,7 +1793,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 101
+        "y": 103
       },
       "id": 27,
       "options": {
@@ -1812,7 +1812,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 105
+        "y": 107
       },
       "id": 28,
       "fieldConfig": {
@@ -1874,7 +1874,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 105
+        "y": 107
       },
       "id": 29,
       "fieldConfig": {
@@ -1935,7 +1935,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 117
+        "y": 119
       },
       "id": 30,
       "fieldConfig": {
@@ -1996,7 +1996,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 117
+        "y": 119
       },
       "id": 31,
       "fieldConfig": {
@@ -2057,7 +2057,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 129
+        "y": 131
       },
       "id": 32,
       "fieldConfig": {
@@ -2119,7 +2119,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 129
+        "y": 131
       },
       "id": 33,
       "fieldConfig": {
@@ -2181,7 +2181,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 141
+        "y": 143
       },
       "id": 34,
       "description": "One row per pod on this node. Click a column header to rank by that resource.",
@@ -2413,7 +2413,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 154
+        "y": 156
       },
       "id": 35
     },
@@ -2428,7 +2428,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 155
+        "y": 157
       },
       "id": 36,
       "fieldConfig": {
@@ -2500,7 +2500,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 155
+        "y": 157
       },
       "id": 37,
       "fieldConfig": {
@@ -2571,7 +2571,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 167
+        "y": 169
       },
       "id": 38,
       "fieldConfig": {
@@ -2643,7 +2643,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 167
+        "y": 169
       },
       "id": 39,
       "fieldConfig": {
@@ -2705,7 +2705,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 179
+        "y": 181
       },
       "id": 40,
       "fieldConfig": {
@@ -2767,7 +2767,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 179
+        "y": 181
       },
       "id": 41,
       "fieldConfig": {
