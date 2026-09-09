@@ -1040,7 +1040,7 @@
         "x": 0,
         "y": 10,
         "w": 24,
-        "h": 7
+        "h": 5
       },
       "fieldConfig": {
         "defaults": {
@@ -1078,7 +1078,7 @@
         "valueMode": "color",
         "namePlacement": "auto",
         "sizing": "auto",
-        "minVizHeight": 60,
+        "minVizHeight": 40,
         "minVizWidth": 0,
         "text": {
           "titleSize": 14,
@@ -1177,7 +1177,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 17,
+        "y": 15,
         "w": 24,
         "h": 6
       },
