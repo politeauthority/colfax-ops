@@ -1004,6 +1004,18 @@
           "instant": true,
           "range": false,
           "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-6\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-6\"})",
+          "legendFormat": "Disk 6",
+          "instant": true,
+          "range": false,
+          "refId": "F"
         }
       ]
     },
@@ -1151,6 +1163,18 @@
           "instant": false,
           "range": true,
           "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-6\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-6\"})",
+          "legendFormat": "Disk 6",
+          "instant": false,
+          "range": true,
+          "refId": "F"
         }
       ]
     }
