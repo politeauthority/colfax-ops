@@ -455,7 +455,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "semi-dark-blue"
+                  "fixedColor": "#2c313a"
                 }
               }
             ]
@@ -466,7 +466,7 @@
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "vertical",
+        "orientation": "horizontal",
         "textMode": "value_and_name",
         "wideLayout": false,
         "reduceOptions": {
@@ -559,7 +559,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "semi-dark-blue"
+                  "fixedColor": "#2c313a"
                 }
               }
             ]
@@ -570,7 +570,7 @@
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "vertical",
+        "orientation": "horizontal",
         "textMode": "value_and_name",
         "wideLayout": false,
         "reduceOptions": {
@@ -663,7 +663,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "semi-dark-blue"
+                  "fixedColor": "#2c313a"
                 }
               }
             ]
@@ -674,7 +674,7 @@
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "vertical",
+        "orientation": "horizontal",
         "textMode": "value_and_name",
         "wideLayout": false,
         "reduceOptions": {
@@ -767,7 +767,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "semi-dark-blue"
+                  "fixedColor": "#2c313a"
                 }
               }
             ]
@@ -778,7 +778,7 @@
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "vertical",
+        "orientation": "horizontal",
         "textMode": "value_and_name",
         "wideLayout": false,
         "reduceOptions": {
@@ -871,7 +871,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "semi-dark-blue"
+                  "fixedColor": "#2c313a"
                 }
               }
             ]
@@ -882,7 +882,7 @@
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "vertical",
+        "orientation": "horizontal",
         "textMode": "value_and_name",
         "wideLayout": false,
         "reduceOptions": {
@@ -975,7 +975,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "semi-dark-blue"
+                  "fixedColor": "#2c313a"
                 }
               }
             ]
@@ -986,7 +986,7 @@
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "vertical",
+        "orientation": "horizontal",
         "textMode": "value_and_name",
         "wideLayout": false,
         "reduceOptions": {
