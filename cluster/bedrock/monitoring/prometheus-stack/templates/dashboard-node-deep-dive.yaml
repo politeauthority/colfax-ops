@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-node-deep-dive
+data:
+  node-deep-dive.json: |-
+{{ .Files.Get "dashboards/node-deep-dive.json" | indent 4}}
