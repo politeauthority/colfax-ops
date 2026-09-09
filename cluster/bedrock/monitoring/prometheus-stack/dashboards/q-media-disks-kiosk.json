@@ -1040,7 +1040,7 @@
         "x": 0,
         "y": 10,
         "w": 24,
-        "h": 5
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
@@ -1073,15 +1073,14 @@
       },
       "options": {
         "displayMode": "lcd",
-        "orientation": "vertical",
+        "orientation": "horizontal",
         "showUnfilled": true,
         "valueMode": "color",
         "namePlacement": "auto",
         "sizing": "auto",
-        "minVizHeight": 40,
-        "minVizWidth": 0,
+        "minVizHeight": 10,
+        "minVizWidth": 8,
         "text": {
-          "titleSize": 14,
           "valueSize": 22
         },
         "reduceOptions": {
@@ -1177,7 +1176,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 15,
+        "y": 16,
         "w": 24,
         "h": 6
       },
