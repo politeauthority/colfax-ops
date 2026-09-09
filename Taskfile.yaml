@@ -35,40 +35,18 @@ tasks:
     deps: [setup-helm]
     cmds:
       - |
-        echo "Checking cert-manager"
-        helm dependency build cluster/bedrock/cert-manager
-        helm lint cluster/bedrock/cert-manager -f cluster/bedrock/cert-manager/values-colfax.yaml
-
-        echo "Checking fluentbit"
-        helm dependency build cluster/bedrock/fluentbit
-        helm lint cluster/bedrock/fluentbit -f cluster/bedrock/fluentbit/values-colfax.yaml
-
-        echo "Checking ingress-private"
-        helm dependency build cluster/bedrock/ingress/ingress-private
-        helm lint cluster/bedrock/ingress/ingress-private -f cluster/bedrock/ingress/ingress-private/values-colfax.yaml
-
-        echo "Checking ingress-public"
-        helm dependency build cluster/bedrock/ingress/ingress-public
-        helm lint cluster/bedrock/ingress/ingress-public -f cluster/bedrock/ingress/ingress-public/values-colfax.yaml
-
-        echo "Checking nginx-gateway-fabric/private"
-        helm dependency build cluster/bedrock/nginx-gateway-fabric/private
-        helm lint cluster/bedrock/nginx-gateway-fabric/private -f cluster/bedrock/nginx-gateway-fabric/private/values-colfax.yaml
-
-        echo "Checking nginx-gateway-fabric/public"
-        helm dependency build cluster/bedrock/nginx-gateway-fabric/public
-        helm lint cluster/bedrock/nginx-gateway-fabric/public -f cluster/bedrock/nginx-gateway-fabric/public/values-colfax.yaml
-
-        echo "Checking monitoring/prometheus-stack"
-        helm dependency build cluster/bedrock/monitoring/prometheus-stack
-        helm lint cluster/bedrock/monitoring/prometheus-stack -f cluster/bedrock/monitoring/prometheus-stack/values-colfax.yaml
-
-        echo "Checking storage/nfs-client"
-        helm dependency build cluster/bedrock/storage/nfs-client
-        helm lint cluster/bedrock/storage/nfs-client -f cluster/bedrock/storage/nfs-client/values-colfax.yaml
-
-        echo "Checking harbor"
-        helm dependency build cluster/sandbox/harbor
-        helm lint cluster/sandbox/harbor -f cluster/sandbox/harbor/values-colfax.yaml
+        set -e
+        # nginx-gateway-fabric-private is decommissioned and its upstream chart is gone
+        # from helm.nginx.com; skip it until the directory is removed.
+        skip="cluster/bedrock/ingress/nginx-gateway-fabric-private"
+        for chart in $(find cluster -name Chart.yaml -not -path '*/charts/*' -exec dirname {} \; | sort); do
+          if [ "$chart" = "$skip" ]; then
+            echo "Skipping $chart"
+            continue
+          fi
+          echo "Checking $chart"
+          helm dependency build "$chart"
+          helm lint "$chart" -f "$chart/values-colfax.yaml"
+        done
 
     silent: true
