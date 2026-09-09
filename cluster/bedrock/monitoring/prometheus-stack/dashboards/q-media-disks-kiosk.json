@@ -342,7 +342,7 @@
         "defaults": {
           "unit": "decbytes",
           "color": {
-            "mode": "thresholds"
+            "mode": "continuous-GrYlRd"
           },
           "thresholds": {
             "mode": "absolute",
@@ -354,17 +354,55 @@
             ]
           },
           "mappings": [],
-          "decimals": 0
+          "decimals": 0,
+          "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Incomplete"
+            },
+            "properties": [
+              {
+                "id": "max",
+                "value": 100000000000.0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Complete"
+            },
+            "properties": [
+              {
+                "id": "max",
+                "value": 200000000000.0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              }
+            ]
+          }
+        ]
       },
       "options": {
         "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "center",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "textMode": "value_and_name",
-        "wideLayout": true,
+        "wideLayout": false,
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
