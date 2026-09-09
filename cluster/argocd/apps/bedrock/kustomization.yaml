@@ -9,6 +9,7 @@ resources:
 - gateway-api-crds.yaml
 - prometheus-stack.yaml
 - blackbox-exporter.yaml
+- process-exporter.yaml
 - sealed-secrets.yaml
 - metallb.yaml
 - traefik-crds.yaml

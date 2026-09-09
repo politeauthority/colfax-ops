@@ -1,0 +1,24 @@
+image:
+  repository: ncabatoff/process-exporter
+  tag: v0.8.7
+  pullPolicy: IfNotPresent
+
+# Port process-exporter listens on. 9256 is its upstream default.
+port: 9256
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    # No CPU limit on purpose: this is a sampling agent and CFS throttling
+    # would skew the very numbers it is meant to report.
+    memory: 256Mi
+
+# Group every process by its comm (executable basename), so the dashboard can
+# rank them. See templates/configmap.yaml for why the regex is '.*' and not '.+'.
+config:
+  process_names:
+    - name: "{{.Comm}}"
+      cmdline:
+        - '.*'

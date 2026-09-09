@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: process-exporter
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: process-exporter
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: process-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: process-exporter
+      annotations:
+        checksum/config: {{ toYaml .Values.config | sha256sum }}
+    spec:
+      # Needed to see host PIDs; without it /host/proc would only show this pod.
+      hostPID: true
+      securityContext:
+        # /proc/<pid>/io is mode 0400 owned by the process user, so reading IO
+        # counters for other users' processes requires root.
+        runAsUser: 0
+        runAsGroup: 0
+        runAsNonRoot: false
+      tolerations:
+        # Match node-exporter: run on every node, control-plane included.
+        - effect: NoSchedule
+          operator: Exists
+      containers:
+        - name: process-exporter
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - --procfs=/host/proc
+            - --config.path=/config/process-exporter.yaml
+            - --web.listen-address=:{{ .Values.port }}
+            # Per-thread series would multiply cardinality by ~10 for no gain
+            # at node level, and smaps adds a costly read per process per scrape.
+            - --threads=false
+            - --gather-smaps=false
+            # Drop groups once their processes exit, instead of reporting stale zeros.
+            - --remove-empty-groups
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 5
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 3
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: proc
+              mountPath: /host/proc
+              readOnly: true
+            - name: config
+              mountPath: /config
+              readOnly: true
+      volumes:
+        - name: proc
+          hostPath:
+            path: /proc
+            type: Directory
+        - name: config
+          configMap:
+            name: process-exporter-config
