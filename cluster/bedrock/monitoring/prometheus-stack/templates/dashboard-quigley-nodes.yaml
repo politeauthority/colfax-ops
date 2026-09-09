@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-quigley-nodes
+data:
+  quigley-nodes.json: |-
+{{ .Files.Get "dashboards/quigley-nodes.json" | indent 4}}

@@ -2220,8 +2220,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Kubernetes / Node Deep Dive",
-  "uid": "k8s-node-deep-dive",
+  "title": "Quigley Nodes",
+  "uid": "quigley-nodes",
   "version": 1,
   "weekStart": ""
 }
