@@ -816,7 +816,7 @@
         "x": 0,
         "y": 10,
         "w": 24,
-        "h": 5
+        "h": 7
       },
       "fieldConfig": {
         "defaults": {
@@ -852,13 +852,13 @@
         "orientation": "horizontal",
         "showUnfilled": true,
         "valueMode": "color",
-        "namePlacement": "left",
+        "namePlacement": "top",
         "sizing": "auto",
         "minVizHeight": 12,
         "minVizWidth": 8,
         "text": {
-          "titleSize": 14,
-          "valueSize": 16
+          "titleSize": 16,
+          "valueSize": 18
         },
         "reduceOptions": {
           "calcs": [
@@ -941,9 +941,9 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 15,
+        "y": 17,
         "w": 24,
-        "h": 8
+        "h": 7
       },
       "fieldConfig": {
         "defaults": {
