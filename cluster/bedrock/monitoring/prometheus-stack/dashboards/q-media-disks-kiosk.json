@@ -40,7 +40,7 @@
         "x": 0,
         "y": 0,
         "w": 6,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
@@ -85,8 +85,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 20,
-          "valueSize": 64
+          "titleSize": 16,
+          "valueSize": 44
         }
       },
       "targets": [
@@ -116,7 +116,7 @@
         "x": 6,
         "y": 0,
         "w": 4,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
@@ -161,8 +161,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 56
+          "titleSize": 16,
+          "valueSize": 36
         }
       },
       "targets": [
@@ -192,7 +192,7 @@
         "x": 10,
         "y": 0,
         "w": 5,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
@@ -237,8 +237,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 56
+          "titleSize": 16,
+          "valueSize": 36
         }
       },
       "targets": [
@@ -268,7 +268,7 @@
         "x": 15,
         "y": 0,
         "w": 5,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
@@ -325,8 +325,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 56
+          "titleSize": 16,
+          "valueSize": 36
         }
       },
       "targets": [
@@ -356,7 +356,7 @@
         "x": 20,
         "y": 0,
         "w": 4,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
@@ -393,8 +393,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 28
+          "titleSize": 16,
+          "valueSize": 20
         }
       },
       "targets": [
@@ -434,9 +434,9 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 5,
+        "y": 4,
         "w": 5,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
@@ -481,8 +481,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -510,9 +510,9 @@
       },
       "gridPos": {
         "x": 5,
-        "y": 5,
+        "y": 4,
         "w": 5,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
@@ -557,8 +557,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -586,9 +586,9 @@
       },
       "gridPos": {
         "x": 10,
-        "y": 5,
+        "y": 4,
         "w": 5,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
@@ -633,8 +633,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -662,9 +662,9 @@
       },
       "gridPos": {
         "x": 15,
-        "y": 5,
+        "y": 4,
         "w": 5,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
@@ -709,8 +709,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -738,9 +738,9 @@
       },
       "gridPos": {
         "x": 20,
-        "y": 5,
+        "y": 4,
         "w": 4,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
@@ -785,8 +785,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -814,9 +814,9 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 13,
+        "y": 10,
         "w": 24,
-        "h": 6
+        "h": 5
       },
       "fieldConfig": {
         "defaults": {
@@ -854,11 +854,11 @@
         "valueMode": "color",
         "namePlacement": "left",
         "sizing": "auto",
-        "minVizHeight": 16,
+        "minVizHeight": 12,
         "minVizWidth": 8,
         "text": {
-          "titleSize": 18,
-          "valueSize": 22
+          "titleSize": 14,
+          "valueSize": 16
         },
         "reduceOptions": {
           "calcs": [
@@ -875,20 +875,11 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"} / node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"})",
-          "legendFormat": "{{mountpoint}}",
+          "expr": "label_replace(100 * (1 - node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"} / node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"}), \"disk\", \"Disk $1\", \"mountpoint\", \".*media-([0-9]+)\")",
+          "legendFormat": "{{disk}}",
           "instant": true,
           "range": false,
           "refId": "A"
-        }
-      ],
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": ".*media-([0-9]+)",
-            "renamePattern": "Disk $1"
-          }
         }
       ]
     },
@@ -902,9 +893,9 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 19,
+        "y": 15,
         "w": 24,
-        "h": 10
+        "h": 8
       },
       "fieldConfig": {
         "defaults": {
@@ -983,20 +974,11 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"} / node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"})",
-          "legendFormat": "{{mountpoint}}",
+          "expr": "label_replace(100 * (1 - node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"} / node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"}), \"disk\", \"Disk $1\", \"mountpoint\", \".*media-([0-9]+)\")",
+          "legendFormat": "{{disk}}",
           "instant": false,
           "range": true,
           "refId": "A"
-        }
-      ],
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": ".*media-([0-9]+)",
-            "renamePattern": "Disk $1"
-          }
         }
       ]
     }
