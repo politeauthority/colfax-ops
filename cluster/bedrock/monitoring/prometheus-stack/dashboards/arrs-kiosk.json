@@ -215,17 +215,17 @@
       "fieldConfig": {
         "defaults": {
           "color": {"mode": "thresholds"},
-          "max": 15000000000000,
+          "max": 16000000000000,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {"color": "red", "value": null},
-              {"color": "orange", "value": 107374182400},
-              {"color": "green", "value": 536870912000}
+              {"color": "orange", "value": 100000000000},
+              {"color": "green", "value": 500000000000}
             ]
           },
-          "unit": "bytes"
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -243,7 +243,7 @@
         {
           "datasource": {"type": "prometheus", "uid": "prometheus"},
           "editorMode": "code",
-          "expr": "label_replace(sonarr_rootfolder_freespace_bytes, \"drive\", \"$1\", \"path\", \"/mnt/([^/]+)/.*\")",
+          "expr": "label_replace(node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"}, \"drive\", \"$1\", \"mountpoint\", \"/mnt/(.*)\")",
           "instant": true,
           "legendFormat": "{{drive}}",
           "refId": "A"

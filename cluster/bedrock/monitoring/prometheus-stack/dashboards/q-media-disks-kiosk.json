@@ -259,7 +259,7 @@
     {
       "id": 4,
       "type": "stat",
-      "title": "Days Until Full",
+      "title": "Total Size",
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
@@ -272,7 +272,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "d",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -280,38 +280,18 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "semi-dark-blue",
                 "value": null
-              },
-              {
-                "color": "orange",
-                "value": 30
-              },
-              {
-                "color": "green",
-                "value": 90
               }
             ]
           },
-          "mappings": [
-            {
-              "type": "range",
-              "options": {
-                "from": 100000,
-                "to": null,
-                "result": {
-                  "text": "\u221e",
-                  "color": "green"
-                }
-              }
-            }
-          ],
-          "decimals": 0
+          "mappings": [],
+          "decimals": 2
         },
         "overrides": []
       },
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
@@ -336,7 +316,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"}) / clamp_min(-deriv(sum(node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"})[7d:1h]) * 86400, 1)",
+          "expr": "sum(node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"})",
           "legendFormat": "",
           "instant": true,
           "range": false,
@@ -435,7 +415,7 @@
       "gridPos": {
         "x": 0,
         "y": 4,
-        "w": 5,
+        "w": 4,
         "h": 6
       },
       "fieldConfig": {
@@ -509,9 +489,9 @@
         "uid": "prometheus"
       },
       "gridPos": {
-        "x": 5,
+        "x": 4,
         "y": 4,
-        "w": 5,
+        "w": 4,
         "h": 6
       },
       "fieldConfig": {
@@ -585,9 +565,9 @@
         "uid": "prometheus"
       },
       "gridPos": {
-        "x": 10,
+        "x": 8,
         "y": 4,
-        "w": 5,
+        "w": 4,
         "h": 6
       },
       "fieldConfig": {
@@ -661,9 +641,9 @@
         "uid": "prometheus"
       },
       "gridPos": {
-        "x": 15,
+        "x": 12,
         "y": 4,
-        "w": 5,
+        "w": 4,
         "h": 6
       },
       "fieldConfig": {
@@ -737,7 +717,7 @@
         "uid": "prometheus"
       },
       "gridPos": {
-        "x": 20,
+        "x": 16,
         "y": 4,
         "w": 4,
         "h": 6
@@ -805,6 +785,82 @@
       ]
     },
     {
+      "id": 13,
+      "type": "stat",
+      "title": "Disk 6 \u2014 Free",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 20,
+        "y": 4,
+        "w": 4,
+        "h": 6
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decbytes",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 500000000000.0
+              },
+              {
+                "color": "green",
+                "value": 1500000000000.0
+              }
+            ]
+          },
+          "mappings": [],
+          "decimals": 2
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "textMode": "value",
+        "wideLayout": true,
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 16,
+          "valueSize": 32
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_avail_bytes{mountpoint=\"/mnt/media-6\"}",
+          "legendFormat": "free",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
       "id": 11,
       "type": "bargauge",
       "title": "Used per disk",
@@ -816,7 +872,7 @@
         "x": 0,
         "y": 10,
         "w": 24,
-        "h": 5
+        "h": 7
       },
       "fieldConfig": {
         "defaults": {
@@ -852,13 +908,13 @@
         "orientation": "horizontal",
         "showUnfilled": true,
         "valueMode": "color",
-        "namePlacement": "left",
+        "namePlacement": "top",
         "sizing": "auto",
         "minVizHeight": 12,
         "minVizWidth": 8,
         "text": {
-          "titleSize": 14,
-          "valueSize": 16
+          "titleSize": 16,
+          "valueSize": 18
         },
         "reduceOptions": {
           "calcs": [
@@ -928,6 +984,18 @@
           "instant": true,
           "range": false,
           "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-6\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-6\"})",
+          "legendFormat": "Disk 6",
+          "instant": true,
+          "range": false,
+          "refId": "F"
         }
       ]
     },
@@ -941,9 +1009,9 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 15,
+        "y": 17,
         "w": 24,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
@@ -1075,6 +1143,18 @@
           "instant": false,
           "range": true,
           "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-6\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-6\"})",
+          "legendFormat": "Disk 6",
+          "instant": false,
+          "range": true,
+          "refId": "F"
         }
       ]
     }
