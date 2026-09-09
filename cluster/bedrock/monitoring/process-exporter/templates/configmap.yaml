@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: process-exporter-config
+  namespace: monitoring
+data:
+  # The cmdline regex is '.*' rather than '.+' deliberately. process-exporter
+  # matches against strings.Join(cmdline, " "), and kernel threads have an empty
+  # cmdline -- so '.+' would silently drop nfsd, kswapd, jbd2 and friends, which
+  # are exactly the processes cAdvisor cannot see and this exporter exists to show.
+  process-exporter.yaml: |
+{{ toYaml .Values.config | indent 4 }}

@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: process-exporter
+  namespace: monitoring
+  labels:
+    # Required: the Prometheus CR selects podMonitors on this label.
+    release: prometheusstack
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: process-exporter
+  podMetricsEndpoints:
+    - port: metrics
+      interval: 30s
+      # Scraping /proc for every process is not free; give it room.
+      scrapeTimeout: 20s
+      relabelings:
+        # Label series by node name rather than pod IP, so the Quigley Nodes
+        # dashboard can filter with the same $node value it uses for cAdvisor.
+        - sourceLabels: [__meta_kubernetes_pod_node_name]
+          targetLabel: node
+        - sourceLabels: [__meta_kubernetes_pod_node_name]
+          targetLabel: instance

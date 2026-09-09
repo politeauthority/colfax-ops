@@ -1,0 +1,6 @@
+apiVersion: v2
+name: process-exporter
+description: Per-process CPU, memory and disk IO metrics for Quigley cluster nodes
+type: application
+version: 0.0.1
+appVersion: "0.8.7"
