@@ -875,11 +875,59 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "label_replace(100 * (1 - node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"} / node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"}), \"disk\", \"Disk $1\", \"mountpoint\", \".*media-([0-9]+)\")",
-          "legendFormat": "{{disk}}",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-1\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-1\"})",
+          "legendFormat": "Disk 1",
           "instant": true,
           "range": false,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-2\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-2\"})",
+          "legendFormat": "Disk 2",
+          "instant": true,
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-3\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-3\"})",
+          "legendFormat": "Disk 3",
+          "instant": true,
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-4\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-4\"})",
+          "legendFormat": "Disk 4",
+          "instant": true,
+          "range": false,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-5\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-5\"})",
+          "legendFormat": "Disk 5",
+          "instant": true,
+          "range": false,
+          "refId": "E"
         }
       ]
     },
@@ -974,11 +1022,59 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "label_replace(100 * (1 - node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"} / node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"}), \"disk\", \"Disk $1\", \"mountpoint\", \".*media-([0-9]+)\")",
-          "legendFormat": "{{disk}}",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-1\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-1\"})",
+          "legendFormat": "Disk 1",
           "instant": false,
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-2\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-2\"})",
+          "legendFormat": "Disk 2",
+          "instant": false,
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-3\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-3\"})",
+          "legendFormat": "Disk 3",
+          "instant": false,
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-4\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-4\"})",
+          "legendFormat": "Disk 4",
+          "instant": false,
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-5\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-5\"})",
+          "legendFormat": "Disk 5",
+          "instant": false,
+          "range": true,
+          "refId": "E"
         }
       ]
     }
