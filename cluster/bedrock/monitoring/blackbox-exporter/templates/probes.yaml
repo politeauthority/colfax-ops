@@ -43,7 +43,10 @@ spec:
         # - http://ersatztv.q-media.svc.cluster.local/health  # ersatztv suspended
         - http://radarr.q-media.svc.cluster.local/ping
         - http://sonarr.q-media.svc.cluster.local/ping
-        - http://sabnzbd-web.q-media.svc.cluster.local
+        # Probe sab's version API, not the UI root: rendering "/" walks the whole
+        # download queue, so it takes 30-50s with a large queue while this answers
+        # in ~4ms. Matches the readinessProbe in private-ops #81.
+        - "http://sabnzbd-web.q-media.svc.cluster.local/api?mode=version&output=json"
         - http://argocd-server.argocd.svc.cluster.local
         - http://prometheusstack-grafana.monitoring.svc.cluster.local/api/health
         - http://stocky-api.stocky.svc.cluster.local:8000/_health
