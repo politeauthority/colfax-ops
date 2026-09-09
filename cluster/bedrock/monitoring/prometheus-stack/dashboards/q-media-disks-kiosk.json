@@ -44,7 +44,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -196,7 +196,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -360,7 +360,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -440,7 +440,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -464,36 +464,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -519,18 +497,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-1\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -550,7 +516,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -574,36 +540,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -629,18 +573,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-2\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -660,7 +592,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -684,36 +616,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -739,18 +649,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-3\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -770,7 +668,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -794,36 +692,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -849,18 +725,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-4\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -880,7 +744,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -904,36 +768,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -959,18 +801,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-5\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -1056,7 +886,7 @@
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "/mnt/media-(\\d+)",
+            "regex": ".*media-([0-9]+)",
             "renamePattern": "Disk $1"
           }
         }
@@ -1164,7 +994,7 @@
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "/mnt/media-(\\d+)",
+            "regex": ".*media-([0-9]+)",
             "renamePattern": "Disk $1"
           }
         }
