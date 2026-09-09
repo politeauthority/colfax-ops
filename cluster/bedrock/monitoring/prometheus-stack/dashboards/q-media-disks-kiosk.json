@@ -444,15 +444,31 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "of"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "semi-dark-blue"
+                }
+              }
+            ]
+          }
+        ]
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "auto",
-        "textMode": "value",
-        "wideLayout": true,
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "wideLayout": false,
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -461,8 +477,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 16,
-          "valueSize": 32
+          "titleSize": 14,
+          "valueSize": 22
         }
       },
       "targets": [
@@ -477,6 +493,18 @@
           "instant": false,
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-1\"}",
+          "legendFormat": "of",
+          "instant": true,
+          "range": false,
+          "refId": "B"
         }
       ]
     },
@@ -520,15 +548,31 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "of"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "semi-dark-blue"
+                }
+              }
+            ]
+          }
+        ]
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "auto",
-        "textMode": "value",
-        "wideLayout": true,
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "wideLayout": false,
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -537,8 +581,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 16,
-          "valueSize": 32
+          "titleSize": 14,
+          "valueSize": 22
         }
       },
       "targets": [
@@ -553,6 +597,18 @@
           "instant": false,
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-2\"}",
+          "legendFormat": "of",
+          "instant": true,
+          "range": false,
+          "refId": "B"
         }
       ]
     },
@@ -596,15 +652,31 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "of"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "semi-dark-blue"
+                }
+              }
+            ]
+          }
+        ]
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "auto",
-        "textMode": "value",
-        "wideLayout": true,
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "wideLayout": false,
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -613,8 +685,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 16,
-          "valueSize": 32
+          "titleSize": 14,
+          "valueSize": 22
         }
       },
       "targets": [
@@ -629,6 +701,18 @@
           "instant": false,
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-3\"}",
+          "legendFormat": "of",
+          "instant": true,
+          "range": false,
+          "refId": "B"
         }
       ]
     },
@@ -672,15 +756,31 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "of"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "semi-dark-blue"
+                }
+              }
+            ]
+          }
+        ]
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "auto",
-        "textMode": "value",
-        "wideLayout": true,
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "wideLayout": false,
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -689,8 +789,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 16,
-          "valueSize": 32
+          "titleSize": 14,
+          "valueSize": 22
         }
       },
       "targets": [
@@ -705,6 +805,18 @@
           "instant": false,
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-4\"}",
+          "legendFormat": "of",
+          "instant": true,
+          "range": false,
+          "refId": "B"
         }
       ]
     },
@@ -748,15 +860,31 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "of"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "semi-dark-blue"
+                }
+              }
+            ]
+          }
+        ]
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "auto",
-        "textMode": "value",
-        "wideLayout": true,
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "wideLayout": false,
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -765,8 +893,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 16,
-          "valueSize": 32
+          "titleSize": 14,
+          "valueSize": 22
         }
       },
       "targets": [
@@ -781,6 +909,18 @@
           "instant": false,
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-5\"}",
+          "legendFormat": "of",
+          "instant": true,
+          "range": false,
+          "refId": "B"
         }
       ]
     },
@@ -824,15 +964,31 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "of"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "semi-dark-blue"
+                }
+              }
+            ]
+          }
+        ]
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "auto",
-        "textMode": "value",
-        "wideLayout": true,
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "wideLayout": false,
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -841,8 +997,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 16,
-          "valueSize": 32
+          "titleSize": 14,
+          "valueSize": 22
         }
       },
       "targets": [
@@ -857,6 +1013,18 @@
           "instant": false,
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-6\"}",
+          "legendFormat": "of",
+          "instant": true,
+          "range": false,
+          "refId": "B"
         }
       ]
     },
@@ -905,16 +1073,16 @@
       },
       "options": {
         "displayMode": "lcd",
-        "orientation": "horizontal",
+        "orientation": "vertical",
         "showUnfilled": true,
         "valueMode": "color",
-        "namePlacement": "top",
+        "namePlacement": "auto",
         "sizing": "auto",
-        "minVizHeight": 12,
-        "minVizWidth": 8,
+        "minVizHeight": 60,
+        "minVizWidth": 0,
         "text": {
-          "titleSize": 16,
-          "valueSize": 18
+          "titleSize": 14,
+          "valueSize": 22
         },
         "reduceOptions": {
           "calcs": [
