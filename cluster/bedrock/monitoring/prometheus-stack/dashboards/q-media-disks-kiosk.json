@@ -40,11 +40,11 @@
         "x": 0,
         "y": 0,
         "w": 6,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -85,8 +85,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 20,
-          "valueSize": 64
+          "titleSize": 16,
+          "valueSize": 44
         }
       },
       "targets": [
@@ -116,7 +116,7 @@
         "x": 6,
         "y": 0,
         "w": 4,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
@@ -161,8 +161,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 56
+          "titleSize": 16,
+          "valueSize": 36
         }
       },
       "targets": [
@@ -192,11 +192,11 @@
         "x": 10,
         "y": 0,
         "w": 5,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -237,8 +237,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 56
+          "titleSize": 16,
+          "valueSize": 36
         }
       },
       "targets": [
@@ -268,7 +268,7 @@
         "x": 15,
         "y": 0,
         "w": 5,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
@@ -325,8 +325,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 56
+          "titleSize": 16,
+          "valueSize": 36
         }
       },
       "targets": [
@@ -356,11 +356,11 @@
         "x": 20,
         "y": 0,
         "w": 4,
-        "h": 5
+        "h": 4
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -393,8 +393,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 28
+          "titleSize": 16,
+          "valueSize": 20
         }
       },
       "targets": [
@@ -434,13 +434,13 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 5,
+        "y": 4,
         "w": 5,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -464,36 +464,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -503,8 +481,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -519,18 +497,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-1\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -544,13 +510,13 @@
       },
       "gridPos": {
         "x": 5,
-        "y": 5,
+        "y": 4,
         "w": 5,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -574,36 +540,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -613,8 +557,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -629,18 +573,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-2\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -654,13 +586,13 @@
       },
       "gridPos": {
         "x": 10,
-        "y": 5,
+        "y": 4,
         "w": 5,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -684,36 +616,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -723,8 +633,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -739,18 +649,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-3\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -764,13 +662,13 @@
       },
       "gridPos": {
         "x": 15,
-        "y": 5,
+        "y": 4,
         "w": 5,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -794,36 +692,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -833,8 +709,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -849,18 +725,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-4\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -874,13 +738,13 @@
       },
       "gridPos": {
         "x": 20,
-        "y": 5,
+        "y": 4,
         "w": 4,
-        "h": 8
+        "h": 6
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
+          "unit": "decbytes",
           "color": {
             "mode": "thresholds"
           },
@@ -904,36 +768,14 @@
           "mappings": [],
           "decimals": 2
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "of"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "transparent"
-                }
-              },
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "options": {
         "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
-        "textMode": "value_and_name",
+        "textMode": "value",
         "wideLayout": true,
         "reduceOptions": {
           "calcs": [
@@ -943,8 +785,8 @@
           "values": false
         },
         "text": {
-          "titleSize": 18,
-          "valueSize": 48
+          "titleSize": 16,
+          "valueSize": 32
         }
       },
       "targets": [
@@ -959,18 +801,6 @@
           "instant": false,
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "node_filesystem_size_bytes{mountpoint=\"/mnt/media-5\"}",
-          "legendFormat": "of",
-          "instant": true,
-          "range": false,
-          "refId": "B"
         }
       ]
     },
@@ -984,9 +814,9 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 13,
+        "y": 10,
         "w": 24,
-        "h": 6
+        "h": 5
       },
       "fieldConfig": {
         "defaults": {
@@ -1024,11 +854,11 @@
         "valueMode": "color",
         "namePlacement": "left",
         "sizing": "auto",
-        "minVizHeight": 16,
+        "minVizHeight": 12,
         "minVizWidth": 8,
         "text": {
-          "titleSize": 18,
-          "valueSize": 22
+          "titleSize": 14,
+          "valueSize": 16
         },
         "reduceOptions": {
           "calcs": [
@@ -1045,20 +875,59 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"} / node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"})",
-          "legendFormat": "{{mountpoint}}",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-1\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-1\"})",
+          "legendFormat": "Disk 1",
           "instant": true,
           "range": false,
           "refId": "A"
-        }
-      ],
-      "transformations": [
+        },
         {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "/mnt/media-(\\d+)",
-            "renamePattern": "Disk $1"
-          }
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-2\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-2\"})",
+          "legendFormat": "Disk 2",
+          "instant": true,
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-3\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-3\"})",
+          "legendFormat": "Disk 3",
+          "instant": true,
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-4\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-4\"})",
+          "legendFormat": "Disk 4",
+          "instant": true,
+          "range": false,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-5\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-5\"})",
+          "legendFormat": "Disk 5",
+          "instant": true,
+          "range": false,
+          "refId": "E"
         }
       ]
     },
@@ -1072,9 +941,9 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 19,
+        "y": 15,
         "w": 24,
-        "h": 10
+        "h": 8
       },
       "fieldConfig": {
         "defaults": {
@@ -1153,20 +1022,59 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=~\"/mnt/media-.*\"} / node_filesystem_size_bytes{mountpoint=~\"/mnt/media-.*\"})",
-          "legendFormat": "{{mountpoint}}",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-1\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-1\"})",
+          "legendFormat": "Disk 1",
           "instant": false,
           "range": true,
           "refId": "A"
-        }
-      ],
-      "transformations": [
+        },
         {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "/mnt/media-(\\d+)",
-            "renamePattern": "Disk $1"
-          }
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-2\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-2\"})",
+          "legendFormat": "Disk 2",
+          "instant": false,
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-3\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-3\"})",
+          "legendFormat": "Disk 3",
+          "instant": false,
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-4\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-4\"})",
+          "legendFormat": "Disk 4",
+          "instant": false,
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "100 * (1 - node_filesystem_avail_bytes{mountpoint=\"/mnt/media-5\"} / node_filesystem_size_bytes{mountpoint=\"/mnt/media-5\"})",
+          "legendFormat": "Disk 5",
+          "instant": false,
+          "range": true,
+          "refId": "E"
         }
       ]
     }
