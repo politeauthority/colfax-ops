@@ -15,6 +15,7 @@ resources:
 # - arc-secret.yaml
 # - ip-sentry.yaml
 - graylog.yaml
+- graylog-forwarder.yaml
 - authentik.yaml
 - kio.yaml
 - kio-companion.yaml
