@@ -14,3 +14,15 @@ metallb:
         operator: Equal
         value: "true"
         effect: NoSchedule
+      # mac-worker (arm64 Colima VM). Its taints are applied by `task
+      # mac-worker-up` *after* the node joins, so the speaker pod lands there
+      # during the join window and then can't be rescheduled once the taints
+      # exist -- the DaemonSet silently drops to 4 desired.
+      - key: kubernetes.io/arch
+        operator: Equal
+        value: arm64
+        effect: NoSchedule
+      - key: dedicated
+        operator: Equal
+        value: mac-worker
+        effect: NoSchedule
