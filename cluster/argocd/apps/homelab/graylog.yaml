@@ -38,10 +38,10 @@ spec:
         - /spec/updateStrategy/rollingUpdate
         - /spec/template/metadata/annotations/checksum~1config
         - /spec/template/metadata/annotations/checksum~1secret
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - RespectIgnoreDifferences=true
-      - ServerSideApply=true
+  # syncPolicy:
+  #   automated:
+  #     selfHeal: true
+  #   syncOptions:
+  #     - CreateNamespace=true
+  #     - RespectIgnoreDifferences=true
+  #     - ServerSideApply=true
