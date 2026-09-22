@@ -76,7 +76,7 @@ harbor:
     type: clusterIP
     tls:
       enabled: false
-  externalURL: https://harbor.squid-ink.us
+  externalURL: https://harbor.alix.lol
   persistence:
     enabled: true
     persistentVolumeClaim:
