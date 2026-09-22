@@ -275,8 +275,18 @@ def main(argv=None):
     todo, done, sealed_hits, no_old = [], [], [], []
     for s in secrets:
         auths = (s["config"] or {}).get("auths") or {}
+        # Done is decided by the NEW host being present, never by the old one being
+        # absent. rekey() keeps the old entry on purpose, so "still carries the old
+        # host" is true of every secret this has ever rotated. Classifying on that
+        # reported finished work as outstanding forever and never once printed
+        # "already on". The write stayed idempotent, so the run was harmless and only
+        # the output was wrong -- which is the worse half of the two, because it left
+        # no way to confirm from the script that the rotation had landed.
+        if args.new_host in auths:
+            done.append(s)
+            continue
         if args.old_host not in auths:
-            (done if args.new_host in auths else no_old).append(s)
+            no_old.append(s)
             continue
         if (s["namespace"], s["name"]) in sealed:
             sealed_hits.append(s)
