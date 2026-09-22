@@ -19,11 +19,17 @@ against the new host first (basic auth for a pull-scoped token, then a real
 manifest GET), and a secret whose credential cannot pull is reported and skipped
 rather than rewritten into a differently-broken state.
 
-SEALED SECRETS ARE NOT TOUCHED. Some pull secrets are owned by a SealedSecret and
-reconciled from git. Writing those with `kubectl apply` would hold until the
-controller resyncs and then silently revert, which is worse than not trying: the
-pulls would work long enough to look fixed. Those are listed with the `kubeseal`
-command to regenerate them, and left alone.
+GIT-MANAGED SECRETS ARE NOT TOUCHED. Some pull secrets are reconciled from a
+repository rather than applied by hand, either behind a SealedSecret or as a plain
+Secret that ArgoCD syncs. Patching one holds until the next reconcile and then
+silently reverts, which is worse than not trying: the pulls work long enough to
+look fixed. Both kinds are detected and listed with what to do instead.
+
+The ArgoCD half was added after the first real run. `b2-backup` and
+`cluster-stats` both reported patched and both read back on the old host seconds
+later -- a plain Secret in an app's repo has no SealedSecret and no owner
+reference, so it is indistinguishable from a hand-applied one until the drift is
+noticed. `argocd.argoproj.io/tracking-id` is what tells them apart.
 
 NOTHING IS RESTARTED. A running pod keeps its image; the secret only matters at
 the next pull. Which workloads would need a restart to pick it up is reported, and
@@ -132,6 +138,32 @@ def sealed_owned(namespaces):
         print("  ! could not list SealedSecrets — treating all secrets as hand-applied")
         return set()
     return {(i["metadata"]["namespace"], i["metadata"]["name"]) for i in items}
+
+
+#: ArgoCD stamps this on every resource it reconciles. A secret carrying it is
+#: defined in git, so patching it holds only until the next sync and then reverts.
+ARGOCD_TRACKING = "argocd.argoproj.io/tracking-id"
+
+
+def gitops_managed(secret):
+    """Why this secret is reconciled from git, or None if it is hand-applied.
+
+    Sealed ownership was the first half of this and was not enough. A plain Secret
+    committed to a repo and synced by ArgoCD has no SealedSecret behind it and no
+    owner reference, and looks exactly like a hand-applied one — right up to the
+    point where ArgoCD notices the drift and puts the old hostname back.
+
+    Found the hard way: `b2-backup` and `cluster-stats` both reported patched and
+    both read back on the old host seconds later. Nothing failed and nothing said
+    so, which is the failure mode this whole script is built to avoid.
+    """
+    metadata = secret["item"]["metadata"]
+    if ARGOCD_TRACKING in (metadata.get("annotations") or {}):
+        return "argocd"
+    # The older tracking style, for apps configured before the annotation existed.
+    if (metadata.get("labels") or {}).get("app.kubernetes.io/instance"):
+        return "argocd"
+    return None
 
 
 def probe_credential(username, password, host, repos=PROBE_REPOS, timeout=15):
@@ -289,6 +321,12 @@ def main(argv=None):
             no_old.append(s)
             continue
         if (s["namespace"], s["name"]) in sealed:
+            s["managed_by"] = "sealed"
+            sealed_hits.append(s)
+            continue
+        managed = gitops_managed(s)
+        if managed:
+            s["managed_by"] = managed
             sealed_hits.append(s)
             continue
         todo.append(s)
@@ -296,7 +334,7 @@ def main(argv=None):
     print("%s pull secret(s) found" % len(secrets))
     print("  %-3s already on %s" % (len(done), args.new_host))
     print("  %-3s on neither host (left alone)" % len(no_old))
-    print("  %-3s sealed — reconciled from git, not touched here" % len(sealed_hits))
+    print("  %-3s reconciled from git — not touched here" % len(sealed_hits))
     print("  %-3s to re-key\n" % len(todo))
 
     if not todo and not sealed_hits:
@@ -336,9 +374,13 @@ def main(argv=None):
         print("    ROTATE_USERNAME=... ROTATE_PASSWORD=... %s --apply --replace-user '<user>'\n" % sys.argv[0])
 
     if sealed_hits:
-        print("SEALED — regenerate these from git instead of applying directly:")
+        print("GIT-MANAGED — change these at the source, not with kubectl:")
         for s in sealed_hits:
-            print("  %-20s %-22s" % (s["namespace"], s["name"]))
+            print("  %-20s %-22s (%s)" % (s["namespace"], s["name"], s.get("managed_by", "sealed")))
+        print("  An argocd one is a plain Secret in its app's repo: edit the manifest")
+        print("  there and let the sync carry it. Patching it holds until ArgoCD")
+        print("  notices the drift and then silently reverts.")
+        print("  A sealed one is regenerated with kubeseal:")
         print("    kubectl create secret docker-registry <name> \\")
         print("        --docker-server='%s' --docker-username=... --docker-password=... \\" % args.new_host)
         print("        -n <namespace> --dry-run=client -o yaml \\")

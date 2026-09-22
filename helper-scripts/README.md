@@ -33,10 +33,13 @@ Dry run is the default. Three things it will not do:
   and the refusal only shows up on the manifest. A secret whose credential
   cannot pull is reported and skipped, not rewritten into a differently-broken
   state.
-- **Touch a sealed secret.** Some pull secrets are reconciled from git. A
-  `kubectl apply` would hold until the controller resyncs and then revert, which
-  is worse than not trying — the pulls would work just long enough to look
-  fixed. Those are listed with the `kubeseal` command to regenerate them.
+- **Touch a git-managed secret.** Some pull secrets are reconciled from a
+  repository, either behind a SealedSecret or as a plain Secret ArgoCD syncs.
+  Patching one holds until the next reconcile and then reverts, which is worse
+  than not trying — the pulls work just long enough to look fixed. Both kinds are
+  detected (`argocd.argoproj.io/tracking-id` for the ArgoCD ones) and listed with
+  what to do instead: edit the manifest in its own repo, or regenerate with
+  `kubeseal`.
 - **Restart anything.** A running pod already has its image; the secret is only
   read at the next pull. The script prints which workloads use each secret and
   stops there.
