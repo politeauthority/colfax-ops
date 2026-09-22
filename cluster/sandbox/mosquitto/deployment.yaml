@@ -26,7 +26,7 @@ spec:
         - name: harbor-registry
       containers:
       - name: mosquitto
-        image: harbor.squid-ink.us/docker-hub/eclipse-mosquitto
+        image: harbor.alix.lol/docker-hub/eclipse-mosquitto
         resources:
           requests:
             cpu: 10m
