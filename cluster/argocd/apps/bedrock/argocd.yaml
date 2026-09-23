@@ -5,8 +5,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:politeauthority/colfax-ops.git'
-    path: cluster/argocd
+    repoURL: 'git@github.com:politeauthority/private-ops.git'
+    path: argocd
     targetRevision: main
   destination:
     namespace: argocd
